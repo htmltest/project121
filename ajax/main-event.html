@@ -1,0 +1,42 @@
+<form action="#" method="post">
+    <div class="main-events-form-fields">
+        <div class="main-events-form-title">Рассчитайте стоимость страховки<br /> для себя и своих близках в поездках<br /> по всему миру</div>
+        <div class="form-field">
+            <div class="form-select">
+                <select name="country" data-placeholder="Страна поездки" class="required">
+                    <option value=""></option>
+                    <option value="1">Объедененные Арабские Эмираты</option>
+                    <option value="2">Эстония</option>
+                    <option value="3">Финляндия</option>
+                    <option value="4">Швеция</option>
+                    <option value="5">Соединенные Штаты Америки</option>
+                    <option value="6">Египет</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="form-input form-input-date-range"><span class="form-input-label">Период</span><input type="text" name="period" value="" class="required" /></div>
+        </div>
+        <div class="main-events-form-row">
+            <div class="form-field">
+                <div class="form-input"><span class="form-input-label">Взрослые (cтарше 16 лет)</span><input type="number" name="parent" value="1" min="1" max="12" step="1" /></div>
+            </div>
+            <div class="form-field">
+                <div class="form-input"><span class="form-input-label">Дети (0-15 лет)</span><input type="number" name="childrens" value="0" min="0" max="12" step="1" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-events-form-results">
+        <div class="main-events-form-results-value">
+            <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Моя защита»</div>
+            <div class="main-events-form-results-value-price"><span>2599</span> ₽</div>
+        </div>
+        <div class="form-field">
+            <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" /></div>
+        </div>
+        <div class="form-field">
+            <div class="form-submit"><input type="submit" value="Купить полис" class="btn-orange" /></div>
+        </div>
+    </div>
+</form>
