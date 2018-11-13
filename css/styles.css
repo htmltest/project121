@@ -18,6 +18,7 @@ strong {font-weight:normal}
 
 h1 {margin:0 0 33px 0; padding:0; font-weight:normal; font-size:38px; line-height:42px}
 h1 svg {display:inline-block; vertical-align:middle; margin:-2px 18px 0 0}
+.container h1:first-child {padding-top:94px}
 h1 path {fill:#ff6200}
 h2 {margin:68px 0 19px 0; padding:0; font-weight:normal; font-size:28px; line-height:42px}
 h1+h2 {margin-top:33px}
@@ -81,25 +82,28 @@ h2+blockquote {margin-top:26px}
 
 .notice {margin:14px 0 26px 0; font-size:12px; line-height:20px; color:#7f7f7f}
 
-.btn-orange {display:inline-block; border-radius:3px; background:#ff6200; margin:0; padding:0 20px; outline:none; overflow:visible; border:1px solid #e6e6e6; text-decoration:none; height:65px; box-sizing:border-box; color:#fff; text-align:center; text-transform:uppercase; font:500 14px/63px Roboto, sans-serif; letter-spacing:0.7px; -webkit-appearance:none; cursor:pointer; transition:all 0.2s}
+.btn-orange {display:inline-block; border-radius:3px; background:#ff6200; margin:0; padding:0 20px; outline:none; overflow:visible; border:1px solid #e6e6e6; text-decoration:none; height:65px; box-sizing:border-box; color:#fff; text-align:center; text-transform:uppercase; font:500 18px/63px Roboto, sans-serif; letter-spacing:0.7px; -webkit-appearance:none; cursor:pointer; transition:all 0.2s}
 .btn-orange:hover {background:#ff8a00; color:#fff}
 .btn-orange:active {background:#ff6200; color:#fff}
 .btn-orange img,
 .btn-orange svg {display:inline-block; vertical-align:middle; margin:-2px 11px 0 0}
 .btn-orange svg path {fill:#fff}
 
-.btn-blue {display:inline-block; border-radius:3px; background:#004e96; margin:0; padding:0 20px; outline:none; overflow:visible; border:1px solid #e6e6e6; text-decoration:none; height:65px; box-sizing:border-box; color:#fff; text-align:center; text-transform:none; font:500 14px/63px Roboto, sans-serif; letter-spacing:0; -webkit-appearance:none; cursor:pointer; transition:all 0.2s}
+.btn-blue {display:inline-block; border-radius:3px; background:#004e96; margin:0; padding:0 20px; outline:none; overflow:visible; border:1px solid #e6e6e6; text-decoration:none; height:65px; box-sizing:border-box; color:#fff; text-align:center; text-transform:none; font:500 18px/63px Roboto, sans-serif; letter-spacing:0; -webkit-appearance:none; cursor:pointer; transition:all 0.2s}
 .btn-blue:hover {background:#03a9f4; color:#fff}
 .btn-blue:active {background:#005fb6; color:#fff}
 .btn-blue img,
 .btn-blue svg {display:inline-block; vertical-align:middle; margin:-2px 11px 0 0}
 .btn-blue svg path {fill:#fff}
 
-.btn-border {display:inline-block; border-radius:3px; background:#fff; margin:0; padding:0 20px; outline:none; overflow:visible; border:1px solid #e6e6e6; text-decoration:none; height:65px; box-sizing:border-box; color:#004e96; text-align:center; text-transform:none; font:500 14px/63px Roboto, sans-serif; letter-spacing:0; -webkit-appearance:none; cursor:pointer; transition:all 0.2s}
+.btn-border {display:inline-block; border-radius:3px; background:#fff; margin:0; padding:0 20px; outline:none; overflow:visible; border:1px solid #e6e6e6; text-decoration:none; height:65px; box-sizing:border-box; color:#004e96; text-align:center; text-transform:none; font:500 18px/63px Roboto, sans-serif; letter-spacing:0; -webkit-appearance:none; cursor:pointer; transition:all 0.2s}
 .btn-border:hover {border-color:#004e96; color:#004e96}
 .btn-border:active {border-color:#ff6200; color:#ff6200}
+.btn-border img,
+.btn-border svg {display:inline-block; vertical-align:middle; margin:-2px 7px 0 0}
+.btn-border svg path {fill:#004e96}
 
-.btn-mini {border-width:0; height:40px; line-height:40px; border-radius:0}
+.btn-mini {border-width:0; height:40px; line-height:40px; border-radius:0; font-size:14px}
 
 .btn-border.btn-mini {border-width:1px; height:38px; line-height:36px; border-radius:3px}
 
@@ -125,7 +129,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-input-number .form-input-label {z-index:1}
 .form-input-number .form-input-label {left:0; right:0; text-align:center; display:block}
 .form-input.focus .form-input-label {top:3px; font-size:12px}
-.form-input-label em {font-style:normal; color:#ff5353}
+.form-input-label em {font-style:normal; color:#ff6200}
 .form-input-label span {color:#ff7777}
 
 .form-input input,
@@ -196,6 +200,9 @@ fieldset {margin:20px 0; padding:0; border:0}
 
 .form-submit {margin:37px 0}
 .form-submit .btn-orange {min-width:223px}
+
+.form-required-notice {font-size:12px; line-height:20px; color:#7f7f7f; margin:20px 0}
+.form-required-notice span {font-size:18px; font-weight:normal; color:#ff6200; vertical-align:middle; display:inline-block}
 
 .container {max-width:1200px; margin:0 auto; padding:0 15px}
 .container::after {content:""; display:block; clear:both}
@@ -535,6 +542,82 @@ h3.carier-text {font-weight:300; line-height:42px}
 .defense-form {background:#deeff7; min-height:36px; position:relative; margin:46px 0 57px 0; text-align:left}
 .defense-form form {margin:0; padding:40px 30px 20px 30px}
 .defense-form form::after {content:""; display:block; clear:both}
+
+.contacts-feedback-link {float:right; width:160px; padding:4px 0 0 0}
+.contacts-feedback-link .btn-blue {padding:0; width:100%}
+
+.contacts-menu {margin-top:-17px}
+.contacts-menu ul {margin:0; padding:0; list-style:none}
+.contacts-menu ul::after {content:""; display:block; clear:both}
+.contacts-menu ul li {float:left; margin:0 0 0 40px; padding:0}
+.contacts-menu ul li:first-child {margin:0}
+.contacts-menu ul li::before {display:none}
+.contacts-menu ul li a {border-bottom:1px dashed #004e96}
+.contacts-menu ul li a:hover {border-color:#ff6200}
+.contacts-menu ul li a:active {border-color:#ff8a00}
+.contacts-menu ul li.active a {color:#7f7f7f}
+.contacts-menu ul li.active a {border-color:rgba(0, 0, 0, 0)}
+
+.contacts-tabs {position;relative}
+.contacts-tab {position:absolute; left:-9999px; top:-9999px; width:100%; opacity:0; transition:opacity 0.2s}
+.contacts-tab.active {position:relative; left:auto; top:auto; opacity:1}
+.contacts-tab h2 {margin-top:35px}
+
+.contacts-container::after {content:""; display:block; clear:both}
+
+.contacts-text {float:left; width:520px}
+.contacts-info {margin:27px 0}
+.contacts-info-row::after {content:""; display:block; clear:both}
+.contacts-info-label {float:left; font-weight:bold; width:113px}
+.contacts-info-value {margin:0 0 0 140px}
+
+.contacts-yandex .btn-border {padding:0 15px 0 9px}
+
+.contacts-map {float:right; width:585px}
+.contacts-map-inner {height:233px}
+
+.feedback {background:#e5f6fe; position:relative; margin:65px 0 -104px 0; padding:29px 0 57px 0}
+.feedback::before {content:""; display:block; position:absolute; left:100%; top:0; bottom:0; width:9999px; background:#e5f6fe}
+.feedback::after {content:""; display:block; position:absolute; right:100%; top:0; bottom:0; width:9999px; background:#e5f6fe}
+.feedback h2 {margin-top:0}
+.feedback h2 form {margin:0}
+.feedback .form-field {margin:15px 0 0 0}
+.feedback .form-field:first-child {margin:0}
+.feedback .form-input textarea {height:213px}
+.feedback .form-checkbox {font-size:12px; line-height:20px; color:#7f7f7f; margin:40px 0 14px 0}
+.feedback .form-submit {float:right; margin:3px 0 0 0}
+.feedback-recaptcha {float:left; margin:3px 0 0 0}
+
+.search-results-form form::after {content:""; display:block; clear:both}
+.search-results-form .form-input {float:left; width:960px}
+.search-results-form .form-submit {float:right; width:200px; margin:0}
+.search-results-form .form-submit .btn-blue {text-transform:none; font-size:14px; padding:0; width:100%}
+
+.search-results {margin:56px 0 71px 0}
+.search-result {margin:48px 0}
+.search-result-title {font-size:22px; line-height:32px; font-weight:normal}
+.search-result-text {padding:6px 0 0 0}
+.search-result-text strong {font-weight:bold}
+.search-result-date {font-size:12px; line-height:20px; font-weight:normal; color:#7f7f7f; padding:9px 0 0 0}
+.search-result-path {font-size:12px; line-height:20px; color:#004e96; padding:4px 0 0 0}
+.search-result-path a {text-decoration:underline}
+
+.main-404 {padding:28px 0 0 0}
+.main-404 h2:first-child {margin-top:0}
+.main-404 .bottom-btns {margin-bottom:0; padding-bottom:84px}
+.main-404 .main-events {padding:0; margin-bottom:-10px}
+
+.hotline {width:472px; border:1px solid #e6e6e6; background:#fff url(../images/hotline.png) no-repeat right bottom; border-top:8px solid #03a9f4; margin:29px 0 34px 0; padding:25px 30px 22px 30px}
+.hotline-title {text-transform:uppercase; font-size:12px; line-height:20px; color:#7f7f7f; letter-spacing:0.6px; font-weight:normal}
+.hotline-phone {font-weight:bold; font-size:38px; line-height:42px; margin:4px 0 0 0}
+.hotline-phone svg {display:inline-block; vertical-align:middle; margin:-2px 15px 0 0}
+.hotline-phone path {fill:#004e96; transition:all 0.2s}
+.hotline-phone a:hover path {fill:#ff6200}
+.hotline-phone a:active path {color:#ff8a00}
+.hotline-others {display:table; line-height:28px; margin:6px 0 0 0}
+.hotline-other {display:table-row}
+.hotline-other-label {display:table-cell; vertical-align:top; padding:0 15px 0 0; font-size:12px; color:#7f7f7f; font-weight:normal}
+.hotline-other-value {display:table-cell; vertical-align:top}
 
 footer {height:382px; margin:-382px 0 0 0; background:#005fb6; color:#cae3f9; position:relative}
 footer a {color:#cae3f9}
