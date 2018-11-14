@@ -135,6 +135,13 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('body').on('click', '.vacancy-title', function(e) {
+        var curItem = $(this).parent().filter('.vacancy');
+        curItem.toggleClass('open');
+        curItem.find('.vacancy-content').slideToggle();
+        e.preventDefault();
+    });
+
 });
 
 $(window).on('resize', function() {
