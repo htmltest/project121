@@ -102,8 +102,20 @@ h2+blockquote {margin-top:26px}
 .cols .doc-item:last-child {margin-bottom:0}
 
 @media screen and (max-width:1199px) {
-    .col-half {width:100%}
-    .col-half+.col-half {margin-top:14px}
+    .cols {margin:0}
+    .col-half {float:none; width:auto; padding:0}
+    .cols p:first-child {margin-top:14px}
+    .cols p:last-child {margin-bottom:14px}
+    .cols ul:first-child {margin-top:14px}
+    .cols ul:last-child {margin-bottom:14px}
+    .cols ul:first-child li:first-child {margin-top:14px}
+    .cols ul:last-child li:last-child {margin-bottom:14px}
+    .cols ol:first-child {margin-top:14px}
+    .cols ol:last-child {margin-bottom:14px}
+    .cols ol:first-child li:first-child {margin-top:14px}
+    .cols ol:last-child li:last-child {margin-bottom:14px}
+    .cols .doc-item:first-child {margin-top:21px}
+    .cols .doc-item:last-child {margin-bottom:14px}
 }
 
 .notice {margin:14px 0 26px 0; font-size:12px; line-height:20px; color:#7f7f7f}
@@ -721,8 +733,8 @@ h2+.bottom-btns {margin-top:21px}
     .wrapper table.team {display:block; border-bottom:none}
     .wrapper table.team tbody {display:block}
     .wrapper table.team tr {display:block; border-bottom:1px solid #d9d9d9; padding:12px 0 9px 0}
-    .wrapper table.team td {display:block; padding:0; border:none; padding:0 10px; font-size:13px; line-height:20px; font-weight:normal; color:#7f7f7f}
-    .wrapper table.team td:first-child {width:auto; font-size:18px; line-height:20px; font-weight:300; color:#000}
+    .wrapper table.team td {display:block; padding:0; border:none; padding:5px 10px 0 10px; font-size:14px; line-height:20px; font-weight:normal; color:#7f7f7f}
+    .wrapper table.team td:first-child {width:auto; font-size:18px; line-height:20px; font-weight:300; color:#000; padding-top:0}
 }
 
 .doc-item {display:block; margin:14px 0; border-radius:3px; padding:9px 58px 10px 58px; border:1px solid #e6e6e6; text-decoration:none; position:relative}
@@ -742,7 +754,7 @@ h2+.bottom-btns {margin-top:21px}
     .doc-item {margin:9px 0; padding-right:15px}
     .doc-item-logo {display:none}
     .doc-item-title {font-size:18px}
-    .doc-item-info {font-size:13px}
+    .doc-item-info {font-size:14px}
 }
 
 h1+.page-menu {margin-top:-17px}
@@ -793,8 +805,8 @@ h1+.page-menu {margin-top:-17px}
     .main-events-item-inner:hover {transform:translateY(-5px); box-shadow:0 10px 20px rgba(0, 78, 150, 0.2); border-bottom-color:#ff6200}
 }
 .main-events-item.active .main-events-item-inner {transform:none; box-shadow:none; border-bottom-color:#03a9f4}
-.main-events-item-photo {line-height:0}
-.main-events-item-photo img {display:block; width:100%}
+.main-events-item-photo {line-height:0; height:161px; position:relative; overflow:hidden}
+.main-events-item-photo img {display:block; width:100%; max-height:none}
 .main-events-item-content {padding:0 20px}
 .main-events-item-type {font-size:12px; line-height:20px; font-weight:500; color:#007fce; transition:all 0.2s; padding:22px 0 0 0}
 @media screen and (min-width:1200px) {
@@ -828,7 +840,7 @@ h1+.page-menu {margin-top:-17px}
     .main-events {margin:0 -15px; padding:0}
     .main-events-item {padding:0; width:100%; font-size:18px}
     .main-events-item-inner {border-bottom:none}
-    .main-events-item-photo {height:342px; position:relative; overflow:hidden}
+    .main-events-item-photo {height:342px}
     .main-events-item-photo img {min-width:100%; min-height:100%; max-width:none; width:auto; height:auto; max-height:none}
     .main-events-item-content {position:absolute; left:40px; top:0; right:175px; padding:0}
     .main-events-item-type {color:#004e96; padding:23px 0 0 0; font-size:13px}
@@ -1180,7 +1192,8 @@ h3.carier-text {font-weight:300; line-height:42px}
 .press-welcome-author {font-size:12px; line-height:24px; color:#7f7f7f; margin:30px 0 0 0}
 
 @media screen and (max-width:1199px) {
-    .press-welcome-author {margin:-5px 0 15px 0; font-size:13px}
+    .press-welcome {font-size:18px; line-height:30px}
+    .press-welcome-author {margin:0 0 20px 0; font-size:16px}
 }
 
 .press-news {position:relative; background:#f9f9f9; padding:34px 0 43px 0; margin:58px 0 0 0}
