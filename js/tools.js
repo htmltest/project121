@@ -42,7 +42,6 @@ $(document).ready(function() {
 
     $('.page-menu').each(function() {
         $('.page-menu-inner').append('<ul></ul>');
-        console.log($('.page-section-item').length);
         $('.page-section-item').each(function() {
             var curItem = $(this);
             $('.page-menu-inner ul').append('<li><a href="#' + curItem.attr('id') + '">' + curItem.data('title') + '</a></li>');
@@ -78,26 +77,28 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.main-events-item-inner', function(e) {
-        var curLink = $(this);
-        var curItem = curLink.parent();
-        if (curItem.hasClass('active')) {
-            $('.main-events-form').html('').hide();
-            curItem.removeClass('active')
-        } else {
-            $('.main-events-item.active').removeClass('active');
-            $('.main-events-form').html('<div class="loading"></div>').show();
-            curItem.addClass('active')
-            $.ajax({
-                type: 'POST',
-                url: curLink.attr('href'),
-                dataType: 'html',
-                cache: false
-            }).done(function(html) {
-                $('.main-events-form').html(html);
-                initForm($('.main-events-form form'));
-            });
+        if ($('.main-events-form').length > 0) {
+            var curLink = $(this);
+            var curItem = curLink.parent();
+            if (curItem.hasClass('active')) {
+                $('.main-events-form').html('').hide();
+                curItem.removeClass('active')
+            } else {
+                $('.main-events-item.active').removeClass('active');
+                $('.main-events-form').html('<div class="loading"></div>').show();
+                curItem.addClass('active')
+                $.ajax({
+                    type: 'POST',
+                    url: curLink.attr('href'),
+                    dataType: 'html',
+                    cache: false
+                }).done(function(html) {
+                    $('.main-events-form').html(html);
+                    initForm($('.main-events-form form'));
+                });
+            }
+            e.preventDefault();
         }
-        e.preventDefault();
     });
 
     $('.main-up').click(function(e) {
@@ -430,11 +431,36 @@ $(window).on('load resize scroll', function() {
                 }
             }
         });
+        if ($('.page-menu ul').hasClass('slick-slider')) {
+            $('.page-menu ul').slick('slickGoTo', $('.page-menu ul li').index($('.page-menu ul li.active')));
+        }
     });
 
     if ($(window).scrollTop() > $(window).height()) {
         $('.main-up').addClass('visible');
     } else {
         $('.main-up').removeClass('visible');
+    }
+
+    if ($(window).width() < 1200) {
+        if (!$('.page-menu ul').hasClass('slick-slider')) {
+            var curWidth = 0;
+            $('.page-menu ul li').each(function() {
+                curWidth += $(this).width();
+            });
+            if (curWidth > $('.page-menu').width()) {
+                $('.page-menu ul').slick({
+                    dots: false,
+                    infinite: false,
+                    variableWidth: true,
+                    prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
+                    nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>'
+                });
+            }
+        }
+    } else {
+        if ($('.page-menu ul').hasClass('slick-slider')) {
+            $('.page-menu ul').slick('unslick');
+        }
     }
 });
