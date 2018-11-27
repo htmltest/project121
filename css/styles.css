@@ -87,33 +87,35 @@ h2+blockquote {margin-top:26px}
 .cols {margin:14px -15px}
 .cols::after {content:""; display:block; clear:both}
 .col-half {float:left; width:50%; padding:0 15px}
-.cols h3:first-child {margin-top:42px}
-.cols p:first-child {margin-top:0}
-.cols p:last-child {margin-bottom:0}
-.cols ul:first-child {margin-top:0}
-.cols ul:last-child {margin-bottom:0}
-.cols ul:first-child li:first-child {margin-top:0}
-.cols ul:last-child li:last-child {margin-bottom:0}
-.cols ol:first-child {margin-top:0}
-.cols ol:last-child {margin-bottom:0}
-.cols ol:first-child li:first-child {margin-top:0}
-.cols ol:last-child li:last-child {margin-bottom:0}
+.cols-reverse .col-half {float:right}
+.cols > h3:first-child {margin-top:42px}
+.cols > p:first-child {margin-top:0}
+.cols > p:last-child {margin-bottom:0}
+.cols > ul:first-child {margin-top:0}
+.cols > ul:last-child {margin-bottom:0}
+.cols > ul:first-child li:first-child {margin-top:0}
+.cols > ul:last-child li:last-child {margin-bottom:0}
+.cols > ol:first-child {margin-top:0}
+.cols > ol:last-child {margin-bottom:0}
+.cols > ol:first-child li:first-child {margin-top:0}
+.cols > ol:last-child li:last-child {margin-bottom:0}
 .cols .doc-item:first-child {margin-top:0}
 .cols .doc-item:last-child {margin-bottom:0}
 
 @media screen and (max-width:1199px) {
     .cols {margin:0}
-    .col-half {float:none; width:auto; padding:0}
-    .cols p:first-child {margin-top:14px}
-    .cols p:last-child {margin-bottom:14px}
-    .cols ul:first-child {margin-top:14px}
-    .cols ul:last-child {margin-bottom:14px}
-    .cols ul:first-child li:first-child {margin-top:14px}
-    .cols ul:last-child li:last-child {margin-bottom:14px}
-    .cols ol:first-child {margin-top:14px}
-    .cols ol:last-child {margin-bottom:14px}
-    .cols ol:first-child li:first-child {margin-top:14px}
-    .cols ol:last-child li:last-child {margin-bottom:14px}
+    .col-half {float:none; width:auto; padding:0; margin:14px 0}
+    .cols-reverse .col-half {float:none}
+    .cols > p:first-child {margin-top:14px}
+    .cols > p:last-child {margin-bottom:14px}
+    .cols > ul:first-child {margin-top:14px}
+    .cols > ul:last-child {margin-bottom:14px}
+    .cols > ul:first-child li:first-child {margin-top:14px}
+    .cols > ul:last-child li:last-child {margin-bottom:14px}
+    .cols > ol:first-child {margin-top:14px}
+    .cols > ol:last-child {margin-bottom:14px}
+    .cols > ol:first-child li:first-child {margin-top:14px}
+    .cols > ol:last-child li:last-child {margin-bottom:14px}
     .cols .doc-item:first-child {margin-top:21px}
     .cols .doc-item:last-child {margin-bottom:14px}
 }
@@ -307,8 +309,9 @@ header {background:#004e96; padding:0 0 26px 0}
     header {height:68px; padding:0; position:relative}
 }
 
-.logo {float:left; position:relative; width:115px; height:63px; background:url(../images/logo.svg) no-repeat; background-size:100%; margin:12px 0 0 0}
+.logo {float:left; position:relative; width:115px; height:63px; margin:12px 0}
 .logo a {display:block; position:absolute; left:0; top:0; right:0; bottom:0}
+.logo img {display:block; width:100%}
 
 @media screen and (max-width:1199px) {
     .logo {float:none; position:absolute; left:77px; top:8px; width:83px; height:45px; margin:0}
@@ -1131,12 +1134,14 @@ h3.carier-text {font-weight:300; line-height:42px}
 .feedback .form-submit {float:right; margin:3px 0 0 0}
 .feedback-recaptcha {float:left; margin:3px 0 0 0; width:264px}
 .feedback-recaptcha .g-recaptcha {width:304px; transform:scale(0.87); transform-origin:left top}
+.feedback-ctrl {margin-top:-241px}
 
 @media screen and (max-width:1199px) {
     .feedback {margin:35px 0 -30px 0; padding:19px 0 40px 0}
     .feedback .form-checkbox {margin:26px 0 30px 0; font-size:13px}
     .feedback .form-submit {width:161px}
     .feedback .form-submit .btn-orange {width:100%; padding:0; min-width:0}
+    .feedback-ctrl {margin-top:0}
 }
 
 .search-results-form form::after {content:""; display:block; clear:both}
@@ -1200,7 +1205,7 @@ h3.carier-text {font-weight:300; line-height:42px}
 .press-welcome-author {font-size:12px; line-height:24px; color:#7f7f7f; margin:30px 0 0 0}
 
 @media screen and (max-width:1199px) {
-    .press-welcome {font-size:18px; line-height:30px}
+    .press-welcome {font-size:18px; line-height:30px; padding:0 0 10px 0}
     .press-welcome-author {margin:0 0 20px 0; font-size:16px}
 }
 
@@ -1362,7 +1367,8 @@ footer a {color:#cae3f9}
 }
 
 .footer-right {float:left; width:270px; padding:36px 0 0 0}
-.footer-logo {width:85px; height:47px; background:url(../images/logo.svg) no-repeat; background-size:100%}
+.footer-logo {width:85px; height:46px; line-height:0}
+.footer-logo img {display:block; width:100%}
 .footer-phone {font-weight:500; font-size:18px; color:#fff; padding:20px 0 0 0}
 .footer-phone a {color:#fff}
 @media screen and (min-width:1200px) {
