@@ -428,6 +428,12 @@ button.ui-button::-moz-focus-inner {
     font: bold 18px/23px Roboto, sans-serif;
     background: #fff;
 }
+
+@media screen and (max-width:1199px) {
+    .form-input .ui-spinner-input {
+        font-size: 22px;
+    }
+}
 .form-input .ui-spinner-button,
 .form-input .ui-spinner-button:hover,
 .form-input .ui-spinner-button:active {

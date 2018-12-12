@@ -9,7 +9,7 @@ $(document).ready(function() {
         dots: false,
     });
 
-    $('.nav-add-link').click(function() {
+    $('.nav-add-link').click(function(e) {
         $('html').toggleClass('nav-add-open');
         e.preventDefault();
     });
@@ -36,6 +36,12 @@ $(document).ready(function() {
         curField.remove();
     });
 
+    $('body').on('click', '.form-input-clear', function(e) {
+        var curField = $(this).parents().filter('.form-input');
+        curField.find('input').val('').trigger('blur').trigger('change');
+        e.preventDefault();
+    });
+
     $('form').each(function() {
         initForm($(this));
     });
@@ -59,7 +65,7 @@ $(document).ready(function() {
     $('.main-events-list').slick({
         infinite: false,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
         nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
         dots: false,
@@ -225,7 +231,227 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('#order-programm-select').change(function() {
+        var curValue = $(this).val();
+        $('.order-programm-detail').hide();
+        var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
+        curProgramm.show();
+        $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+        $('.main-events-form-results-value-price em').remove();
+        window.setTimeout(function() {
+            $('.order-form-results-code-btn a').trigger('click');
+        }, 100);
+    });
+
+    $('#order-programm-select').each(function() {
+        var curValue = $(this).val();
+        $('.order-programm-detail').hide();
+        var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
+        curProgramm.show();
+        $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+        $('.main-events-form-results-value-price em').remove();
+        window.setTimeout(function() {
+            $('.order-form-results-code-btn a').trigger('click');
+        }, 100);
+    });
+
+    $('#order-date-start').on('change', function() {
+        $('#order-date-end').datepicker('option', 'minDate', getDate(this));
+        if ($('#order-date-end').val() == '') {
+            var newDate = getDate(this);
+            newDate.setFullYear(newDate.getFullYear() + 1);
+            $('#order-date-end').datepicker('setDate', newDate);
+        }
+    });
+
+    $('body').on('click', '.order-form-results-code-btn a', function(e) {
+        var curValue = $('#order-promo').val();
+        if (curValue != '') {
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/order-promo.json',
+                dataType: 'json',
+                data: JSON.stringify({'promo': curValue, 'programm': $('#order-programm-select').val()}),
+                cache: false
+            }).done(function(data) {
+                if (data.status == 'ok') {
+                    $('#order-promo').data('newcost', data.newcost);
+                    var curProgrammID = $('#order-programm-select').val();
+                    var curProgramm = $('.order-programm-detail[data-id="' + curProgrammID + '"]');
+                    $('.main-events-form-results-value-price span').html(data.newcost);
+                    $('.main-events-form-results-value-price em').remove();
+                    $('.main-events-form-results-value-price').append(' <em>' + curProgramm.data('cost') + ' ₽</em>');
+                    $('#order-promo').removeClass('error');
+                    $('#order-promo').prop('disabled', true);
+                    $('.order-form-results-code').addClass('success');
+                } else {
+                    var curProgrammID = $('#order-programm-select').val();
+                    var curProgramm = $('.order-programm-detail[data-id="' + curProgrammID + '"]');
+                    $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+                    $('.main-events-form-results-value-price em').remove();
+                    $('#order-promo').addClass('error');
+                    $('#order-promo').prop('disabled', false);
+                    $('.order-form-results-code').removeClass('success');
+                }
+            });
+        } else {
+            var curProgrammID = $('#order-programm-select').val();
+            var curProgramm = $('.order-programm-detail[data-id="' + curProgrammID + '"]');
+            $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+            $('.main-events-form-results-value-price em').remove();
+            $('#order-promo').removeClass('error');
+            $('#order-promo').prop('disabled', false);
+            $('.order-form-results-code').removeClass('success');
+        }
+        e.preventDefault();
+    });
+
+    $('body').on('click', '.order-form-results-code .form-input-clear', function(e) {
+        var curProgrammID = $('#order-programm-select').val();
+        var curProgramm = $('.order-programm-detail[data-id="' + curProgrammID + '"]');
+        $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+        $('.main-events-form-results-value-price em').remove();
+        $('#order-promo').removeClass('error');
+        $('#order-promo').prop('disabled', false);
+        $('.order-form-results-code').removeClass('success');
+        e.preventDefault();
+    });
+
+    $('#phone').on('keyup', function(e) {
+        var curInput = $(this);
+        var curValue = curInput.val();
+        if (curValue.match(/^\+7 \(\d{3}\) \d{3}\-\d{2}\-\d{2}$/)) {
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/order-phone.json',
+                dataType: 'json',
+                data: JSON.stringify({'phone': curValue}),
+                cache: false
+            }).done(function(data) {
+                if (data.status == 'ok') {
+                    $('#phone-hint').show();
+                } else {
+                    $('#phone-hint').hide();
+                }
+            });
+        } else {
+            $('#phone-hint').hide();
+        }
+    });
+
+    $('.order-address-checkbox input').change(function() {
+        if ($(this).prop('checked')) {
+            $('.order-address-jur').hide();
+            $('.order-address-jur input').removeClass('required');
+        } else {
+            $('.order-address-jur').show();
+            $('.order-address-jur input').addClass('required');
+        }
+    });
+
+    $('.order-address-checkbox input').each(function() {
+        if ($(this).prop('checked')) {
+            $('.order-address-jur').hide();
+            $('.order-address-jur input').removeClass('required');
+        } else {
+            $('.order-address-jur').show();
+            $('.order-address-jur input').addClass('required');
+        }
+    });
+
+    $('#order-confirm').change(function() {
+        if ($(this).prop('checked')) {
+            $('.order-confirm-form').addClass('open');
+        } else {
+            $('.order-confirm-form').removeClass('open');
+        }
+    });
+
+    $('#order-confirm').each(function() {
+        if ($(this).prop('checked')) {
+            $('.order-confirm-form').addClass('open');
+        } else {
+            $('.order-confirm-form').removeClass('open');
+        }
+    });
+
+    $('#order-confirm-data').change(function() {
+        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-form').addClass('close');
+        } else {
+            $('.order-confirm-form').removeClass('close');
+        }
+    });
+
+    $('#order-confirm-data').each(function() {
+        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-form').addClass('close');
+        } else {
+            $('.order-confirm-form').removeClass('close');
+        }
+    });
+
+    $('#order-confirm-info').change(function() {
+        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-form').addClass('close');
+        } else {
+            $('.order-confirm-form').removeClass('close');
+        }
+    });
+
+    $('#order-confirm-info').each(function() {
+        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-form').addClass('close');
+        } else {
+            $('.order-confirm-form').removeClass('close');
+        }
+    });
+
+    var confirmForm = $('.order-confirm-form');
+    if (confirmForm.length > 0) {
+        var validator = confirmForm.validate();
+        validator.destroy();
+        confirmForm.validate({
+            ignore: '',
+            submitHandler: function(form) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(form).attr('action'),
+                    dataType: 'json',
+                    data: JSON.stringify({'sms': $(form).find('input[type="text"]').val()}),
+                    cache: false,
+                    timeout: 5000
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    $(form).find('.form-error').remove();
+                    $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
+                }).done(function(data) {
+                    if (data.status == 'ok') {
+                        $('.order-confirm-form').addClass('sms-success');
+                    } else {
+                        $(form).find('.form-error').remove();
+                        $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
+                    }
+                });
+            }
+        });
+    }
+
+    $('body').on('copy paste cut', '#emailCopy', function() {
+        return false;
+    });
+
 });
+
+function getDate(element) {
+    var date;
+    try {
+        date = $.datepicker.parseDate(dateFormat, element.value);
+    } catch(error) {
+        date = null;
+    }
+    return date;
+}
 
 $(window).on('resize', function() {
     $('.form-select select').chosen('destroy');
@@ -242,6 +468,9 @@ var dateFormat = 'dd.mm.yy';
 
 function initForm(curForm) {
     curForm.find('input.phoneRU').mask('+7 (000) 000-00-00');
+    curForm.find('.form-input-date input').mask('00.00.0000');
+    curForm.find('input.digit4').mask('0000');
+    curForm.find('input.digit6').mask('000000');
 
     curForm.find('.form-input input, .form-input textarea').each(function() {
         if ($(this).val() != '') {
