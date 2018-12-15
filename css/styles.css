@@ -4,10 +4,14 @@
 
 html {min-width:480px; height:100%}
 
+@media screen and (max-width:1199px) {
+    html {height:auto}
+}
+
 body {min-width:480px; height:100%; margin:0; padding:0; font:300 16px/32px Roboto, sans-serif; color:#000; background:#fff; -webkit-text-size-adjust:100%}
 
 @media screen and (max-width:1199px) {
-    body {font-size:18px}
+    body {font-size:18px; height:auto}
 }
 
 a {outline:none; color:#004e96; text-decoration:none; transition:all 0.2s}
@@ -201,6 +205,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .desktop-menu-icon-text::after {content:""; display:block; width:0; height:0; position:absolute; left:50%; bottom:-6px; margin-left:-6px; border-top:6px solid #fff; border-left:6px solid transparent; border-right:6px solid transparent}
 
 .form-input {position:relative; background:#fff; border-radius:3px}
+.form-input-disabled {background:#f7f5f5}
 .form-input-number {margin:0 71px; max-width:173px}
 .form-input-label {position:absolute; left:24px; font-size:18px; color:#7f7f7f; top:17px; transition:all 0.2s; font-weight:normal}
 .form-input-number .form-input-label {z-index:1}
@@ -221,6 +226,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 
 .form-input input,
 .form-input textarea {position:relative; border:1px solid #e6e6e6; font:bold 18px/23px Roboto, sans-serif; color:#000; vertical-align:top; margin:0; padding:32px 24px 8px 24px; width:100%; height:65px; box-sizing:border-box; outline:none; border-radius:3px; background:url(../images/blank.gif); -webkit-appearance:none; transition:all 0.2s}
+.form-input-disabled input {color:#888}
 .form-input textarea {height:auto; resize:none; overflow:auto}
 .form-input input.error,
 .form-input textarea.error {border-color:#ff1800; color:#ff1800}
@@ -237,6 +243,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 
 .form-input-date,
 .form-input-date-range {position:relative; background:#fff; border-radius:3px}
+.form-input-date.form-input-disabled, .form-input-date-range.form-input-disabled {background:#f7f5f5}
 .form-input-date::before,
 .form-input-date-range::before {content:""; display:block; width:16px; height:17px; position:absolute; right:20px; top:25px; background:url(../images/form-input-date.svg) no-repeat; background-size:100%}
 .form-input-date input,
@@ -324,7 +331,8 @@ fieldset {margin:20px 0; padding:0; border:0}
 .wrapper-inner {padding:0 0 486px 0}
 
 @media screen and (max-width:1199px) {
-    .wrapper-inner {padding:0 0 446px 0}
+    .wrapper {min-height:0}
+    .wrapper-inner {padding:0}
 }
 
 header {background:#004e96; padding:0 0 26px 0}
@@ -1276,8 +1284,8 @@ h3.carier-text {font-weight:300; line-height:42px}
 
 .vacancy-filter {max-width:571px; margin-bottom:27px}
 
-.vacancy {border:1px solid #e6e6e6; margin:7px 0}
-.vacancy-title {display:block; font-size:22px; line-height:32px; padding:18px 49px 14px 49px; position:relative}
+.vacancy {border:1px solid #e6e6e6; margin:7px 0; background:#fff}
+.vacancy-title {display:block; font-size:22px; line-height:32px; padding:18px 49px 14px 49px; position:relative; background:#fff}
 @media screen and (min-width:1200px) {
     .vacancy-title:hover {color:#004e96; background:#f9f9f9}
 }
@@ -1395,11 +1403,13 @@ h3.carier-text {font-weight:300; line-height:42px}
 .order-programm-detail strong {font-weight:bold}
 
 @media screen and (max-width:1199px) {
-    .order-programm-detail {margin-left:3px}
+    .order-programm-detail {margin-left:3px; margin-bottom:20px}
 }
 
 .order-form-results {float:right; width:434px; padding-top:4px}
-.order-form-results .main-events-form-results-value {padding-right:32px}
+.order-form-results .main-events-form-results-value {padding-right:32px; padding-bottom:15px}
+.order-form-results .main-events-form-results-value+.main-events-form-results-value::before {display:none}
+.order-form-results .main-events-form-results-value+.main-events-form-results-value {padding-right:20px; padding-bottom:33px}
 .order-form-results .main-events-form-results-value-price {text-align:center; padding-top:27px}
 .order-form-results .main-events-form-results-value-price em {font-style:normal; font-size:36px; color:#7f7f7f; text-decoration:line-through}
 .order-form-results .form-field {margin:29px 0 -10px 0}
@@ -1407,6 +1417,7 @@ h3.carier-text {font-weight:300; line-height:42px}
 .order-form-results-code::after {content:""; display:block; clear:both}
 .order-form-results .order-form-results-code .form-field {margin:0; float:left; width:288px}
 .order-form-results .order-form-results-code.success .form-field {width:100%}
+.order-form-results-code label.error {display:block !important; color:#f5021f; font-size:12px; line-height:14px; margin:4px 0 0 0}
 .order-form-results-code.success .form-input input {border-color:#fff}
 .order-form-results-code-btn {float:left; margin:0 0 0 13px}
 .order-form-results-code.success .order-form-results-code-btn {display:none}
@@ -1421,8 +1432,13 @@ h3.carier-text {font-weight:300; line-height:42px}
     .order-form-results:first-child {padding-top:20px}
 }
 
+.main-events-form-results-details {font-weight:normal; font-size:15px; line-height:30px; color:#000; display:table; margin:13px 0 -20px 0}
+.main-events-form-results-details-row {display:table-row}
+.main-events-form-results-details-label {display:table-cell; vertical-align:top; padding:0 35px 0 0; color:#7f7f7f}
+.main-events-form-results-details-value {display:table-cell; vertical-align:top}
+
 .order-form-ctrl {float:left; width:100%}
-.order-form-ctrl .form-field {float:right; margin:-72px 0 0 0; position:relative}
+.order-form-ctrl .form-field {float:right; margin:0; position:relative}
 .order-form-ctrl .form-submit {float:right; margin:0}
 .order-form-ctrl .form-submit .btn-orange {min-width:306px}
 
@@ -1451,6 +1467,7 @@ h2+.order-form {padding-top:0}
 .order-field-gender .form-radio {float:left; margin:10px 35px 10px 0}
 
 .order-address-checkbox {margin:-9px 0 -2px 23px; font-size:12px}
+.order-middlename-checkbox {margin:-9px 0 -2px 23px; font-size:12px}
 
 .order-passport {margin:20px -13px}
 .order-passport::after {content:""; display:block; clear:both}
@@ -1476,6 +1493,7 @@ h2+.order-form {padding-top:0}
 .order-confirm-form {margin:50px 0 0 0}
 
 .order-confirm-form-detail {display:none}
+.order-confirm-form-detail .form-hint strong {font-weight:bold; color:#005fb6}
 .order-confirm-form.open .order-confirm-form-detail {display:block}
 
 .order-confirm-form-detail .form-hint {margin:-12px 0 -4px 33px}
@@ -1486,6 +1504,7 @@ h2+.order-form {padding-top:0}
 .order-confirm-sms-row .form-submit {float:left; width:307px; margin:0 0 0 14px}
 .order-confirm-sms-row .form-submit .btn-orange {width:100%}
 .order-confirm-sms-new {float:left; clear:left}
+.order-confirm-form.close .form-submit .btn-orange {opacity:0.5; cursor:default; pointer-events:none}
 
 @media screen and (max-width:1199px) {
     .order-confirm-sms-row .form-input {width:calc(100% - 275px)}
@@ -1494,14 +1513,19 @@ h2+.order-form {padding-top:0}
 }
 
 .order-confirm-form.sms-success .order-confirm-sms {display:none}
-.order-confirm-form.close .order-confirm-sms {display:none}
 
 .order-success-sms {display:none}
+.order-success-sms::after {content:""; display:block; clear:both}
+.order-success-sms-content {float:left; width:390px}
+.order-success-sms-content h2 {margin-top:15px}
 .order-confirm-form.sms-success .order-success-sms {display:block}
 .order-success-sms-text {margin:-17px 0 30px 0}
+.order-success-sms-link {float:left; padding:18px 0 0 0}
 .order-success-sms-link a {width:307px}
 
 @media screen and (max-width:1199px) {
+    .order-success-sms-content {float:none; width:auto}
+    .order-success-sms-link {float:none; padding:0}
     .order-success-sms-link a {width:100%}
 }
 
@@ -1527,6 +1551,25 @@ h2+.order-form {padding-top:0}
 .order-results-info-name {display:table-cell; vertical-align:top; padding:0 32px 0 0}
 .order-results-info-value {display:table-cell; vertical-align:top}
 
+.order-faq {background:#f9f9f9; padding:17px 0 62px 0; margin:37px 0 -104px 0}
+.order-faq h2 {margin-top:0}
+
+@media screen and (max-width:1199px) {
+    .order-faq {margin-bottom:-30px}
+}
+
+.order-confirm-form-header {margin:20px 0}
+.order-confirm-form-header::after {content:""; display:block; clear:both}
+.order-confirm-form-header .form-field {float:left; width:473px; margin:0}
+.order-confirm-form-back {float:left}
+.order-confirm-form.open .order-confirm-form-back {display:none}
+
+@media screen and (max-width:1199px) {
+    .order-confirm-form-header .form-field {float:none; width:auto}
+    .order-confirm-form-back {float:none}
+    .order-confirm-form-back a {margin:20px 0 0 0; width:100%}
+}
+
 footer {height:382px; margin:-382px 0 0 0; background:#005fb6; color:#cae3f9; position:relative}
 footer a {color:#cae3f9}
 @media screen and (min-width:1200px) {
@@ -1535,7 +1578,7 @@ footer a {color:#cae3f9}
 }
 
 @media screen and (max-width:1199px) {
-    footer {height:416px; margin:-416px 0 0 0; background:#004e96}
+    footer {height:auto; margin:30px 0 0 0; background:#004e96}
 }
 
 .footer-top::after {content:""; display:block; clear:both}
@@ -1598,7 +1641,7 @@ footer a {color:#cae3f9}
 .footer-info {float:left}
 
 @media screen and (max-width:1199px) {
-    .footer-bottom {border-top:none; margin:0; font-size:11px; line-height:12px; padding:26px 0 0 0}
+    .footer-bottom {border-top:none; margin:0; font-size:11px; line-height:12px; padding:26px 0}
     .footer-copyrights {float:none; width:auto}
     .footer-time {display:none}
     .footer-info {float:none; padding:3px 0 0 0}

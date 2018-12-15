@@ -255,14 +255,25 @@ $(document).ready(function() {
         }, 100);
     });
 
-    $('#order-date-start').on('change', function() {
-        $('#order-date-end').datepicker('option', 'minDate', getDate(this));
-        if ($('#order-date-end').val() == '') {
-            var newDate = getDate(this);
+    if ($('#order-date-start').length == 1) {
+        $('#order-date-start').datepicker().data('datepicker').update({
+            onSelect: function(formattedDate, date, inst) {
+                var dateArray = formattedDate.split('.');
+                var newDate = new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
+            }
+        });
+        $('#order-date-start').change(function() {
+            var curDateText = $(this).val();
+            var curDateArray = curDateText.split('.');
+            var curDate = new Date(curDateArray[2] + '-' + curDateArray[1] + '-' + curDateArray[0]);
+            $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
+            var newDate = curDate;
             newDate.setFullYear(newDate.getFullYear() + 1);
-            $('#order-date-end').datepicker('setDate', newDate);
-        }
-    });
+            $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
+        });
+    }
 
     $('body').on('click', '.order-form-results-code-btn a', function(e) {
         var curValue = $('#order-promo').val();
@@ -282,6 +293,7 @@ $(document).ready(function() {
                     $('.main-events-form-results-value-price em').remove();
                     $('.main-events-form-results-value-price').append(' <em>' + curProgramm.data('cost') + ' ₽</em>');
                     $('#order-promo').removeClass('error');
+                    $('#order-promo').parent().find('label.error').remove();
                     $('#order-promo').prop('disabled', true);
                     $('.order-form-results-code').addClass('success');
                 } else {
@@ -290,6 +302,8 @@ $(document).ready(function() {
                     $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
                     $('.main-events-form-results-value-price em').remove();
                     $('#order-promo').addClass('error');
+                    $('#order-promo').parent().find('label.error').remove();
+                    $('#order-promo').after('<label class="error">Неправильный промо-код</label>');
                     $('#order-promo').prop('disabled', false);
                     $('.order-form-results-code').removeClass('success');
                 }
@@ -300,6 +314,7 @@ $(document).ready(function() {
             $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
             $('.main-events-form-results-value-price em').remove();
             $('#order-promo').removeClass('error');
+            $('#order-promo').parent().find('label.error').remove();
             $('#order-promo').prop('disabled', false);
             $('.order-form-results-code').removeClass('success');
         }
@@ -312,6 +327,7 @@ $(document).ready(function() {
         $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
         $('.main-events-form-results-value-price em').remove();
         $('#order-promo').removeClass('error');
+        $('#order-promo').parent().find('label.error').remove();
         $('#order-promo').prop('disabled', false);
         $('.order-form-results-code').removeClass('success');
         e.preventDefault();
@@ -356,6 +372,26 @@ $(document).ready(function() {
         } else {
             $('.order-address-jur').show();
             $('.order-address-jur input').addClass('required');
+        }
+    });
+
+    $('.order-middlename-checkbox input').change(function() {
+        if ($(this).prop('checked')) {
+            $('.form-field-middlename input').removeClass('required');
+            $('.form-field-middlename em').hide();
+        } else {
+            $('.form-field-middlename input').addClass('required');
+            $('.form-field-middlename em').show();
+        }
+    });
+
+    $('.order-middlename-checkbox input').each(function() {
+        if ($(this).prop('checked')) {
+            $('.form-field-middlename input').removeClass('required');
+            $('.form-field-middlename em').hide();
+        } else {
+            $('.form-field-middlename input').addClass('required');
+            $('.form-field-middlename em').show();
         }
     });
 
@@ -443,16 +479,6 @@ $(document).ready(function() {
 
 });
 
-function getDate(element) {
-    var date;
-    try {
-        date = $.datepicker.parseDate(dateFormat, element.value);
-    } catch(error) {
-        date = null;
-    }
-    return date;
-}
-
 $(window).on('resize', function() {
     $('.form-select select').chosen('destroy');
     $('.form-select select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
@@ -464,11 +490,23 @@ $(window).on('resize', function() {
     });
 });
 
-var dateFormat = 'dd.mm.yy';
+$.fn.datepicker.language['ru'] =  {
+    days: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'],
+    daysShort: ['Вос','Пон','Вто','Сре','Чет','Пят','Суб'],
+    daysMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+    months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+    monthsShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+    today: 'Сегодня',
+    clear: 'Очистить',
+    dateFormat: 'dd.mm.yyyy',
+    timeFormat: 'hh:ii',
+    firstDay: 1
+};
 
 function initForm(curForm) {
     curForm.find('input.phoneRU').mask('+7 (000) 000-00-00');
     curForm.find('.form-input-date input').mask('00.00.0000');
+    curForm.find('.form-input-date input').attr('autocomplete', 'off');
     curForm.find('input.digit4').mask('0000');
     curForm.find('input.digit6').mask('000000');
 
@@ -512,22 +550,44 @@ function initForm(curForm) {
     });
 
     curForm.find('.form-input-date input').each(function() {
+        var minDateText = $(this).attr('min');
+        var minDate = null;
+        if (typeof (minDateText) != 'undefined') {
+            var minDateArray = minDateText.split('.');
+            minDate = new Date(minDateArray[2] + '-' + minDateArray[1] + '-' + minDateArray[0]);
+        }
+        var maxDateText = $(this).attr('max');
+        var maxDate = null;
+        if (typeof (maxDateText) != 'undefined') {
+            var maxDateArray = maxDateText.split('.');
+            maxDate = new Date(maxDateArray[2] + '-' + maxDateArray[1] + '-' + maxDateArray[0]);
+        }
         $(this).datepicker({
-            dateFormat: dateFormat,
-            minDate: $(this).attr('min'),
-            maxDate: $(this).attr('max')
+            language: 'ru',
+            minDate: minDate,
+            maxDate: maxDate
         });
     });
 
     curForm.find('.form-input-date-range input').each(function() {
+        var minDateText = $(this).attr('min');
+        var minDate = null;
+        if (typeof (minDateText) != 'undefined') {
+            var minDateArray = minDateText.split('.');
+            minDate = new Date(minDateArray[2] + '-' + minDateArray[1] + '-' + minDateArray[0]);
+        }
+        var maxDateText = $(this).attr('max');
+        var maxDate = null;
+        if (typeof (maxDateText) != 'undefined') {
+            var maxDateArray = maxDateText.split('.');
+            maxDate = new Date(maxDateArray[2] + '-' + maxDateArray[1] + '-' + maxDateArray[0]);
+        }
         $(this).datepicker({
-            dateFormat: dateFormat,
-            range: 'period',
-            minDate: $(this).attr('min'),
-            maxDate: $(this).attr('max'),
-            onSelect: function(dateText, inst, extensionRange) {
-                inst.input.val(extensionRange.startDateText + ' - ' + extensionRange.endDateText);
-            }
+            language: 'ru',
+            range: true,
+            multipleDatesSeparator: ' - ',
+            minDate: minDate,
+            maxDate: maxDate
         });
     });
 

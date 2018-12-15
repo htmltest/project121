@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="js/chosen/chosen.css" />
         <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css" />
         <link rel="stylesheet" href="js/nouislider/nouislider.css" />
+        <link rel="stylesheet" href="js/air-datepicker/datepicker.css" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -293,6 +294,26 @@
                                     <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Всё просто»</div>
                                     <div class="main-events-form-results-value-price"><span>2599</span> ₽</div>
                                 </div>
+                                <div class="main-events-form-results-value">
+                                    <div class="main-events-form-results-details">
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Программа:</div>
+                                            <div class="main-events-form-results-details-value">250 000 руб.</div>
+                                        </div>
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Вид имущества:</div>
+                                            <div class="main-events-form-results-details-value">Квартира</div>
+                                        </div>
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Дата начала:</div>
+                                            <div class="main-events-form-results-details-value">16.12.2018</div>
+                                        </div>
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Дата окончания:</div>
+                                            <div class="main-events-form-results-details-value">16.12.2109</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="order-form-fields">
@@ -314,8 +335,11 @@
                                 <div class="form-field">
                                     <div class="form-input"><span class="form-input-label">Имя <em>*</em></span><input type="text" name="firstname" value="" class="required" /></div>
                                 </div>
-                                <div class="form-field">
+                                <div class="form-field form-field-middlename">
                                     <div class="form-input"><span class="form-input-label">Отчество <em>*</em></span><input type="text" name="middlename" value="" class="required" /></div>
+                                </div>
+                                <div class="form-checkbox order-middlename-checkbox">
+                                    <label><input type="checkbox" name="middlename_none" /><span>Отчество отсутствует</span></label>
                                 </div>
                                 <div class="form-field">
                                     <div class="form-select">
@@ -329,7 +353,7 @@
                                 </div>
                                 <div class="order-form-row">
                                     <div class="form-field">
-                                        <div class="form-input form-input-date"><span class="form-input-label">Дата рождения <em>*</em></span><input type="text" name="birthday" value="" max="-18y" class="required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
+                                        <div class="form-input form-input-date"><span class="form-input-label">Дата рождения <em>*</em></span><input type="text" name="birthday" value="" max="16.12.2000" class="required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
                                     </div>
                                 </div>
                                 <div class="form-field order-field-gender">
@@ -342,13 +366,13 @@
                                     </div>
                                 </div>
                                 <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" id="address" value="" class="required" /></div>
+                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" id="address" value="" class="required" /><div class="form-input-dadata"></div></div>
                                 </div>
                                 <div class="form-checkbox order-address-checkbox">
                                     <label><input type="checkbox" name="address_equal" checked="checked" /><span>Адрес регистрации совпадает с адресом застрахованного имущества</span></label>
                                 </div>
                                 <div class="form-field order-address-jur">
-                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" id="address_jur" value="" class="required" /></div>
+                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" id="address_jur" value="" class="required" /><div class="form-input-dadata"></div></div>
                                     <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
                                     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
                                     <!--[if lt IE 10]>
@@ -360,15 +384,33 @@
                                             token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
                                             type: "ADDRESS",
                                             count: 5,
+                                            onSelect: function(suggestion) {
+                                                var curDataField = $(this).parent().find('.form-input-dadata');
+                                                curDataField.html('');
+                                                for(curItem in suggestion.data) {
+                                                    if (suggestion.data[curItem] != null) {
+                                                        curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                                                    }
+                                                }
+                                            }
                                         });
                                         $("#address_jur").suggestions({
                                             token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
                                             type: "ADDRESS",
                                             count: 5,
+                                            onSelect: function(suggestion) {
+                                                var curDataField = $(this).parent().find('.form-input-dadata');
+                                                curDataField.html('');
+                                                for(curItem in suggestion.data) {
+                                                    if (suggestion.data[curItem] != null) {
+                                                        curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                                                    }
+                                                }
+                                            }
                                         });
                                     </script>
                                 </div>
-                                <h2>Удостоверение личности Страхователя</h2>
+                                <h2>Паспорт страхователя</h2>
                                 <div class="order-passport">
                                     <div class="form-field">
                                         <div class="form-input"><span class="form-input-label">Серия <em>*</em></span><input type="text" name="passport_ser" value="" class="required digits digit4" minlength="4" maxlength="4" /></div>
@@ -377,7 +419,7 @@
                                         <div class="form-input"><span class="form-input-label">Номер <em>*</em></span><input type="text" name="passport_num" value="" class="required digits digit6" minlength="6" maxlength="6" /></div>
                                     </div>
                                     <div class="form-field">
-                                        <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="passport_date" value="" max="0d" class="required" /></div>
+                                        <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="passport_date" value="" max="15.12.2018" class="required" /></div>
                                     </div>
                                 </div>
                                 <div class="form-field">
@@ -398,6 +440,93 @@
 
                 </div>
                 <!-- container END -->
+
+                <!-- order faq -->
+                <div class="order-faq">
+                    <div class="container">
+
+                        <h2>Вопросы и ответы</h2>
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Кто может быть Страхователем?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Кто может быть Застрахованным лицом?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Как назначить другое Застрахованное лицо?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Кто является Выгодоприобретателем?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Каковы территория страхования и время действия страхования?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Какова Страховая сумма и Страховая премия?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Каков срок действия полиса?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                    </div>
+                </div>
+                <!-- order faq END -->
 
             </div>
         </div>
@@ -489,10 +618,9 @@
         <script src="js/validation/messages_ru.js"></script>
         <script src="js/chosen/chosen.jquery.min.js"></script>
         <script src="js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-        <script src="js/jquery-ui-1.12.1.custom/datepicker-ru.js"></script>
-        <script src="js/jquery-ui-1.12.1.custom/jquery.datepicker.extension.range.min.js"></script>
         <script src="js/nouislider/nouislider.min.js"></script>
         <script src="js/wnumb/wNumb.js"></script>
+        <script src="js/air-datepicker/datepicker.min.js"></script>
         <script src="js/tools.js"></script>
 
     </body>

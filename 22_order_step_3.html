@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="js/chosen/chosen.css" />
         <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css" />
         <link rel="stylesheet" href="js/nouislider/nouislider.css" />
+        <link rel="stylesheet" href="js/air-datepicker/datepicker.css" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -387,13 +388,16 @@
                     </table>
 
                     <form action="ajax/order-sms.json" method="post" class="order-confirm-form">
-                        <div class="form-field">
-                            <div class="form-checkbox">
-                                <label><input type="checkbox" name="order_confirm" id="order-confirm" class="required" /><span>Данные проверены и не содержат ошибок</span></label>
+                        <div class="order-confirm-form-header">
+                            <div class="form-field">
+                                <div class="form-checkbox">
+                                    <label><input type="checkbox" name="order_confirm" id="order-confirm" class="required" /><span>Данные проверены и не содержат ошибок</span></label>
+                                </div>
                             </div>
+                            <div class="order-confirm-form-back"><a href="#" class="btn-blue btn-mini">Редактировать данные</a></div>
                         </div>
                         <div class="order-confirm-form-detail">
-                            <div class="form-hint">На Ваш адрес ххххххххххх@mail.ru направлены: страховой полис, подписанный электронной подписью Страховщика, и правила страхования.<br /> На номер +х (ххх)ххх-хх-хх отправлено SMS с кодом подтверждения.</div>
+                            <div class="form-hint">На Ваш адрес <strong>ххххххххххх@mail.ru</strong> направлены: страховой полис, подписанный электронной подписью Страховщика, и правила страхования.<br /> На номер <strong>+х (ххх)ххх-хх-хх</strong> отправлено SMS с кодом подтверждения.</div>
                             <div class="form-field">
                                 <div class="form-checkbox">
                                     <label><input type="checkbox" name="order_confirm_data" class="required" id="order-confirm-data" checked="checked" /><span> Выражаю свое согласие ООО «СМП-Страхование» <a href="windows/policy-order.html" class="window-link">на обработку моих персональных данных</a>.</span></label>
@@ -403,16 +407,18 @@
                                 </div>
                             </div>
                             <div class="order-confirm-sms">
-                                <h2>Укажите СМС-пароль для подтверждения введенных данных</h2>
+                                <h2>Укажите СМС-код для подтверждения введенных данных</h2>
                                 <div class="order-confirm-sms-row">
-                                    <div class="form-input"><span class="form-input-label">СМС-Пароль <em>*</em></span><input type="text" name="code" value="" class="required" /></div>
+                                    <div class="form-input"><span class="form-input-label">СМС-код <em>*</em></span><input type="text" name="code" value="" class="required" /></div>
                                     <div class="form-submit"><input type="submit" value="Подтвердить" class="btn-orange" /></div>
                                     <div class="order-confirm-sms-new">Не пришел смс-код? <a href="#">Отправить повторно</a></div>
                                 </div>
                             </div>
                             <div class="order-success-sms">
-                                <h2>Спасибо!</h2>
-                                <p class="order-success-sms-text">Ваш номер телефона подтвержден.</p>
+                                <div class="order-success-sms-content">
+                                    <h2>Спасибо!</h2>
+                                    <p class="order-success-sms-text">Ваш номер телефона подтвержден.</p>
+                                </div>
                                 <div class="order-success-sms-link"><a href="#" class="btn-orange">Оплатить</a></div>
                             </div>
                         </div>
@@ -420,6 +426,93 @@
 
                 </div>
                 <!-- container END -->
+
+                <!-- order faq -->
+                <div class="order-faq">
+                    <div class="container">
+
+                        <h2>Вопросы и ответы</h2>
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Кто может быть Страхователем?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Кто может быть Застрахованным лицом?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Как назначить другое Застрахованное лицо?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Кто является Выгодоприобретателем?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Каковы территория страхования и время действия страхования?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Какова Страховая сумма и Страховая премия?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                        <!-- vacancy -->
+                        <div class="vacancy faq">
+                            <a href="#" class="vacancy-title"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg>Каков срок действия полиса?</a>
+                            <div class="vacancy-content">
+                                <div class="vacancy-content-inner">
+                                    <p>Застрахованное лицо либо его наследники. Договор страхования считается заключенным в пользу Застрахованного лица. В случае смерти Застрахованного лица Выгодоприобретателями признаются наследники Застрахованного лица.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vacancy END -->
+
+                    </div>
+                </div>
+                <!-- order faq END -->
 
             </div>
         </div>
@@ -511,10 +604,9 @@
         <script src="js/validation/messages_ru.js"></script>
         <script src="js/chosen/chosen.jquery.min.js"></script>
         <script src="js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-        <script src="js/jquery-ui-1.12.1.custom/datepicker-ru.js"></script>
-        <script src="js/jquery-ui-1.12.1.custom/jquery.datepicker.extension.range.min.js"></script>
         <script src="js/nouislider/nouislider.min.js"></script>
         <script src="js/wnumb/wNumb.js"></script>
+        <script src="js/air-datepicker/datepicker.min.js"></script>
         <script src="js/tools.js"></script>
 
     </body>
