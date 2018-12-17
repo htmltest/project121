@@ -1076,23 +1076,45 @@ h3.carier-text {font-weight:300; line-height:42px}
 .polis-price::before {content:""; display:block; position:absolute; left:100%; top:0; width:9999px; bottom:0; background:#f9f9f9}
 .polis-price::after {content:""; display:block; position:absolute; right:100%; top:0; width:9999px; bottom:0; background:#f9f9f9}
 .polis-price h2 {margin-top:0; text-align:center}
-.polis-price-list {margin:0 -15px; padding:12px 0 0 0}
+.polis-price-list {margin:0 -10px; padding:12px 0 0 0}
 .polis-price-list::after {content:""; display:block; clear:both}
-.polis-price-item {float:left; width:50%; padding:0 15px}
+.polis-price-item {float:left; width:50%; padding:0 10px}
+.polis-price-3 .polis-price-item {width:33.33%}
+.polis-price-4 .polis-price-item {width:auto; float:none}
+.polis-price-1 .polis-price-item {width:614px; margin:0 auto; padding:0; display:block; float:none}
 .polis-price-item-inner {background:#fff; padding:21px 45px 26px 45px}
+.polis-price-3 .polis-price-item-inner {padding:21px 38px 26px 38px}
+.polis-price-4 .polis-price-item-inner {padding:29px 75px 38px 75px}
 .polis-price-item-summ-title {text-transform:uppercase; font-size:16px; color:#7f7f7f; font-weight:normal}
 .polis-price-item-summ-value {font-size:38px; line-height:42px; color:#004e96; font-weight:bold; padding:7px 0 0 0}
+.polis-price-item-summ-notice {font-size:13px; line-height:20px; margin:3px 0 -3px 0}
 .polis-price-item-insurance-title {text-transform:uppercase; font-size:16px; color:#7f7f7f; font-weight:normal; padding:25px 0 0 0}
 .polis-price-item-insurance-title::before {content:""; display:block; width:96px; height:3px; background:#ff6607; margin:0 0 5px 0}
 .polis-price-item-insurance-value {font-size:28px; line-height:32px; font-weight:normal}
+.polis-price-item-inner-info {border-top:1px solid #e6e6e6; display:table; width:100%; font-size:13px; line-height:20px; margin:32px 0 0 0}
+.polis-price-item-inner-info-row {display:table-row}
+.polis-price-item-inner-info-label {display:table-cell; vertical-align:top; padding:8px 0}
+.polis-price-item-inner-info-row:first-child .polis-price-item-inner-info-label {padding-top:31px}
+.polis-price-item-inner-info-value {display:table-cell; vertical-align:top; white-space:nowrap; text-align:right; padding:8px 0 8px 30px}
+.polis-price-item-inner-info-row:first-child .polis-price-item-inner-info-value {padding-top:31px}
+.polis-price-item-comment {float:left; width:100%; margin:20px 0 0 0}
+.polis-price-item-comment .polis-price-item-inner {padding:23px 38px}
 
 @media screen and (max-width:1199px) {
     .polis-price {margin:35px 0}
     .polis-price h2 {text-align:left}
     .polis-price-list {margin:0}
     .polis-price-item {float:none; width:auto; padding:0}
+    .polis-price-3 .polis-price-item {width:auto}
     .polis-price-item+.polis-price-item {margin:16px 0 0 0}
+    .polis-price-item-inner {padding:21px 25px 26px 25px}
+    .polis-price-3 .polis-price-item-inner {padding:21px 25px 26px 25px}
     .polis-price-item-summ-title {font-size:18px}
+    .polis-price-1 .polis-price-item {width:auto}
+    .polis-price-item-summ-notice {line-height:26px; margin:0 0 -3px 0}
+    .polis-price-4 .polis-price-item-inner {padding:20px 50px}
+    .polis-price-item-comment {float:none; width:auto; margin:16px 0 0 0}
+    .polis-price-item-comment .polis-price-item-inner {padding:23px 25px}
 }
 
 .contacts-feedback-link {float:right; width:160px; padding:4px 0 0 0}

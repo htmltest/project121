@@ -6,7 +6,7 @@ $(document).ready(function() {
         slidesToScroll: 1,
         prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
         nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
-        dots: false,
+        dots: false
     });
 
     $('.nav-add-link').click(function(e) {
@@ -256,14 +256,6 @@ $(document).ready(function() {
     });
 
     if ($('#order-date-start').length == 1) {
-        $('#order-date-start').datepicker().data('datepicker').update({
-            onSelect: function(formattedDate, date, inst) {
-                var dateArray = formattedDate.split('.');
-                var newDate = new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
-                newDate.setFullYear(newDate.getFullYear() + 1);
-                $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
-            }
-        });
         $('#order-date-start').change(function() {
             var curDateText = $(this).val();
             var curDateArray = curDateText.split('.');
@@ -272,6 +264,21 @@ $(document).ready(function() {
             var newDate = curDate;
             newDate.setFullYear(newDate.getFullYear() + 1);
             $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
+        });
+        $('#order-date-start').each(function() {
+            var curDateText = $(this).val();
+            if (curDateText != '') {
+                var curDateArray = curDateText.split('.');
+                var curDate = new Date(curDateArray[2] + '-' + curDateArray[1] + '-' + curDateArray[0]);
+                $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
+                var newDate = curDate;
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
+            } else {
+                $('#order-date-end').val('');
+                $('#order-date-start').datepicker().data('datepicker').clear();
+                $('#order-date-end').datepicker().data('datepicker').clear();
+            }
         });
     }
 
