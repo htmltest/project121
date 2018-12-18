@@ -183,8 +183,18 @@ $(document).ready(function() {
         $(this).toggleClass('open');
     });
 
+    $('.nav-add-item-title a').click(function(e) {
+        if ($(window).width() < 1200) {
+            if ($(this).parent().next().find('li').length > 1) {
+                e.preventDefault();
+            }
+        }
+    });
+
     $('.nav-add-item-title').each(function() {
-        $(this).prepend('<svg xmlns="http://www.w3.org/2000/svg" width="6" height="14" viewBox="0 0 49.68 92.8"><path d="M5.6,91.92a3.21,3.21,0,0,1-2.32,1,3.2,3.2,0,0,1-2.32-1,3.28,3.28,0,0,1,0-4.64l40.8-40.8L1,5.68A3.28,3.28,0,0,1,5.6,1L48.72,44.16a3.28,3.28,0,0,1,0,4.64Zm0,0"/></svg>');
+        if ($(this).next().find('li').length > 1) {
+            $(this).prepend('<svg xmlns="http://www.w3.org/2000/svg" width="6" height="14" viewBox="0 0 49.68 92.8"><path d="M5.6,91.92a3.21,3.21,0,0,1-2.32,1,3.2,3.2,0,0,1-2.32-1,3.28,3.28,0,0,1,0-4.64l40.8-40.8L1,5.68A3.28,3.28,0,0,1,5.6,1L48.72,44.16a3.28,3.28,0,0,1,0,4.64Zm0,0"/></svg>');
+        }
     });
 
     $('.nav-add-item-list li').each(function() {
@@ -470,6 +480,7 @@ $(document).ready(function() {
                     $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
                 }).done(function(data) {
                     if (data.status == 'ok') {
+                        $(form).find('.form-error').remove();
                         $('.order-confirm-form').addClass('sms-success');
                     } else {
                         $(form).find('.form-error').remove();
@@ -482,6 +493,12 @@ $(document).ready(function() {
 
     $('body').on('copy paste cut', '#emailCopy', function() {
         return false;
+    });
+
+    $('body').on('click', '.btn-form-send', function(e) {
+        $(this).parents().filter('form').validate().destroy();
+        $(this).parents().filter('form').trigger('submit');
+        e.preventDefault();
     });
 
 });

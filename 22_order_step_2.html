@@ -374,41 +374,9 @@
                                 <div class="form-field order-address-jur">
                                     <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" id="address_jur" value="" class="required" /><div class="form-input-dadata"></div></div>
                                     <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
-                                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
                                     <!--[if lt IE 10]>
                                         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
                                     <![endif]-->
-                                    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
-                                    <script type="text/javascript">
-                                        $("#address").suggestions({
-                                            token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
-                                            type: "ADDRESS",
-                                            count: 5,
-                                            onSelect: function(suggestion) {
-                                                var curDataField = $(this).parent().find('.form-input-dadata');
-                                                curDataField.html('');
-                                                for(curItem in suggestion.data) {
-                                                    if (suggestion.data[curItem] != null) {
-                                                        curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
-                                                    }
-                                                }
-                                            }
-                                        });
-                                        $("#address_jur").suggestions({
-                                            token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
-                                            type: "ADDRESS",
-                                            count: 5,
-                                            onSelect: function(suggestion) {
-                                                var curDataField = $(this).parent().find('.form-input-dadata');
-                                                curDataField.html('');
-                                                for(curItem in suggestion.data) {
-                                                    if (suggestion.data[curItem] != null) {
-                                                        curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
-                                                    }
-                                                }
-                                            }
-                                        });
-                                    </script>
                                 </div>
                                 <h2>Паспорт страхователя</h2>
                                 <div class="order-passport">
@@ -431,7 +399,7 @@
                             <div class="order-form-ctrl order-form-ctrl-2">
                                 <div class="form-field">
                                     <div class="form-submit"><input type="submit" value="Оформить полис" class="btn-orange" /></div>
-                                    <div class="back-link"><a href="#" class="btn-border btn-mini">Вернуться</a></div>
+                                    <div class="back-link"><a href="#" class="btn-border btn-mini btn-form-send">Вернуться</a></div>
                                 </div>
                             </div>
                         </form>
@@ -622,6 +590,40 @@
         <script src="js/wnumb/wNumb.js"></script>
         <script src="js/air-datepicker/datepicker.min.js"></script>
         <script src="js/tools.js"></script>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
+        <script type="text/javascript">
+            $("#address").attr('autocomplete', 'off');
+            $("#address").suggestions({
+                token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
+                type: "ADDRESS",
+                count: 5,
+                onSelect: function(suggestion) {
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
+                    for(curItem in suggestion.data) {
+                        if (suggestion.data[curItem] != null) {
+                            curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                        }
+                    }
+                }
+            });
+            $("#address_jur").attr('autocomplete', 'off');
+            $("#address_jur").suggestions({
+                token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
+                type: "ADDRESS",
+                count: 5,
+                onSelect: function(suggestion) {
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
+                    for(curItem in suggestion.data) {
+                        if (suggestion.data[curItem] != null) {
+                            curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                        }
+                    }
+                }
+            });
+        </script>
 
     </body>
 </html>

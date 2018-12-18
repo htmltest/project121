@@ -28,6 +28,7 @@ strong {font-weight:normal}
 
 h1 {margin:0 0 33px 0; padding:0; font-weight:normal; font-size:38px; line-height:42px}
 h1 svg {display:inline-block; vertical-align:middle; margin:-2px 18px 0 0}
+h1 img {display:inline-block; vertical-align:middle; margin:-2px 18px 0 0}
 .container > h1:first-child {padding-top:94px}
 h1 path {fill:#ff6200}
 h2 {margin:68px 0 19px 0; padding:0; font-weight:normal; font-size:28px; line-height:42px}
@@ -795,7 +796,7 @@ h2+.bottom-btns {margin-top:21px}
 }
 
 h1+.page-menu {margin-top:-17px}
-.page-menu {height:32px}
+.page-menu {height:32px; margin-bottom:46px}
 .page-menu.fixed .page-menu-inner {position:fixed; left:0; top:0; right:0; bottom:0; background:#fff; height:50px; line-height:49px; border-bottom:1px solid #e6e6e6; z-index:20}
 .page-menu.fixed ul {max-width:1200px; margin:0 auto; padding:0 15px}
 .page-menu ul {margin:0; padding:0; list-style:none}
@@ -845,7 +846,8 @@ h1+.page-menu {margin-top:-17px}
 .main-events-list {position:relative; width:100%; font-size:0; line-height:0; letter-spacing:-1px; white-space:nowrap; overflow:hidden; text-align:left}
 .main-events-list.slick-initialized {overflow:visible}
 .main-events-item {display:inline-block; vertical-align:top; width:25%; padding:19px 10px; font-size:16px; line-height:32px; letter-spacing:0; white-space:normal}
-.main-events-item-inner {display:block; background:#fff; border-bottom:5px solid #d9d9d9; position:relative}
+.main-events-item-inner {display:block; background:#fff; border-bottom:5px solid #d9d9d9; position:relative; visibility:hidden}
+.main-events-list .slick-active .main-events-item-inner {visibility:visible}
 .main-events-item.active .main-events-item-inner::after {content:""; display:block; position:absolute; left:50%; bottom:-25px; width:52px; height:25px; margin-left:-26px; background:url(../images/main-events-item.png)}
 @media screen and (min-width:1200px) {
     .main-events-item-inner:hover {transform:translateY(-5px); box-shadow:0 10px 20px rgba(0, 78, 150, 0.2); border-bottom-color:#ff6200}
