@@ -202,10 +202,11 @@ $(document).ready(function() {
         if (curLi.find('ul').length > 0) {
             curLi.addClass('mobile-with-submenu');
             curLi.find('> a').eq(0).append('<svg xmlns="http://www.w3.org/2000/svg" width="5" height="11" viewBox="0 0 49.68 92.8"><path d="M5.6,91.92a3.21,3.21,0,0,1-2.32,1,3.2,3.2,0,0,1-2.32-1,3.28,3.28,0,0,1,0-4.64l40.8-40.8L1,5.68A3.28,3.28,0,0,1,5.6,1L48.72,44.16a3.28,3.28,0,0,1,0,4.64Zm0,0" transform="translate(0 -0.08)"/></svg>');
+            curLi.find('> span').eq(0).append('<svg xmlns="http://www.w3.org/2000/svg" width="5" height="11" viewBox="0 0 49.68 92.8"><path d="M5.6,91.92a3.21,3.21,0,0,1-2.32,1,3.2,3.2,0,0,1-2.32-1,3.28,3.28,0,0,1,0-4.64l40.8-40.8L1,5.68A3.28,3.28,0,0,1,5.6,1L48.72,44.16a3.28,3.28,0,0,1,0,4.64Zm0,0" transform="translate(0 -0.08)"/></svg>');
         }
     });
 
-    $('.nav-add-item-list li a').click(function(e) {
+    $('.nav-add-item-list li a, .nav-add-item-list li span').click(function(e) {
         if ($(window).width() < 1200) {
             var curLi = $(this).parent();
             if (curLi.find('ul').length > 0) {
@@ -497,6 +498,7 @@ $(document).ready(function() {
 
     $('body').on('click', '.btn-form-send', function(e) {
         $(this).parents().filter('form').validate().destroy();
+        $(this).parents().filter('form').append('<input type="hidden" name="' + $(this).data('name') + '" value="1" />');
         $(this).parents().filter('form').trigger('submit');
         e.preventDefault();
     });
@@ -531,6 +533,7 @@ function initForm(curForm) {
     curForm.find('input.phoneRU').mask('+7 (000) 000-00-00');
     curForm.find('.form-input-date input').mask('00.00.0000');
     curForm.find('.form-input-date input').attr('autocomplete', 'off');
+    curForm.find('.form-input-date-range input').attr('autocomplete', 'off');
     curForm.find('input.digit4').mask('0000');
     curForm.find('input.digit6').mask('000000');
 

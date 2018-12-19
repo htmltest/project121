@@ -484,6 +484,7 @@ footer {transition:opacity 0.7s, visibility 0.7s}
 .nav-add-item-list ul {margin:0; padding:0; list-style:none}
 .nav-add-item-list ul li {margin:12px 0; padding:0 0 0 16px}
 .nav-add-item-list ul li a svg {display:none}
+.nav-add-item-list ul li span svg {display:none}
 .nav-add-item-list ul li::before {content:""; display:block; width:6px; height:11px; position:absolute; left:1px; top:6px; background:url(../images/nav-add.svg) no-repeat; background-size:100%; border-radius:0; border:none; transform:rotate(-180deg)}
 .nav-add-item-list ul li ul {display:block; font-size:14px; line-height:20px; font-weight:300; margin:-2px 0 15px 0}
 .nav-add-item-list ul li ul li {margin:8px 0; padding:0 0 0 20px; position:relative}
@@ -512,6 +513,8 @@ footer {transition:opacity 0.7s, visibility 0.7s}
     .mobile-menu-open .nav-add .nav-add-item-list ul li {margin:24px 0 0 0; padding:0}
     .mobile-menu-open .nav-add .nav-add-item-list ul li a svg {display:inline-block; vertical-align:middle; margin:-2px 0 0 7px; transform:rotate(90deg)}
     .mobile-menu-open .nav-add .nav-add-item-list ul li a path {fill:#004e96}
+    .mobile-menu-open .nav-add .nav-add-item-list ul li span svg {display:inline-block; vertical-align:middle; margin:-2px 0 0 7px; transform:rotate(90deg)}
+    .mobile-menu-open .nav-add .nav-add-item-list ul li span path {fill:#004e96}
     .mobile-menu-open .nav-add .nav-add-item-list ul li:first-child {margin:0}
     .mobile-menu-open .nav-add .nav-add-item-list ul li::before {display:none}
     .mobile-menu-open .nav-add .nav-add-item-list ul li ul {display:none; font-weight:normal; font-size:16px; padding-top:24px}
