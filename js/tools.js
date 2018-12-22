@@ -65,9 +65,9 @@ $(document).ready(function() {
     $('.main-events-list').each(function() {
         if ($('.main-events-item').length > 4) {
             var startHTML = $(this).html();
-            $(this).data('startIndex', $('.main-events-item').length * 10);
-            $(this).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML);
-            $(this).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML);
+            $(this).data('startIndex', $('.main-events-item').length * 5);
+            $(this).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML);
+            $(this).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML);
         }
     });
 
