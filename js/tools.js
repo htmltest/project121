@@ -62,10 +62,20 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('.main-events-list').each(function() {
+        if ($('.main-events-item').length > 4) {
+            var startHTML = $(this).html();
+            $(this).data('startIndex', $('.main-events-item').length * 10);
+            $(this).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML).prepend(startHTML);
+            $(this).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML).append(startHTML);
+        }
+    });
+
     $('.main-events-list').slick({
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
+        initialSlide: $('.main-events-list').data('startIndex'),
         prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
         nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.72 381.74"><path d="M26.14,191l172.4-172.4A10.8,10.8,0,0,0,183.26,3.28L3.18,183.36a10.77,10.77,0,0,0,0,15.28l180.08,180a10.85,10.85,0,0,0,7.6,3.2,10.55,10.55,0,0,0,7.6-3.2,10.77,10.77,0,0,0,0-15.28Zm0,0" transform="translate(0 -0.1)"/></svg></button>',
         dots: false,
@@ -355,6 +365,7 @@ $(document).ready(function() {
         var curInput = $(this);
         var curValue = curInput.val();
         if (curValue.match(/^\+7 \(\d{3}\) \d{3}\-\d{2}\-\d{2}$/)) {
+            curInput.parent().addClass('loading');
             $.ajax({
                 type: 'POST',
                 url: 'ajax/order-phone.json',
@@ -362,6 +373,7 @@ $(document).ready(function() {
                 data: JSON.stringify({'phone': curValue}),
                 cache: false
             }).done(function(data) {
+                curInput.parent().removeClass('loading');
                 if (data.status == 'ok') {
                     $('#phone-hint').show();
                 } else {
@@ -415,18 +427,38 @@ $(document).ready(function() {
 
     $('#order-confirm').change(function() {
         if ($(this).prop('checked')) {
-            $('.order-confirm-form').addClass('open');
+            $(this).prop('disabled', true);
+            var curCheckbox = $(this).parents().filter('.form-checkbox');
+            var curForm = $(this).parents().filter('form');
+            curForm.find('.order-confirm-form-back').hide();
+            curCheckbox.addClass('loading');
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/order-confirm.json',
+                dataType: 'json',
+                cache: false,
+                timeout: 5000
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                curCheckbox.removeClass('loading');
+                curForm.find('.form-error').remove();
+                curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
+            }).done(function(data) {
+                curCheckbox.removeClass('loading');
+                if (data.status == 'ok') {
+                    curForm.find('.form-error').remove();
+                    $('.order-confirm-form').addClass('open');
+                } else {
+                    curForm.find('.form-error').remove();
+                    curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
+                }
+            });
         } else {
             $('.order-confirm-form').removeClass('open');
         }
     });
 
     $('#order-confirm').each(function() {
-        if ($(this).prop('checked')) {
-            $('.order-confirm-form').addClass('open');
-        } else {
-            $('.order-confirm-form').removeClass('open');
-        }
+        $(this).prop('checked', false);
     });
 
     $('#order-confirm-data').change(function() {
@@ -468,7 +500,10 @@ $(document).ready(function() {
         confirmForm.validate({
             ignore: '',
             submitHandler: function(form) {
-
+                confirmForm.addClass('loading');
+                confirmForm.find('input[type="submit"]').prop('disabled', true);
+                confirmForm.find('input[type="text"]').prop('disabled', true);
+                confirmForm.find('input[type="text"]').parent().addClass('form-input-disabled');
                 $.ajax({
                     type: 'POST',
                     url: $(form).attr('action'),
@@ -477,9 +512,17 @@ $(document).ready(function() {
                     cache: false,
                     timeout: 5000
                 }).fail(function(jqXHR, textStatus, errorThrown) {
+                    confirmForm.removeClass('loading');
+                    confirmForm.find('input[type="submit"]').prop('disabled', false);
+                    confirmForm.find('input[type="text"]').prop('disabled', false);
+                    confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
                     $(form).find('.form-error').remove();
                     $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
                 }).done(function(data) {
+                    confirmForm.removeClass('loading');
+                    confirmForm.find('input[type="submit"]').prop('disabled', false);
+                    confirmForm.find('input[type="text"]').prop('disabled', false);
+                    confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
                     if (data.status == 'ok') {
                         $(form).find('.form-error').remove();
                         $('.order-confirm-form').addClass('sms-success');

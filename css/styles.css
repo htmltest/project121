@@ -139,6 +139,10 @@ h2+blockquote {margin-top:26px}
     .btn-orange:hover {background:#ff8a00; color:#fff}
     .btn-orange:active {background:#ff6200; color:#fff}
 }
+.btn-orange:disabled {cursor:default; opacity:0.5}
+@media screen and (min-width:1200px) {
+    .btn-orange:disabled:hover {background:#ff6200}
+}
 .btn-orange img,
 .btn-orange svg {display:inline-block; vertical-align:middle; margin:-2px 11px 0 0}
 .btn-orange svg path {fill:#fff}
@@ -147,6 +151,10 @@ h2+blockquote {margin-top:26px}
 @media screen and (min-width:1200px) {
     .btn-blue:hover {background:#03a9f4; color:#fff}
     .btn-blue:active {background:#005fb6; color:#fff}
+}
+.btn-blue:disabled {cursor:default; opacity:0.5}
+@media screen and (min-width:1200px) {
+    .btn-blue:disabled:hover {background:#ff6200}
 }
 .btn-blue img,
 .btn-blue svg {display:inline-block; vertical-align:middle; margin:-2px 11px 0 0}
@@ -157,6 +165,10 @@ h2+blockquote {margin-top:26px}
 @media screen and (min-width:1200px) {
     .btn-border:hover {border-color:#004e96; color:#004e96}
     .btn-border:active {border-color:#ff6200; color:#ff6200}
+}
+.btn-border:disabled {cursor:default; opacity:0.5}
+@media screen and (min-width:1200px) {
+    .btn-border:disabled:hover {background:#ff6200}
 }
 .btn-border img,
 .btn-border svg {display:inline-block; vertical-align:middle; margin:-2px 7px 0 0}
@@ -206,6 +218,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .desktop-menu-icon-text::after {content:""; display:block; width:0; height:0; position:absolute; left:50%; bottom:-6px; margin-left:-6px; border-top:6px solid #fff; border-left:6px solid transparent; border-right:6px solid transparent}
 
 .form-input {position:relative; background:#fff; border-radius:3px}
+.form-input.loading::after {content:""; display:block; position:absolute; top:20px; right:10px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
 .form-input-disabled {background:#f7f5f5}
 .form-input-number {margin:0 71px; max-width:173px}
 .form-input-label {position:absolute; left:24px; font-size:18px; color:#7f7f7f; top:17px; transition:all 0.2s; font-weight:normal}
@@ -284,8 +297,9 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-checkbox {margin:14px 0; line-height:22px; user-select:none}
 .form-checkbox::after {content:""; display:block; clear:both}
 .form-checkbox label {float:left; margin:0; cursor:pointer}
+.form-checkbox.loading label::after {content:""; display:block; float:left; margin:-1px 0 -1px 10px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
 .form-checkbox input {display:none}
-.form-checkbox span {display:block; padding:0 0 0 33px; position:relative}
+.form-checkbox span {display:block; float:left; padding:0 0 0 33px; position:relative}
 .form-checkbox span::before {content:""; display:block; position:absolute; left:0; top:0; width:22px; height:22px; border:1px solid #e6e6e6; background:#fff url(../images/checkbox.svg) no-repeat -999px -999px; border-radius:3px; transition:background-color 0.2s, border-color 0.2s}
 @media screen and (min-width:1200px) {
     .form-checkbox label:hover span::before {border-color:#03a9f4}
@@ -1528,10 +1542,11 @@ h2+.order-form {padding-top:0}
 
 .order-confirm-sms-row::after {content:""; display:block; clear:both}
 .order-confirm-sms-row .form-input {float:left; width:374px}
-.order-confirm-sms-row .form-submit {float:left; width:307px; margin:0 0 0 14px}
+.order-confirm-sms-row .form-submit {float:left; width:307px; margin:0 0 0 14px; position:relative}
 .order-confirm-sms-row .form-submit .btn-orange {width:100%}
 .order-confirm-sms-new {float:left; clear:left}
 .order-confirm-form.close .form-submit .btn-orange {opacity:0.5; cursor:default; pointer-events:none}
+.order-confirm-form.loading .form-submit::after {content:""; display:block; position:absolute; right:-34px; top:50%; margin-top:-12px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
 
 @media screen and (max-width:1199px) {
     .order-confirm-sms-row .form-input {width:calc(100% - 275px)}
