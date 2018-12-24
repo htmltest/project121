@@ -906,6 +906,7 @@ h1+.page-menu {margin-top:-17px}
     .main-events {margin:0 -15px; padding:0}
     .main-events-item {padding:0; width:100%; font-size:18px}
     .main-events-item-inner {border-bottom:none}
+    .main-events-item-inner {visibility:visible}
     .main-events-item-photo {display:none}
     .main-events-item-photo-mobile {display:block; line-height:0; position:relative; overflow:hidden; height:342px}
     .main-events-item-photo-mobile img {min-width:100%; min-height:100%; max-width:none; width:auto; height:auto; max-height:none}
@@ -916,7 +917,7 @@ h1+.page-menu {margin-top:-17px}
     .main-events-item-btn-mobile {display:block; margin:-8px 0 0 0}
     .main-events-item-btn-mobile .btn-blue {padding:0 15px; font-weight:normal; font-size:13px}
     .main-events-list .slick-dots {position:absolute; left:40px; bottom:32px; margin:0; padding:0; list-style:none; font-size:0; line-height:0; letter-spacing:-1px}
-    .main-events-list .slick-dots li {margin:0 0 0 15px; padding:0; display:inline-block; vertical-align:top}
+    .main-events-list .slick-dots li {margin:0 0 0 15px; padding:0; display:none; vertical-align:top}
     .main-events-list .slick-dots li::before {display:none}
     .main-events-list .slick-dots li:first-child {margin:0}
     .main-events-list .slick-dots li button {display:block; width:7px; height:7px; border-radius:50%; border:1px solid #004e96; background:transparent; margin:0; padding:0; outline:none; -webkit-appearance:none; cursor:pointer; font-size:0; line-height:0; text-indent:100px}
@@ -1359,8 +1360,8 @@ h3.carier-text {font-weight:300; line-height:42px}
 .how .vacancy-content h3:first-child {margin-top:33px}
 
 .how-prefs {padding-bottom:23px}
-.how-prefs ol li {padding:0 0 0 45px}
-.how-prefs ol li::before {color:#03a9f4; font-size:28px; line-height:42px; font-weight:bold; left:0; top:10px}
+.how-prefs ol li {padding:0 0 0 26px}
+.how-prefs ol li::before {display:none}
 .how-prefs h4 {margin-top:0; padding-top:16px; margin-bottom:-6px}
 
 .service-docs {background:#f9f9f9; position:relative; margin:43px 0; padding:29px 0 25px 0}
