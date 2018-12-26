@@ -736,7 +736,10 @@ function initForm(curForm) {
     });
 }
 
-function windowOpen(linkWindow, addWindow = false, dataWindow, callbackWindow) {
+function windowOpen(linkWindow, addWindow, dataWindow, callbackWindow) {
+    if (addWindow === undefined) {
+        addWindow = false;
+    }
     if (!addWindow) {
         var curPadding = $('.wrapper').width();
         $('html').addClass('window-open');
@@ -757,7 +760,7 @@ function windowOpen(linkWindow, addWindow = false, dataWindow, callbackWindow) {
         data: dataWindow,
         cache: false
     }).done(function(html) {
-        $('.window:last').html('<div class="window-container window-container-load"><div class="window-content">' + html + '<a href="#" class="window-close"></a></div></div>')
+        $('.window:last').html('<div class="window-container window-container-load"><div class="window-content">' + html + '<a href="#" class="window-close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.2 11.2"><path d="M11.2,1.12,10.08,0,5.6,4.48,1.12,0,0,1.12,4.48,5.6,0,10.08,1.12,11.2,5.6,6.72l4.48,4.48,1.12-1.12L6.72,5.6Zm0,0"/></svg></a></div></div>')
 
         if ($('.window:last .window-container img').length > 0) {
             $('.window:last .window-container img').each(function() {
