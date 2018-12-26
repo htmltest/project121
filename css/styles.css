@@ -1100,11 +1100,20 @@ h3.carier-text {font-weight:300; line-height:42px}
 .polis-price-list {margin:0 -10px; padding:12px 0 0 0}
 .polis-price-list::after {content:""; display:block; clear:both}
 .polis-price-item {float:left; width:50%; padding:0 10px}
-.polis-price-3 .polis-price-item {width:33.33%}
+.polis-price-list-1 .polis-price-item {width:50%; margin:0 auto; padding:0; display:block; float:none}
+.polis-price-list-2 .polis-price-item {width:50%}
+.polis-price-list-3 .polis-price-item {width:33.33%}
+.polis-price-list-4 .polis-price-item {width:33.33%}
+.polis-price-list-4 .polis-price-item:nth-child(4) {width:50%; padding-top:20px; clear:left; float:none; display:block; margin:0 auto}
+.polis-price-list-5 .polis-price-item {width:33.33%}
+.polis-price-list-5 .polis-price-item:nth-child(4) {width:50%; padding-top:20px}
+.polis-price-list-5 .polis-price-item:nth-child(5) {width:50%; padding-top:20px}
+.polis-price-list-6 .polis-price-item {width:33.33%}
+.polis-price-list-6 .polis-price-item:nth-child(4) {padding-top:20px}
+.polis-price-list-6 .polis-price-item:nth-child(5) {padding-top:20px}
+.polis-price-list-6 .polis-price-item:nth-child(6) {padding-top:20px}
 .polis-price-4 .polis-price-item {width:auto; float:none}
-.polis-price-1 .polis-price-item {width:614px; margin:0 auto; padding:0; display:block; float:none}
 .polis-price-item-inner {background:#fff; padding:21px 45px 26px 45px}
-.polis-price-3 .polis-price-item-inner {padding:21px 38px 26px 38px}
 .polis-price-4 .polis-price-item-inner {padding:29px 75px 38px 75px}
 .polis-price-item-summ-title {text-transform:uppercase; font-size:16px; color:#7f7f7f; font-weight:normal}
 .polis-price-item-summ-value {font-size:38px; line-height:42px; color:#004e96; font-weight:bold; padding:7px 0 0 0}

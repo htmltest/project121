@@ -572,6 +572,11 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('.polis-price-list').each(function() {
+        var countItems = $(this).find('.polis-price-item').length;
+        $(this).addClass('polis-price-list-' + countItems);
+    });
+
 });
 
 $(window).on('resize', function() {
