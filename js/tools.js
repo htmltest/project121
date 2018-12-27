@@ -642,7 +642,7 @@ function initForm(curForm) {
         curBlock.html(curHTML.replace(/type=\"number\"/g, 'type="text"'));
         curBlock.find('input').spinner();
         curBlock.find('input').keypress(function(evt) {
-            var charCode = (evt.which) ? evt.which : evt.keyCode
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (charCode > 31 && (charCode < 43 || charCode > 57)) {
                 return false;
             }
@@ -666,7 +666,8 @@ function initForm(curForm) {
         $(this).datepicker({
             language: 'ru',
             minDate: minDate,
-            maxDate: maxDate
+            maxDate: maxDate,
+            autoClose: true
         });
     });
 
@@ -728,6 +729,16 @@ function initForm(curForm) {
     if (curForm.find('.form-files').length > 0) {
         curForm.data('filesCode', curForm.find('.form-files').html());
     }
+
+    curForm.find('.onlyRUS').each(function() {
+        $(this).keypress(function(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 1039 && charCode < 1104) || charCode == 1105 || charCode == 1025 || charCode == 45 || charCode == 32) {
+                return true;
+            }
+            return false;
+        });
+    });
 
     curForm.validate({
         ignore: '',

@@ -1135,13 +1135,34 @@ h3.carier-text {font-weight:300; line-height:42px}
     .polis-price h2 {text-align:left}
     .polis-price-list {margin:0}
     .polis-price-item {float:none; width:auto; padding:0}
-    .polis-price-3 .polis-price-item {width:auto}
-    .polis-price-item+.polis-price-item {margin:16px 0 0 0}
     .polis-price-item-inner {padding:21px 25px 26px 25px}
-    .polis-price-3 .polis-price-item-inner {padding:21px 25px 26px 25px}
     .polis-price-item-summ-title {font-size:18px}
-    .polis-price-1 .polis-price-item {width:auto}
     .polis-price-item-summ-notice {line-height:26px; margin:0 0 -3px 0}
+    .polis-price-list-1 .polis-price-item,
+    .polis-price-list-2 .polis-price-item,
+    .polis-price-list-3 .polis-price-item,
+    .polis-price-list-4 .polis-price-item,
+    .polis-price-list-4 .polis-price-item:nth-child(4),
+    .polis-price-list-5 .polis-price-item,
+    .polis-price-list-5 .polis-price-item:nth-child(4),
+    .polis-price-list-5 .polis-price-item:nth-child(5),
+    .polis-price-list-6 .polis-price-item,
+    .polis-price-list-6 .polis-price-item:nth-child(4),
+    .polis-price-list-6 .polis-price-item:nth-child(5),
+    .polis-price-list-6 .polis-price-item:nth-child(6) {width:auto; margin:0; padding:0; display:block; float:none}
+    .polis-price-item+.polis-price-item {margin:16px 0 0 0}
+    .polis-price-list-1 .polis-price-item+.polis-price-item,
+    .polis-price-list-2 .polis-price-item+.polis-price-item,
+    .polis-price-list-3 .polis-price-item+.polis-price-item,
+    .polis-price-list-4 .polis-price-item+.polis-price-item,
+    .polis-price-list-4 .polis-price-item:nth-child(4),
+    .polis-price-list-5 .polis-price-item+.polis-price-item,
+    .polis-price-list-5 .polis-price-item:nth-child(4),
+    .polis-price-list-5 .polis-price-item:nth-child(5),
+    .polis-price-list-6 .polis-price-item+.polis-price-item,
+    .polis-price-list-6 .polis-price-item:nth-child(4),
+    .polis-price-list-6 .polis-price-item:nth-child(5),
+    .polis-price-list-6 .polis-price-item:nth-child(6) {margin:16px 0 0 0}
     .polis-price-4 .polis-price-item-inner {padding:20px 50px}
     .polis-price-item-comment {float:none; width:auto; margin:16px 0 0 0}
     .polis-price-item-comment .polis-price-item-inner {padding:23px 25px}
