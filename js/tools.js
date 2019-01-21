@@ -748,7 +748,7 @@ function initForm(curForm) {
         ignore: '',
         submitHandler: function(form) {
             if ($(form).hasClass('ajax-form')) {
-                windowOpen($(form).attr('action'), false, $(form).serialize());
+                windowOpen($(form).attr('action'), false, new FormData(form));
             } else {
                 form.submit();
             }
@@ -777,6 +777,8 @@ function windowOpen(linkWindow, addWindow, dataWindow, callbackWindow) {
         type: 'POST',
         url: linkWindow,
         dataType: 'html',
+        processData: false,
+        contentType: false,
         data: dataWindow,
         cache: false
     }).done(function(html) {
