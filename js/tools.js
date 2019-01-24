@@ -314,6 +314,7 @@ $(document).ready(function() {
             $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
             var newDate = curDate;
             newDate.setFullYear(newDate.getFullYear() + 1);
+            newDate.setDate(newDate.getDate() - 1);
             $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
         });
         $('#order-date-start').each(function() {
@@ -324,6 +325,7 @@ $(document).ready(function() {
                 $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
                 var newDate = curDate;
                 newDate.setFullYear(newDate.getFullYear() + 1);
+                newDate.setDate(newDate.getDate() - 1);
                 $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
             } else {
                 $('#order-date-end').val('');
