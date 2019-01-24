@@ -581,6 +581,14 @@ $(document).ready(function() {
         $(this).addClass('polis-price-list-' + countItems);
     });
 
+    $('body').on('change', '.order-field-type input', function() {
+        var curIndex = $('.order-field-type input').index('.order-field-type input:checked');
+        $('.order-types-tab.active input.required').removeClass('required').addClass('required_');
+        $('.order-types-tab.active').removeClass('active');
+        $('.order-types-tab').eq(curIndex).addClass('active');
+        $('.order-types-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
+    });
+
 });
 
 $(window).on('resize', function() {
@@ -614,6 +622,10 @@ function initForm(curForm) {
     curForm.find('.form-input-date-range input').attr('autocomplete', 'off');
     curForm.find('input.digit4').mask('0000');
     curForm.find('input.digit6').mask('000000');
+    curForm.find('input.digit10').mask('0000000000');
+    curForm.find('input.digit12').mask('000000000000');
+    curForm.find('input.digit13').mask('0000000000000');
+    curForm.find('input.digit15').mask('000000000000000');
 
     curForm.find('.form-input input, .form-input textarea').each(function() {
         if ($(this).val() != '') {
