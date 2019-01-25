@@ -467,6 +467,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: 'ajax/order-confirm.json',
+                data: {'phone': $('#confirmPhone').val(), 'url': $('#confirmURL').val()},
                 dataType: 'json',
                 cache: false,
                 timeout: 5000
