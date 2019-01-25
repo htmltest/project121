@@ -495,33 +495,49 @@ $(document).ready(function() {
 
     $('#order-confirm-data').change(function() {
         if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
+            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
             $('.order-confirm-form').addClass('close');
         } else {
             $('.order-confirm-form').removeClass('close');
+            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
+            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
         }
     });
 
     $('#order-confirm-data').each(function() {
         if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
+            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
             $('.order-confirm-form').addClass('close');
         } else {
             $('.order-confirm-form').removeClass('close');
+            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
+            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
         }
     });
 
     $('#order-confirm-info').change(function() {
         if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
+            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
             $('.order-confirm-form').addClass('close');
         } else {
             $('.order-confirm-form').removeClass('close');
+            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
+            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
         }
     });
 
     $('#order-confirm-info').each(function() {
         if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
+            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
+            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
             $('.order-confirm-form').addClass('close');
         } else {
             $('.order-confirm-form').removeClass('close');
+            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
+            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
         }
     });
 

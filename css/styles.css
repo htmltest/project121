@@ -1585,7 +1585,7 @@ h2+.order-form {padding-top:0}
 .order-confirm-sms-row .form-submit {float:left; width:307px; margin:0 0 0 14px; position:relative}
 .order-confirm-sms-row .form-submit .btn-orange {width:100%}
 .order-confirm-sms-new {float:left; clear:left}
-.order-confirm-form.close .form-submit .btn-orange {opacity:0.5; cursor:default; pointer-events:none}
+.order-confirm-form.close .form-submit .btn-orange {opacity:0.5; cursor:default}
 .order-confirm-form.loading .form-submit::after {content:""; display:block; position:absolute; right:-34px; top:50%; margin-top:-12px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
 
 @media screen and (max-width:1199px) {
