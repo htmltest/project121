@@ -112,11 +112,21 @@ $(document).ready(function() {
                 }
             });
         }
+        if ($('.main-events-item.active').length > 0) {
+            $('.main-events-list').slick('slickSetOption', 'autoplaySpeed', 9999999);
+        }
+
+    });
+
+    $('.main-events-list').on('beforeChange', function(event, slick, currentSlide) {
+        if ($(window).width() < 1200) {
+            $('.main-events-item.active').removeClass('active');
+            $('.main-events-form').html('').hide();
+        }
     });
 
     $('body').on('click', '.main-events-item-inner', function(e) {
-        console.log($('.main-events-list').slick('slickGetOption', 'autoplay'));
-        $('.main-events-list').slick('slickSetOption', 'autoplay', false, true);
+        $('.main-events-list').slick('slickSetOption', 'autoplaySpeed', 9999999);
         if ($('.main-events-form').length > 0) {
             var curLink = $(this);
             var curItem = curLink.parent();
