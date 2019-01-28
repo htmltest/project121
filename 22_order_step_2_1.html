@@ -368,6 +368,9 @@
                                 <div class="form-field">
                                     <div class="form-input"><span class="form-input-label">Этаж</span><input type="text" name="floor" value="" /></div>
                                 </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Стаж</span><input type="text" name="floor" value="" class="digit digit3" /></div>
+                                </div>
                                 <div class="form-field order-field-type">
                                     <div class="form-input-title">Тип клиента <em>*</em></div>
                                     <div class="form-radio">
@@ -648,6 +651,11 @@
                             curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
                         }
                     }
+                },
+                onSelectNothing: function() {
+                    $(this).val('');
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
                 }
             });
             $("#address_jur").attr('autocomplete', 'off');
@@ -663,6 +671,11 @@
                             curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
                         }
                     }
+                },
+                onSelectNothing: function() {
+                    $(this).val('');
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
                 }
             });
         </script>

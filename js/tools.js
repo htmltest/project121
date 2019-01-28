@@ -649,6 +649,7 @@ function initForm(curForm) {
     curForm.find('.form-input-date input').mask('00.00.0000');
     curForm.find('.form-input-date input').attr('autocomplete', 'off');
     curForm.find('.form-input-date-range input').attr('autocomplete', 'off');
+    curForm.find('input.digit3').mask('000');
     curForm.find('input.digit4').mask('0000');
     curForm.find('input.digit6').mask('000000');
     curForm.find('input.digit10').mask('0000000000');
