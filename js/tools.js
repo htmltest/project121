@@ -618,6 +618,14 @@ $(document).ready(function() {
         $('.order-types-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
     });
 
+    $('.order-field-type input:checked', function() {
+        var curIndex = $('.order-field-type input').index('.order-field-type input:checked');
+        $('.order-types-tab.active input.required').removeClass('required').addClass('required_');
+        $('.order-types-tab.active').removeClass('active');
+        $('.order-types-tab').eq(curIndex).addClass('active');
+        $('.order-types-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
+    });
+
 });
 
 $(window).on('resize', function() {
