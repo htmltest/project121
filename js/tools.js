@@ -500,33 +500,6 @@ $(document).ready(function() {
         }
     });
 
-    $('.order-confirm-sms-new a').click(function(e) {
-        var curCheckbox = $(this).parents().filter('.form-checkbox');
-        var curForm = $(this).parents().filter('form');
-        $('.order-confirm-sms-new a').addClass('loading');
-        $.ajax({
-            type: 'POST',
-            url: 'ajax/order-confirm.json',
-            data: {'phone': $('#confirmPhone').val(), 'url': $('#confirmURL').val()},
-            dataType: 'json',
-            cache: false,
-            timeout: 5000
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            $('.order-confirm-sms-new a').removeClass('loading');
-            curForm.find('.form-error').remove();
-            curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
-        }).done(function(data) {
-            curCheckbox.removeClass('loading');
-            if (data.status == 'ok') {
-                curForm.find('.form-error').remove();
-            } else {
-                curForm.find('.form-error').remove();
-                curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
-            }
-        });
-        e.preventDefault();
-    });
-
     $('#order-confirm').each(function() {
         $(this).prop('checked', false);
     });
