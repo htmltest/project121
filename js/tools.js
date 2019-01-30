@@ -590,6 +590,7 @@ $(document).ready(function() {
                 confirmForm.find('input[type="submit"]').prop('disabled', true);
                 confirmForm.find('input[type="text"]').prop('disabled', true);
                 confirmForm.find('input[type="text"]').parent().addClass('form-input-disabled');
+                $(form).find('.form-error').remove();
                 $.ajax({
                     type: 'POST',
                     url: $(form).attr('action'),
@@ -602,7 +603,6 @@ $(document).ready(function() {
                     confirmForm.find('input[type="submit"]').prop('disabled', false);
                     confirmForm.find('input[type="text"]').prop('disabled', false);
                     confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
-                    $(form).find('.form-error').remove();
                     $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
                 }).done(function(data) {
                     confirmForm.removeClass('loading');
@@ -610,10 +610,8 @@ $(document).ready(function() {
                     confirmForm.find('input[type="text"]').prop('disabled', false);
                     confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
                     if (data.status == 'ok') {
-                        $(form).find('.form-error').remove();
                         $('.order-confirm-form').addClass('sms-success');
                     } else {
-                        $(form).find('.form-error').remove();
                         $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
                     }
                 });
