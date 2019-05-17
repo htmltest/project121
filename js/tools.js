@@ -25,6 +25,24 @@ $(document).ready(function() {
         'Ошибка заполнения'
     );
 
+    $.validator.addMethod('passportDate',
+        function(passportDate, element) {
+            var curForm = $(element).parents().filter('form');
+            var birthdayDate = curForm.find('.birthdayDate').val();
+            return checkPassportDate(passportDate, birthdayDate);
+        },
+        'Срок действия паспорт истек'
+    );
+
+    $.validator.addMethod('birthdayDate',
+        function(birthdayDate, element) {
+            var curForm = $(element).parents().filter('form');
+            curForm.find('.passportDate').valid();
+            return true;
+        },
+        ''
+    );
+
     $('body').on('change', '.form-file input', function() {
         var curInput = $(this);
         var curField = curInput.parents().filter('.form-file');
@@ -967,3 +985,69 @@ $(window).on('load resize scroll', function() {
         }
     }
 });
+
+function checkPassportDate(passportDate, dudeDate) {
+    var dob = new Date(dudeDate.replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
+    var pssprtDate = new Date(passportDate.replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
+
+    var pDate20 = new Date(dob);
+    pDate20.setFullYear(pDate20.getFullYear() + 20);
+    var pDate45 = new Date(dob);
+    pDate45.setFullYear(pDate45.getFullYear() + 45);
+
+    var ageDude = parseInt(yearsDiff(new Date(dudeDate.replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'))));
+
+    if (ageDude >= 20 && ageDude < 45) {
+        if (pssprtDate < pDate20) {
+            return false;
+        }
+    }
+
+    if (ageDude >= 45) {
+        if (pssprtDate < pDate45) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function yearsDiff(dt) {
+    if (dt > new Date()) {
+        return 0;
+    }
+
+    var crntDate = new Date();
+
+    var yearDiff = parseInt(crntDate.getFullYear() - dt.getFullYear());
+
+    var dat4check = new Date(dt);
+    dat4check.setFullYear(crntDate.getFullYear());
+    if (dat4check > crntDate) {
+        yearDiff--;
+    }
+
+    if (yearDiff <= 0) {
+        return 0;
+    }
+
+    if (yearDiff === 1) {
+        var monthDiff = parseInt(crntDate.getMonth() - dt.getMonth());
+        if (monthDiff >= 0) {
+            if (monthDiff == 0) {
+                var dayDiff = parseInt(crntDate.getDate() - dt.getDate());
+                if (dayDiff > 0) {
+                    return yearDiff;
+                } else {
+                    return 0;
+                }
+            } else {
+                return crntDate.getFullYear() - dt.getFullYear();
+            }
+        } else {
+            return 0;
+        }
+    } else {
+        return yearDiff;
+    }
+}

@@ -222,7 +222,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-input.loading::after {content:""; display:block; position:absolute; top:20px; right:10px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
 .form-input-disabled {background:#f7f5f5}
 .form-input-number {margin:0 71px; max-width:173px}
-.form-input-label {position:absolute; left:24px; font-size:18px; color:#7f7f7f; top:17px; transition:all 0.2s; font-weight:normal}
+.form-input-label {position:absolute; left:24px; font-size:18px; color:#7f7f7f; top:17px; transition:all 0.2s; font-weight:normal; z-index:1; pointer-events:none}
 .form-input-number .form-input-label {z-index:1}
 .form-input-number .form-input-label {left:0; right:0; text-align:center; display:block}
 .form-input.focus .form-input-label {top:3px; font-size:12px}
@@ -247,7 +247,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-input textarea.error {border-color:#ff1800; color:#ff1800}
 .form-input input:focus,
 .form-input textarea:focus {border-color:#03a9f4}
-.form-input label.error {display:none !important}
+.form-input label.error {display:block; color:#f5021f; font-size:12px; line-height:16px; margin:8px 0 0 0}
 
 @media screen and (max-width:1199px) {
     .form-input input,
