@@ -315,8 +315,10 @@ $(document).ready(function() {
         $('.order-programm-detail').hide();
         var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
         curProgramm.show();
-        $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
-        $('.main-events-form-results-value-price em').remove();
+        if (!$('#order-programm-select').hasClass('not-cost')) {
+            $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+            $('.main-events-form-results-value-price em').remove();
+        }
         window.setTimeout(function() {
             $('.order-form-results-code-btn a').trigger('click');
         }, 100);
@@ -327,8 +329,10 @@ $(document).ready(function() {
         $('.order-programm-detail').hide();
         var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
         curProgramm.show();
-        $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
-        $('.main-events-form-results-value-price em').remove();
+        if (!$('#order-programm-select').hasClass('not-cost')) {
+            $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
+            $('.main-events-form-results-value-price em').remove();
+        }
         window.setTimeout(function() {
             $('.order-form-results-code-btn a').trigger('click');
         }, 100);
