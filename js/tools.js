@@ -43,9 +43,16 @@ $(document).ready(function() {
         ''
     );
 
-    $.validator.addMethod('birthsertSer',
-        function(birthsertSer, element) {
-            return this.optional(element) || birthsertSer.match(/^[IVXLCivxlc]+-[А-Яа-я]{2}$/);
+    $.validator.addMethod('passportSeries',
+        function(curSeries, element) {
+            return this.optional(element) || curSeries.match(/^[0-9]{4}$/);
+        },
+        'Серия введена некорректно'
+    );
+
+    $.validator.addMethod('birthsertSeries',
+        function(curSeries, element) {
+            return this.optional(element) || curSeries.match(/^[IVXLCivxlc]+-[А-Яа-я]{2}$/);
         },
         'Серия введена некорректно'
     );
@@ -682,18 +689,54 @@ $(document).ready(function() {
 
     $('body').on('change', '.order-field-doc input', function() {
         var curIndex = $('.order-field-doc input').index('.order-field-doc input:checked');
-        $('.order-doc-tab.active input.required').removeClass('required').addClass('required_');
-        $('.order-doc-tab.active').removeClass('active');
-        $('.order-doc-tab').eq(curIndex).addClass('active');
-        $('.order-doc-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
+        if (curIndex == 0) {
+            $('#passportORbirthsert').val('');
+            $('#passportORbirthsert').mask('0000');
+            $('#passportORbirthsert').removeClass('birthsertSeries').addClass('passportSeries');
+        } else {
+            var options =  {
+                translation: {
+                    'X': {
+                        pattern: /[IVXLCivxlc]/
+                    },
+                    'W': {
+                        pattern: /[IVXLCivxlc]/, optional: true
+                    },
+                    'Z': {
+                        pattern: /[А-Яа-я]/
+                    }
+                }
+            }
+            $('#passportORbirthsert').val('');
+            $('#passportORbirthsert').mask('XWW-ZZ', options);
+            $('#passportORbirthsert').addClass('birthsertSeries').removeClass('passportSeries');
+        }
     });
 
     $('.order-field-doc input:checked', function() {
         var curIndex = $('.order-field-doc input').index('.order-field-doc input:checked');
-        $('.order-doc-tab.active input.required').removeClass('required').addClass('required_');
-        $('.order-doc-tab.active').removeClass('active');
-        $('.order-doc-tab').eq(curIndex).addClass('active');
-        $('.order-doc-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
+        if (curIndex == 0) {
+            $('#passportORbirthsert').val('');
+            $('#passportORbirthsert').mask('0000');
+            $('#passportORbirthsert').removeClass('birthsertSeries').addClass('passportSeries');
+        } else {
+            var options =  {
+                translation: {
+                    'X': {
+                        pattern: /[IVXLCivxlc0-9]/
+                    },
+                    'W': {
+                        pattern: /[IVXLCivxlc]/, optional: true
+                    },
+                    'Z': {
+                        pattern: /[А-Яа-я]/
+                    }
+                }
+            }
+            $('#passportORbirthsert').val('');
+            $('#passportORbirthsert').mask('XWW-ZZ', options);
+            $('#passportORbirthsert').addClass('birthsertSeries').removeClass('passportSeries');
+        }
     });
 
 });
@@ -734,10 +777,11 @@ function initForm(curForm) {
     curForm.find('input.digit12').mask('000000000000');
     curForm.find('input.digit13').mask('0000000000000');
     curForm.find('input.digit15').mask('000000000000000');
-    curForm.find('input.birthsertSer').mask('XWW-ZZ', {
+    curForm.find('input.passportSeries').mask('0000');
+    var options =  {
         translation: {
             'X': {
-                pattern: /[IVXLCivxlc]/
+                pattern: /[IVXLCivxlc0-9]/
             },
             'W': {
                 pattern: /[IVXLCivxlc]/, optional: true
@@ -746,7 +790,8 @@ function initForm(curForm) {
                 pattern: /[А-Яа-я]/
             }
         }
-    });
+    }
+    curForm.find('input.birthsertSeries').mask('XWW-ZZ', options);
 
     curForm.find('.form-input input, .form-input textarea').each(function() {
         if ($(this).val() != '') {

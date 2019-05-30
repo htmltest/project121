@@ -435,39 +435,19 @@
                                         <label><input type="radio" name="doc_type" value="birthsert" /><span>Свидетельство о рождении</span></label>
                                     </div>
                                 </div>
-                                <div class="order-doc-tabs">
-                                    <div class="order-doc-tab active">
-                                        <div class="order-passport">
-                                            <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Серия <em>*</em></span><input type="text" name="passport_ser" value="" class="required digits digit4" minlength="4" maxlength="4" /></div>
-                                            </div>
-                                            <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Номер <em>*</em></span><input type="text" name="passport_num" value="" class="required digits digit6" minlength="6" maxlength="6" /></div>
-                                            </div>
-                                            <div class="form-field">
-                                                <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="passport_date" value="" max="24.01.2019" class="required" /></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-field">
-                                            <div class="form-input"><span class="form-input-label">Кем выдан <em>*</em></span><input type="text" name="passport_how" value="" class="required" /></div>
-                                        </div>
+                                <div class="order-passport">
+                                    <div class="form-field">
+                                        <div class="form-input"><span class="form-input-label">Серия <em>*</em></span><input type="text" name="passport_ser" value="" class="required passportSeries" id="passportORbirthsert" /></div>
                                     </div>
-                                    <div class="order-doc-tab">
-                                        <div class="order-passport">
-                                            <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Серия <em>*</em></span><input type="text" name="birthsert_ser" value="" class="required birthsertSer" /></div>
-                                            </div>
-                                            <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Номер <em>*</em></span><input type="text" name="birthsert_num" value="" class="required digits digit6" minlength="6" maxlength="6" /></div>
-                                            </div>
-                                            <div class="form-field">
-                                                <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="birthsert_date" value="" max="24.01.2019" class="required" /></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-field">
-                                            <div class="form-input"><span class="form-input-label">Кем выдан <em>*</em></span><input type="text" name="birthsert_how" value="" class="required" /></div>
-                                        </div>
+                                    <div class="form-field">
+                                        <div class="form-input"><span class="form-input-label">Номер <em>*</em></span><input type="text" name="passport_num" value="" class="required digits digit6" minlength="6" maxlength="6" /></div>
                                     </div>
+                                    <div class="form-field">
+                                        <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="passport_date" value="" max="24.01.2019" class="required" /></div>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Кем выдан <em>*</em></span><input type="text" name="passport_how" value="" class="required" /></div>
                                 </div>
                                 <div class="form-required-notice"><span>*</span> Обязательный для заполнения поля</div>
                             </div>
