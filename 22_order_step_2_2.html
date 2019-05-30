@@ -280,86 +280,202 @@
                     </div>
 
                     <div class="order-steps">
-                        <div class="order-step active">Рассчет стоимости</div>
-                        <div class="order-step">Оформление</div>
+                        <div class="order-step success">Рассчет стоимости</div>
+                        <div class="order-step active">Оформление</div>
                         <div class="order-step">Подтверждение</div>
                     </div>
 
+                    <h2 class="no-mobile">Cтрахователь</h2>
                     <!-- order form -->
                     <div class="order-form">
                         <form action="#" method="post">
-                            <div class="order-form-fields">
-                                <div class="form-field">
-                                    <div class="form-select">
-                                        <select name="programm" data-placeholder="Программа страхования" class="required not-cost" id="order-programm-select">
-                                            <option value=""></option>
-                                            <option value="1" selected="selected">Страховая сумма продукта 250 000 рублей</option>
-                                            <option value="2">Страховая сумма продукта 500 000 рублей</option>
-                                            <option value="3">Страховая сумма продукта 1 000 000 рублей</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="order-programm-details">
-                                    <div class="order-programm-detail" data-id="1" data-cost="1250">
-                                        <p><strong>Страховая сумма продукта 250 000 ₽</strong></p>
-                                        <p>Конструктивные элементы квартиры 100 000 ₽</p>
-                                        <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 50 000 ₽</p>
-                                        <p>Домашнее имущество 50 000 ₽</p>
-                                        <p>Гражданская ответственность при эксплуатации квартиры 50 000 ₽</p>
-                                    </div>
-                                    <div class="order-programm-detail" data-id="2" data-cost="2250">
-                                        <p><strong>Страховая сумма продукта 500 000 ₽</strong></p>
-                                        <p>Конструктивные элементы квартиры 200 000 ₽</p>
-                                        <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 100 000 ₽</p>
-                                        <p>Домашнее имущество 100 000 ₽</p>
-                                        <p>Гражданская ответственность при эксплуатации квартиры 100 000 ₽</p>
-                                    </div>
-                                    <div class="order-programm-detail" data-id="3" data-cost="4100">
-                                        <p><strong>Страховая сумма продукта 1 000 000 ₽</strong></p>
-                                        <p>Конструктивные элементы квартиры 400 000 ₽</p>
-                                        <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 200 000 ₽</p>
-                                        <p>Домашнее имущество 200 000 ₽</p>
-                                        <p>Гражданская ответственность при эксплуатации квартиры 200 000 ₽</p>
-                                    </div>
-                                </div>
-                                <div class="form-field" style="display:none">
-                                    <div class="form-select">
-                                        <select name="type" data-placeholder="Вид имущества" class="required">
-                                            <option value="1" selected="selected">Квартира</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="order-form-row">
-                                    <div class="form-field">
-                                        <div class="form-input form-input-date"><span class="form-input-label">Дата начала страхования <em>*</em></span><input type="text" name="dateStart" value="" min="31.12.2018" class="required maxDate1Year" id="order-date-start" /></div>
-                                        <div class="form-hint">Через 15 дней после текущей даты</div>
-                                    </div>
-                                    <div class="form-field">
-                                        <div class="form-input form-input-date form-input-disabled"><span class="form-input-label">Дата окончания страхования</span><input type="text" name="dateEnd" value="" id="order-date-end" disabled="disabled" /></div>
-                                        <div class="form-hint">По умолчанию полис заключается сроком на один год</div>
-                                    </div>
-                                </div>
-                                <div class="form-required-notice"><span>*</span> Обязательный для заполнения поля</div>
-                            </div>
-
                             <div class="order-form-results">
                                 <div class="main-events-form-results-value">
                                     <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Всё просто»</div>
                                     <div class="main-events-form-results-value-price"><span>2599</span> ₽</div>
                                 </div>
                                 <div class="main-events-form-results-value">
-                                    <div class="order-form-results-code">
-                                        <div class="form-field">
-                                            <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" id="order-promo" /><a href="#" class="form-input-clear"></a></div>
+                                    <div class="main-events-form-results-details">
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Программа:</div>
+                                            <div class="main-events-form-results-details-value">250 000 руб.</div>
                                         </div>
-                                        <div class="order-form-results-code-btn"><a href="#" class="btn-blue"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 12.8 12.8"><path d="M12.8,5.6H3L7.52,1.12,6.4,0,0,6.4l6.4,6.4,1.12-1.12L3,7.2H12.8Zm0,0"/></svg></a></div>
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Вид имущества:</div>
+                                            <div class="main-events-form-results-details-value">Квартира</div>
+                                        </div>
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Дата начала:</div>
+                                            <div class="main-events-form-results-details-value">16.12.2018</div>
+                                        </div>
+                                        <div class="main-events-form-results-details-row">
+                                            <div class="main-events-form-results-details-label">Дата окончания:</div>
+                                            <div class="main-events-form-results-details-value">16.12.2109</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="order-form-ctrl">
+                            <div class="order-form-fields">
+                                <h2 class="on-mobile">Cтрахователь</h2>
+                                <div class="form-field">
+                                    <div class="form-select">
+                                        <select name="programm" data-placeholder="Программа">
+                                            <option value="1">Бизнес под защитой</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-select">
+                                        <select name="period" data-placeholder="Срок действия">
+                                            <option value="1">1 год</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="order-form-row">
+                                    <div class="form-field">
+                                        <div class="form-input form-input-date"><span class="form-input-label">Дата начала <em>*</em></span><input type="text" name="startDate" value="" min="24.01.2019" class="required" id="order-date-start" /></div>
+                                    </div>
+                                    <div class="form-field">
+                                        <div class="form-input form-input-date form-input-disabled"><span class="form-input-label">Дата окончания <em>*</em></span><input type="text" name="endDate" value="" class="required" id="order-date-end" disabled="disabled" /></div>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Купон</span><input type="text" name="coupon" value="" /></div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Мобильный телефон <em>*</em></span><input type="text" name="phone" id="phone" value="" class="phoneRU required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
+                                    <div class="form-hint" id="phone-hint">Пользователь с данным номером телефон найден в системе. <a href="windows/auth.html" class="window-link">Авторизоваться</a></div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Адрес электронной почты <em>*</em></span><input type="text" name="email" value="" class="email required" /></div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" id="address" value="" class="required" /><div class="form-input-dadata"></div></div>
+                                </div>
+                                <div class="form-field order-field-gender">
+                                    <div class="form-input-title">Арендованное здание/помещение <em>*</em></div>
+                                    <div class="form-radio">
+                                        <label><input type="radio" name="rent" value="y" checked="checked" /><span>Да</span></label>
+                                    </div>
+                                    <div class="form-radio">
+                                        <label><input type="radio" name="rent" value="n" /><span>Нет</span></label>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Офис</span><input type="text" name="office" value="" /></div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Этаж</span><input type="text" name="floor" value="" /></div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Стаж</span><input type="text" name="floor" value="" class="digit digit3" /></div>
+                                </div>
+                                <div class="form-field order-field-type">
+                                    <div class="form-input-title">Тип клиента <em>*</em></div>
+                                    <div class="form-radio">
+                                        <label><input type="radio" name="type" value="ip" /><span>ИП</span></label>
+                                    </div>
+                                    <div class="form-radio">
+                                        <label><input type="radio" name="type" value="ooo" checked="checked" /><span>ООО</span></label>
+                                    </div>
+                                </div>
+                                <div class="order-types-tabs">
+                                    <div class="order-types-tab active">
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">ИНН</span><input type="text" name="ip_inn" value="" class="required digits digit12" minlength="12" maxlength="12" /></div>
+                                        </div>
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">ОГРНИП</span><input type="text" name="ip_ogrnip" value="" class="required digits digit15" minlength="15" maxlength="15" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="order-types-tab">
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">Наименование юридического лица</span><input type="text" name="ooo_name" value="" class="required" /></div>
+                                        </div>
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">ИНН</span><input type="text" name="ooo_inn" value="" class="required digits digit10" minlength="10" maxlength="10" /></div>
+                                        </div>
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">ОГРН</span><input type="text" name="ooo_ogrn" value="" class="required digits digit13" minlength="13" maxlength="13" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Фамилия <em>*</em></span><input type="text" name="lastname" value="" class="required onlyRUS" /></div>
+                                    <div class="form-hint">Можно использовать только русские буквы и дефис</div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Имя <em>*</em></span><input type="text" name="firstname" value="" class="required onlyRUS" /></div>
+                                </div>
+                                <div class="form-field form-field-middlename">
+                                    <div class="form-input"><span class="form-input-label">Отчество <em>*</em></span><input type="text" name="middlename" value="" class="required onlyRUS" /></div>
+                                </div>
+                                <div class="form-checkbox order-middlename-checkbox">
+                                    <label><input type="checkbox" name="middlename_none" /><span>Отчество отсутствует</span></label>
+                                </div>
+                                <div class="order-form-row">
+                                    <div class="form-field">
+                                        <div class="form-input form-input-date"><span class="form-input-label">Дата рождения <em>*</em></span><input type="text" name="birthday" value="" max="16.12.2000" class="required birthdayDate" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" id="address_jur" value="" class="required" /><div class="form-input-dadata"></div></div>
+                                    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
+                                    <!--[if lt IE 10]>
+                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+                                    <![endif]-->
+                                </div>
+                                <h2>Документ, удостоверяющий личность Страхователя</h2>
+                                <div class="form-field order-field-doc">
+                                    <div class="form-radio">
+                                        <label><input type="radio" name="doc_type" value="passport" checked="checked" /><span>Паспорт</span></label>
+                                    </div>
+                                    <div class="form-radio">
+                                        <label><input type="radio" name="doc_type" value="birthsert" /><span>Свидетельство о рождении</span></label>
+                                    </div>
+                                </div>
+                                <div class="order-doc-tabs">
+                                    <div class="order-doc-tab active">
+                                        <div class="order-passport">
+                                            <div class="form-field">
+                                                <div class="form-input"><span class="form-input-label">Серия <em>*</em></span><input type="text" name="passport_ser" value="" class="required digits digit4" minlength="4" maxlength="4" /></div>
+                                            </div>
+                                            <div class="form-field">
+                                                <div class="form-input"><span class="form-input-label">Номер <em>*</em></span><input type="text" name="passport_num" value="" class="required digits digit6" minlength="6" maxlength="6" /></div>
+                                            </div>
+                                            <div class="form-field">
+                                                <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="passport_date" value="" max="24.01.2019" class="required" /></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">Кем выдан <em>*</em></span><input type="text" name="passport_how" value="" class="required" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="order-doc-tab">
+                                        <div class="order-passport">
+                                            <div class="form-field">
+                                                <div class="form-input"><span class="form-input-label">Серия <em>*</em></span><input type="text" name="birthsert_ser" value="" class="required birthsertSer" /></div>
+                                            </div>
+                                            <div class="form-field">
+                                                <div class="form-input"><span class="form-input-label">Номер <em>*</em></span><input type="text" name="birthsert_num" value="" class="required digits digit6" minlength="6" maxlength="6" /></div>
+                                            </div>
+                                            <div class="form-field">
+                                                <div class="form-input form-input-date"><span class="form-input-label">Дата выдачи <em>*</em></span><input type="text" name="birthsert_date" value="" max="24.01.2019" class="required" /></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-field">
+                                            <div class="form-input"><span class="form-input-label">Кем выдан <em>*</em></span><input type="text" name="birthsert_how" value="" class="required" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-required-notice"><span>*</span> Обязательный для заполнения поля</div>
+                            </div>
+
+                            <div class="order-form-ctrl order-form-ctrl-2">
                                 <div class="form-field">
                                     <div class="form-submit"><input type="submit" value="Оформить полис" class="btn-orange" /></div>
+                                    <div class="back-link"><a href="#" class="btn-border btn-mini btn-form-send" data-name="toFirst">Вернуться</a></div>
                                 </div>
                             </div>
                         </form>
@@ -550,6 +666,60 @@
         <script src="js/wnumb/wNumb.js"></script>
         <script src="js/air-datepicker/datepicker.min.js"></script>
         <script src="js/tools.js"></script>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
+        <script type="text/javascript">
+            $("#address").attr('autocomplete', 'off');
+            $("#address").suggestions({
+                token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
+                type: "ADDRESS",
+                count: 5,
+                onSelect: function(suggestion) {
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
+                    for(curItem in suggestion.data) {
+                        if (suggestion.data[curItem] != null) {
+                            curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                        }
+                    }
+                },
+                onSelectNothing: function() {
+                    $(this).val('');
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
+                }
+            });
+            $("#address_jur").attr('autocomplete', 'off');
+            $("#address_jur").suggestions({
+                token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
+                type: "ADDRESS",
+                count: 5,
+                onSelect: function(suggestion) {
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
+                    if (suggestion.data.flat != null) {
+                        $(this).removeClass('error');
+                        $(this).parent().find('label.error').remove();
+                        for(curItem in suggestion.data) {
+                            if (suggestion.data[curItem] != null) {
+                                curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                            }
+                        }
+                    } else {
+                        $(this).addClass('error');
+                        $(this).parent().find('label.error').remove();
+                        $(this).after('<label class="error">Необходимо ввести квартиру</label>');
+                    }
+                },
+                onSelectNothing: function() {
+                    $(this).val('');
+                    $(this).removeClass('error');
+                    $(this).parent().find('label.error').remove();
+                    var curDataField = $(this).parent().find('.form-input-dadata');
+                    curDataField.html('');
+                }
+            });
+        </script>
 
     </body>
 </html>

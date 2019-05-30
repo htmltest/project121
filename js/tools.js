@@ -43,6 +43,13 @@ $(document).ready(function() {
         ''
     );
 
+    $.validator.addMethod('birthsertSer',
+        function(birthsertSer, element) {
+            return this.optional(element) || birthsertSer.match(/^[IVXLCivxlc]+-[А-Яа-я]{2}$/);
+        },
+        'Серия введена некорректно'
+    );
+
     $('body').on('change', '.form-file input', function() {
         var curInput = $(this);
         var curField = curInput.parents().filter('.form-file');
@@ -673,6 +680,22 @@ $(document).ready(function() {
         $('.order-types-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
     });
 
+    $('body').on('change', '.order-field-doc input', function() {
+        var curIndex = $('.order-field-doc input').index('.order-field-doc input:checked');
+        $('.order-doc-tab.active input.required').removeClass('required').addClass('required_');
+        $('.order-doc-tab.active').removeClass('active');
+        $('.order-doc-tab').eq(curIndex).addClass('active');
+        $('.order-doc-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
+    });
+
+    $('.order-field-doc input:checked', function() {
+        var curIndex = $('.order-field-doc input').index('.order-field-doc input:checked');
+        $('.order-doc-tab.active input.required').removeClass('required').addClass('required_');
+        $('.order-doc-tab.active').removeClass('active');
+        $('.order-doc-tab').eq(curIndex).addClass('active');
+        $('.order-doc-tab').eq(curIndex).find('input.required_').addClass('required').removeClass('required_');
+    });
+
 });
 
 $(window).on('resize', function() {
@@ -711,6 +734,19 @@ function initForm(curForm) {
     curForm.find('input.digit12').mask('000000000000');
     curForm.find('input.digit13').mask('0000000000000');
     curForm.find('input.digit15').mask('000000000000000');
+    curForm.find('input.birthsertSer').mask('XWW-ZZ', {
+        translation: {
+            'X': {
+                pattern: /[IVXLCivxlc]/
+            },
+            'W': {
+                pattern: /[IVXLCivxlc]/, optional: true
+            },
+            'Z': {
+                pattern: /[А-Яа-я]/
+            }
+        }
+    });
 
     curForm.find('.form-input input, .form-input textarea').each(function() {
         if ($(this).val() != '') {
@@ -763,6 +799,11 @@ function initForm(curForm) {
         if (typeof (maxDateText) != 'undefined') {
             var maxDateArray = maxDateText.split('.');
             maxDate = new Date(maxDateArray[2] + '-' + maxDateArray[1] + '-' + maxDateArray[0]);
+        }
+        if ($(this).hasClass('maxDate1Year')) {
+            var curDate = new Date();
+            curDate.setFullYear(curDate.getFullYear() + 1);
+            maxDate = curDate;
         }
         $(this).datepicker({
             language: 'ru',
