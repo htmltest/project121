@@ -57,6 +57,36 @@ $(document).ready(function() {
         'Серия введена некорректно'
     );
 
+    $.validator.addMethod('inputDate',
+        function(curDate, element) {
+            if (this.optional(element) && curDate == '') {
+                return true;
+            } else {
+                if (curDate.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
+                    var userDate = new Date(curDate.substr(6, 4), Number(curDate.substr(3, 2)) - 1, Number(curDate.substr(0, 2)));
+                    if ($(element).attr('min')) {
+                        var minDateStr = $(element).attr('min');
+                        var minDate = new Date(minDateStr.substr(6, 4), Number(minDateStr.substr(3, 2)) - 1, Number(minDateStr.substr(0, 2)));
+                        if (userDate < minDate) {
+                            return false;
+                        }
+                    }
+                    if ($(element).attr('max')) {
+                        var maxDateStr = $(element).attr('max');
+                        var maxDate = new Date(maxDateStr.substr(6, 4), Number(maxDateStr.substr(3, 2)) - 1, Number(maxDateStr.substr(0, 2)));
+                        if (userDate > maxDate) {
+                            return false;
+                        }
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        'Дата введена некорректно'
+    );
+
     $('body').on('change', '.form-file input', function() {
         var curInput = $(this);
         var curField = curInput.parents().filter('.form-file');
@@ -849,6 +879,15 @@ function initForm(curForm) {
             var curDate = new Date();
             curDate.setFullYear(curDate.getFullYear() + 1);
             maxDate = curDate;
+            var maxDay = curDate.getDate();
+            if (maxDay < 10) {
+                maxDay = '0' + maxDay
+            }
+            var maxMonth = curDate.getMonth() + 1;
+            if (maxMonth < 10) {
+                maxMonth = '0' + maxMonth
+            }
+            $(this).attr('max', maxDay + '.' + maxMonth + '.' + curDate.getFullYear());
         }
         $(this).datepicker({
             language: 'ru',
