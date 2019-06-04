@@ -746,7 +746,6 @@ $(document).ready(function() {
     $('.order-field-doc input:checked', function() {
         var curIndex = $('.order-field-doc input').index('.order-field-doc input:checked');
         if (curIndex == 0) {
-            $('#passportORbirthsert').val('');
             $('#passportORbirthsert').mask('0000');
             $('#passportORbirthsert').removeClass('birthsertSeries').addClass('passportSeries');
         } else {
@@ -763,7 +762,6 @@ $(document).ready(function() {
                     }
                 }
             }
-            $('#passportORbirthsert').val('');
             $('#passportORbirthsert').mask('XWW-ZZ', options);
             $('#passportORbirthsert').addClass('birthsertSeries').removeClass('passportSeries');
         }
