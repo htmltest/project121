@@ -31,7 +31,16 @@ $(document).ready(function() {
             var birthdayDate = curForm.find('.birthdayDate').val();
             return checkPassportDate(passportDate, birthdayDate);
         },
-        'Срок действия паспорт истек'
+        'Срок действия документа истек'
+    );
+
+    $.validator.addMethod('passportOrBirthDate',
+        function(passportDate, element) {
+            var curForm = $(element).parents().filter('form');
+            var birthdayDate = $(element).data('birthday');
+            return checkPassportDate(passportDate, birthdayDate);
+        },
+        'Срок действия документа истек'
     );
 
     $.validator.addMethod('birthdayDate',
@@ -770,6 +779,23 @@ $(document).ready(function() {
             $('.order-field-doc input').eq(1).parent().parent().hide();
         } else {
             $('.order-field-doc input').eq(1).parent().parent().show();
+        }
+    });
+
+    $('.order-field-doc').each(function() {
+        if (typeof ($(this).data('birthday')) != 'undefined') {
+            var bitrhDate = new Date($(this).data('birthday').replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
+
+            var bDate15 = new Date(bitrhDate);
+            bDate15.setFullYear(bDate15.getFullYear() + 15);
+
+            var curDate = new Date();
+            if (curDate >= bDate15) {
+                $('.order-field-doc input').eq(0).prop('checked', true);
+                $('.order-field-doc input').eq(1).parent().parent().hide();
+            } else {
+                $('.order-field-doc input').eq(1).parent().parent().show();
+            }
         }
     });
 
