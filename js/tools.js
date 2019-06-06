@@ -752,36 +752,6 @@ $(document).ready(function() {
         }
     });
 
-    $('body').on('change', '.birthdayDate', function(e) {
-        var bitrhDate = new Date($(this).val().replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
-
-        var bDate15 = new Date(bitrhDate);
-        bDate15.setFullYear(bDate15.getFullYear() + 15);
-
-        var curDate = new Date();
-        if (curDate >= bDate15) {
-            $('.order-field-doc input').eq(0).prop('checked', true).trigger('change');
-            $('.order-field-doc input').eq(1).parent().parent().hide();
-        } else {
-            $('.order-field-doc input').eq(1).parent().parent().show();
-        }
-    });
-
-    $('.birthdayDate').each(function(e) {
-        var bitrhDate = new Date($(this).val().replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
-
-        var bDate15 = new Date(bitrhDate);
-        bDate15.setFullYear(bDate15.getFullYear() + 15);
-
-        var curDate = new Date();
-        if (curDate >= bDate15) {
-            $('.order-field-doc input').eq(0).prop('checked', true);
-            $('.order-field-doc input').eq(1).parent().parent().hide();
-        } else {
-            $('.order-field-doc input').eq(1).parent().parent().show();
-        }
-    });
-
     $('.order-field-doc').each(function() {
         if (typeof ($(this).data('birthday')) != 'undefined') {
             var bitrhDate = new Date($(this).data('birthday').replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
