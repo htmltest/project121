@@ -913,10 +913,19 @@ function initForm(curForm) {
             }
             $(this).attr('max', maxDay + '.' + maxMonth + '.' + curDate.getFullYear());
         }
+        var startDate = new Date();
+        if (typeof ($(this).attr('value')) != 'undefined') {
+            var curValue = $(this).val();
+            if (curValue != '') {
+                var startDateArray = curValue.split('.');
+                startDate = new Date(startDateArray[2] + '-' + startDateArray[1] + '-' + startDateArray[0]);
+            }
+        }
         $(this).datepicker({
             language: 'ru',
             minDate: minDate,
             maxDate: maxDate,
+            startDate: startDate,
             autoClose: true
         });
     });
