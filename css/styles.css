@@ -249,6 +249,9 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-input textarea:focus {border-color:#03a9f4}
 .form-input label.error {display:block; color:#f5021f; font-size:12px; line-height:16px; margin:8px 0 0 0}
 
+.form-input .suggestions-addon {top:-65px !important; height:65px !important}
+.form-input label.error+.suggestions-wrapper .suggestions-addon {top:-89px !important; height:65px !important}
+
 @media screen and (max-width:1199px) {
     .form-input input,
     .form-input textarea {font-size:22px}
@@ -1551,6 +1554,11 @@ h2+.order-form {padding-top:0}
 
 .order-address-checkbox {margin:-9px 0 -2px 23px; font-size:12px}
 .order-middlename-checkbox {margin:-9px 0 -2px 23px; font-size:12px}
+
+@media screen and (max-width:1199px) {
+    .order-address-checkbox {margin:0 0 20px 23px}
+    .order-middlename-checkbox {margin:0 0 20px 23px}
+}
 
 .order-passport {margin:20px -13px}
 .order-passport::after {content:""; display:block; clear:both}
