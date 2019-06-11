@@ -363,7 +363,7 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    $('#order-programm-select').change(function() {
+    $('body').on('change', '#order-programm-select', function() {
         var curValue = $(this).val();
         $('.order-programm-detail').hide();
         var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
@@ -386,27 +386,26 @@ $(document).ready(function() {
             $('.main-events-form-results-value-price span').html(curProgramm.data('cost'));
             $('.main-events-form-results-value-price em').remove();
         }
-        window.setTimeout(function() {
-            $('.order-form-results-code-btn a').trigger('click');
-        }, 100);
     });
 
     if ($('#order-date-start').length == 1) {
         $('#order-date-start').change(function() {
             var curDateText = $(this).val();
-            var curDateArray = curDateText.split('.');
-            var curDate = new Date(curDateArray[2] + '-' + curDateArray[1] + '-' + curDateArray[0]);
-            $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
-            var newDate = curDate;
-            newDate.setFullYear(newDate.getFullYear() + 1);
-            newDate.setDate(newDate.getDate() - 1);
-            $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
+            if (curDateText.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
+                var curDateArray = curDateText.split('.');
+                var curDate = new Date(Number(curDateArray[2]), Number(curDateArray[1]) - 1, Number(curDateArray[0]));
+                $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
+                var newDate = curDate;
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                newDate.setDate(newDate.getDate() - 1);
+                $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
+            }
         });
         $('#order-date-start').each(function() {
             var curDateText = $(this).val();
             if (curDateText != '') {
                 var curDateArray = curDateText.split('.');
-                var curDate = new Date(curDateArray[2] + '-' + curDateArray[1] + '-' + curDateArray[0]);
+                var curDate = new Date(Number(curDateArray[2]), Number(curDateArray[1]) - 1, Number(curDateArray[0]));
                 $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
                 var newDate = curDate;
                 newDate.setFullYear(newDate.getFullYear() + 1);
@@ -886,18 +885,47 @@ function initForm(curForm) {
         });
     });
 
+    curForm.find('.form-input-date input').on('change', function() {
+        var curValue = $(this).val();
+        if (curValue.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
+            var myDatepicker = $(this).data('datepicker');
+            if (myDatepicker) {
+                var curValueArray = curValue.split('.');
+                myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
+            }
+        } else {
+            var myDatepicker = $(this).data('datepicker');
+            if (myDatepicker) {
+                myDatepicker.clear();
+            }
+        }
+    });
+
+    curForm.find('.form-input-date input').on('keyup', function() {
+        var curValue = $(this).val();
+        if (curValue.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
+            var myDatepicker = $(this).data('datepicker');
+            if (myDatepicker) {
+                var curValueArray = curValue.split('.');
+                myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
+                myDatepicker.show();
+                $(this).focus();
+            }
+        }
+    });
+
     curForm.find('.form-input-date input').each(function() {
         var minDateText = $(this).attr('min');
         var minDate = null;
         if (typeof (minDateText) != 'undefined') {
             var minDateArray = minDateText.split('.');
-            minDate = new Date(minDateArray[2] + '-' + minDateArray[1] + '-' + minDateArray[0]);
+            minDate = new Date(Number(minDateArray[2]), Number(minDateArray[1]) - 1, Number(minDateArray[0]));
         }
         var maxDateText = $(this).attr('max');
         var maxDate = null;
         if (typeof (maxDateText) != 'undefined') {
             var maxDateArray = maxDateText.split('.');
-            maxDate = new Date(maxDateArray[2] + '-' + maxDateArray[1] + '-' + maxDateArray[0]);
+            maxDate = new Date(Number(maxDateArray[2]), Number(maxDateArray[1]) - 1, Number(maxDateArray[0]));
         }
         if ($(this).hasClass('maxDate1Year')) {
             var curDate = new Date();
@@ -918,7 +946,7 @@ function initForm(curForm) {
             var curValue = $(this).val();
             if (curValue != '') {
                 var startDateArray = curValue.split('.');
-                startDate = new Date(startDateArray[2] + '-' + startDateArray[1] + '-' + startDateArray[0]);
+                startDate = new Date(Number(startDateArray[2]), Number(startDateArray[1]) - 1 , Number(startDateArray[0]));
             }
         }
         $(this).datepicker({
@@ -926,7 +954,8 @@ function initForm(curForm) {
             minDate: minDate,
             maxDate: maxDate,
             startDate: startDate,
-            autoClose: true
+            autoClose: true,
+            toggleSelected: false
         });
     });
 
@@ -935,13 +964,13 @@ function initForm(curForm) {
         var minDate = null;
         if (typeof (minDateText) != 'undefined') {
             var minDateArray = minDateText.split('.');
-            minDate = new Date(minDateArray[2] + '-' + minDateArray[1] + '-' + minDateArray[0]);
+            minDate = new Date(Number(minDateArray[2]), Number(minDateArray[1]) - 1, Number(minDateArray[0]));
         }
         var maxDateText = $(this).attr('max');
         var maxDate = null;
         if (typeof (maxDateText) != 'undefined') {
             var maxDateArray = maxDateText.split('.');
-            maxDate = new Date(maxDateArray[2] + '-' + maxDateArray[1] + '-' + maxDateArray[0]);
+            maxDate = new Date(Number(maxDateArray[2]), Number(maxDateArray[1]) - 1, Number(maxDateArray[0]));
         }
         $(this).datepicker({
             language: 'ru',
