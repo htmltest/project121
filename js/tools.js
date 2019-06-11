@@ -394,15 +394,13 @@ $(document).ready(function() {
     if ($('#order-date-start').length == 1) {
         $('#order-date-start').change(function() {
             var curDateText = $(this).val();
-            if (curDateText.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
-                var curDateArray = curDateText.split('.');
-                var curDate = new Date(curDateArray[2] + '-' + curDateArray[1] + '-' + curDateArray[0]);
-                $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
-                var newDate = curDate;
-                newDate.setFullYear(newDate.getFullYear() + 1);
-                newDate.setDate(newDate.getDate() - 1);
-                $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
-            }
+            var curDateArray = curDateText.split('.');
+            var curDate = new Date(curDateArray[2] + '-' + curDateArray[1] + '-' + curDateArray[0]);
+            $('#order-date-start').datepicker().data('datepicker').selectDate(curDate);
+            var newDate = curDate;
+            newDate.setFullYear(newDate.getFullYear() + 1);
+            newDate.setDate(newDate.getDate() - 1);
+            $('#order-date-end').datepicker().data('datepicker').selectDate(newDate);
         });
         $('#order-date-start').each(function() {
             var curDateText = $(this).val();
@@ -888,34 +886,6 @@ function initForm(curForm) {
         });
     });
 
-    curForm.find('.form-input-date input').on('change', function() {
-        var curValue = $(this).val();
-        if (curValue.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
-            var myDatepicker = $(this).data('datepicker');
-            if (myDatepicker) {
-                var curValueArray = curValue.split('.');
-                myDatepicker.selectDate(new Date(curValueArray[2] + '-' + curValueArray[1] + '-' + curValueArray[0]));
-            }
-        } else {
-            var myDatepicker = $(this).data('datepicker');
-            if (myDatepicker) {
-                myDatepicker.clear();
-            }
-        }
-    });
-
-    curForm.find('.form-input-date input').on('keyup', function() {
-        var curValue = $(this).val();
-        console.log(curValue);
-        if (curValue.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
-            var myDatepicker = $(this).data('datepicker');
-            if (myDatepicker) {
-                var curValueArray = curValue.split('.');
-                myDatepicker.selectDate(new Date(curValueArray[2] + '-' + curValueArray[1] + '-' + curValueArray[0]));
-            }
-        }
-    });
-
     curForm.find('.form-input-date input').each(function() {
         var minDateText = $(this).attr('min');
         var minDate = null;
@@ -956,8 +926,7 @@ function initForm(curForm) {
             minDate: minDate,
             maxDate: maxDate,
             startDate: startDate,
-            autoClose: true,
-            toggleSelected: false
+            autoClose: true
         });
     });
 
