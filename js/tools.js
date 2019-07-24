@@ -66,6 +66,13 @@ $(document).ready(function() {
         'Серия введена некорректно'
     );
 
+    $.validator.addMethod('promoMask',
+        function(curSeries, element) {
+            return this.optional(element) || curSeries.match(/^[А-Яа-яA-Za-z0-9]{2,24}$/);
+        },
+        'Неверный формат промокода'
+    );
+
     $.validator.addMethod('inputDate',
         function(curDate, element) {
             if (this.optional(element) && curDate == '') {
@@ -845,6 +852,18 @@ function initForm(curForm) {
         }
     }
     curForm.find('input.birthsertSeries').mask('XWW-ZZ', options);
+
+    var optionsPromo =  {
+        translation: {
+            'X': {
+                pattern: /[А-Яа-яA-Za-z0-9]/
+            },
+            'W': {
+                pattern: /[А-Яа-яA-Za-z0-9]/, optional: true
+            }
+        }
+    }
+    curForm.find('input.promoMask').mask('XXWWWWWWWWWWWWWWWWWWWWWW', optionsPromo);
 
     curForm.find('.form-input input, .form-input textarea').each(function() {
         if ($(this).val() != '') {

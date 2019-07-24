@@ -964,6 +964,12 @@ h1+.page-menu {margin-top:-17px}
 .main-events-form-results .form-submit {margin:20px 0}
 .main-events-form-results .btn-orange {display:block; padding:0; width:100%; font-size:18px}
 
+.main-events-form-results-value-pre::before {display:none}
+.main-events-form-results-value-pre {padding-right:20px; padding-bottom:33px}
+.main-events-form-results-value-pre .form-field {margin:29px 0 -10px 0}
+.main-events-form-results-value-pre .order-form-results-code .form-field {margin:0; float:left; width:229px}
+.main-events-form-results-value-pre .order-form-results-code.success .form-field {width:100%}
+
 @media screen and (max-width:1199px) {
     .main-events-form-results {float:none; width:auto; margin:0 0 25px 0}
     .main-events-form-results-value {margin:20px 0 40px 0}
@@ -1798,3 +1804,5 @@ footer a {color:#cae3f9}
 .order-field-doc .form-radio {float:left; margin:10px 35px 10px 0}
 
 .birthsertSeries {text-transform:uppercase}
+
+.promoMask {text-transform:uppercase}
