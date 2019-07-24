@@ -1504,7 +1504,7 @@ h3.carier-text {font-weight:300; line-height:42px}
 .order-form-results .main-events-form-results-value+.main-events-form-results-value::before {display:none}
 .order-form-results .main-events-form-results-value+.main-events-form-results-value {padding-right:20px; padding-bottom:33px}
 .order-form-results .main-events-form-results-value-price {text-align:center; padding-top:27px}
-.order-form-results .main-events-form-results-value-price em {font-style:normal; font-size:36px; color:#7f7f7f; text-decoration:line-through}
+.main-events-form-results-value-price em {font-style:normal; font-size:36px; color:#7f7f7f; text-decoration:line-through}
 .order-form-results .form-field {margin:29px 0 -10px 0}
 .order-form-results-code {margin:29px 0 -10px 0}
 .order-form-results-code::after {content:""; display:block; clear:both}
