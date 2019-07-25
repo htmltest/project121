@@ -3,15 +3,35 @@
         <div class="main-events-form-title">Рассчитайте стоимость страховки<br /> для себя и своих близках в поездках<br /> по всему миру</div>
         <div class="form-field">
             <div class="form-select">
-                <select name="country" data-placeholder="Страна поездки" class="required">
+                <select name="country" data-placeholder="Страна поездки" class="required" id="order-programm-select">
                     <option value=""></option>
-                    <option value="1">Объедененные Арабские Эмираты</option>
+                    <option value="1" selected="selected">Объедененные Арабские Эмираты</option>
                     <option value="2">Эстония</option>
                     <option value="3">Финляндия</option>
-                    <option value="4">Швеция</option>
-                    <option value="5">Соединенные Штаты Америки</option>
-                    <option value="6">Египет</option>
                 </select>
+            </div>
+        </div>
+        <div class="order-programm-details">
+            <div class="order-programm-detail" data-id="1" data-cost="25 468">
+                <p><strong>Страховая сумма продукта 250 000 ₽</strong></p>
+                <p>Конструктивные элементы квартиры 100 000 ₽</p>
+                <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 50 000 ₽</p>
+                <p>Домашнее имущество 50 000 ₽</p>
+                <p>Гражданская ответственность при эксплуатации квартиры 50 000 ₽</p>
+            </div>
+            <div class="order-programm-detail" data-id="2" data-cost="2250">
+                <p><strong>Страховая сумма продукта 500 000 ₽</strong></p>
+                <p>Конструктивные элементы квартиры 200 000 ₽</p>
+                <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 100 000 ₽</p>
+                <p>Домашнее имущество 100 000 ₽</p>
+                <p>Гражданская ответственность при эксплуатации квартиры 100 000 ₽</p>
+            </div>
+            <div class="order-programm-detail" data-id="3" data-cost="4100">
+                <p><strong>Страховая сумма продукта 1 000 000 ₽</strong></p>
+                <p>Конструктивные элементы квартиры 400 000 ₽</p>
+                <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 200 000 ₽</p>
+                <p>Домашнее имущество 200 000 ₽</p>
+                <p>Гражданская ответственность при эксплуатации квартиры 200 000 ₽</p>
             </div>
         </div>
         <div class="form-field">
@@ -30,7 +50,7 @@
     <div class="main-events-form-results">
         <div class="main-events-form-results-value">
             <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Всё просто»</div>
-            <div class="main-events-form-results-value-price"><span>2599</span> ₽</div>
+            <div class="main-events-form-results-value-price"><span>25 468</span> ₽</div>
         </div>
         <div class="main-events-form-results-value main-events-form-results-value-pre">
             <div class="order-form-results-code">

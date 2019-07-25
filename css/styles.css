@@ -935,11 +935,11 @@ h1+.page-menu {margin-top:-17px}
 .main-events-form .loading {position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(222, 239, 247, 0.1) url(../images/loading.gif) no-repeat center}
 .main-events-form form {margin:0; padding:40px 30px 20px 30px}
 .main-events-form form::after {content:""; display:block; clear:both}
-.main-events-form-fields {float:left; width:680px}
+.main-events-form-fields {float:left; width:630px}
 .main-events-form-title {font-size:28px; line-height:38px; font-weight:normal; padding:0 15px 6px 15px; margin:-13px 0 0 0}
 .main-events-form-row {margin:20px 0}
 .main-events-form-row::after {content:""; display:block; clear:both}
-.main-events-form-row .form-field {float:left; width:315px; margin:0}
+.main-events-form-row .form-field {float:left; width:310px; margin:0}
 .main-events-form-row .form-field+.form-field {float:right}
 
 @media screen and (max-width:1199px) {
@@ -953,14 +953,15 @@ h1+.page-menu {margin-top:-17px}
     .main-events-form-row .form-field+.form-field {float:none; margin:20px 0 0 0}
 }
 
-.main-events-form-results {float:right; width:363px}
+.main-events-form-results {float:right; width:413px}
 .main-events-form-results-value {background:#fff; border-top:7px solid #03a9f4; box-shadow:0 0 20px 5px rgba(0, 0, 0, 0.1); position:relative; padding:0 120px 33px 32px; margin:0 0 40px 0}
+.main-events-form-results-value:first-child {min-height:175px}
 .main-events-form-results-value::before {content:""; display:block; position:absolute; right:27px; top:14px; width:90px; height:49px; background:url(../images/main-events-form-results.png)}
 .main-events-form-results-value::after {content:""; display:block; position:absolute; left:0; bottom:-8px; right:0; height:8px; background:url(../images/main-events-form-results-value.png)}
 .main-events-form-results-value-title {line-height:22px; padding:25px 0 0 0; font-weight:normal}
-.main-events-form-results-value-price {font-size:42px; line-height:42px; font-weight:normal; padding:22px 0 0 0}
-.main-events-form-results-value-price span.loading {position:relative; display:inline-block; vertical-align:middle}
-.main-events-form-results-value-price span.loading::after {content:""; display:block; width:24px; height:24px; background:url(../images/loading.gif); position:absolute; left:-24px; top:50%; margin:-12px 0 0 0}
+.main-events-form-results-value-price {font-size:42px; line-height:42px; font-weight:normal; margin:22px 0 0 0; min-height:42px; margin-right:-120px; text-align:center; position:relative}
+.main-events-form-results-value-price span.loading {display:inline-block; vertical-align:top; position:static; background:none}
+.main-events-form-results-value-price span.loading::after {content:""; display:block; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center; position:absolute; left:50%; top:50%; margin:-12px 0 0 -12px}
 .main-events-form-results .form-submit {margin:20px 0}
 .main-events-form-results .btn-orange {display:block; padding:0; width:100%; font-size:18px}
 
@@ -973,6 +974,7 @@ h1+.page-menu {margin-top:-17px}
 @media screen and (max-width:1199px) {
     .main-events-form-results {float:none; width:auto; margin:0 0 25px 0}
     .main-events-form-results-value {margin:20px 0 40px 0}
+    .main-events-form-results-value-price {margin-right:0}
 }
 
 .main-title {font-weight:normal; font-size:38px; line-height:42px; text-align:center}
@@ -1503,9 +1505,8 @@ h3.carier-text {font-weight:300; line-height:42px}
 .order-form-results .main-events-form-results-value {padding-right:32px; padding-bottom:15px}
 .order-form-results .main-events-form-results-value+.main-events-form-results-value::before {display:none}
 .order-form-results .main-events-form-results-value+.main-events-form-results-value {padding-right:20px; padding-bottom:33px}
-.order-form-results .main-events-form-results-value-price {text-align:center; padding-top:27px}
-.main-events-form-results-value-price em {font-style:normal; font-size:36px; color:#7f7f7f; text-decoration:line-through}
-.order-form-results .form-field {margin:29px 0 -10px 0}
+.order-form-results .main-events-form-results-value-price {text-align:center; margin-top:27px; margin-right:0}
+.main-events-form-results-value-price em {font-style:normal; font-size:32px; color:#7f7f7f; text-decoration:line-through; display:inline-block; vertical-align:top}
 .order-form-results-code {margin:29px 0 -10px 0}
 .order-form-results-code::after {content:""; display:block; clear:both}
 .order-form-results .order-form-results-code .form-field {margin:0; float:left; width:288px}

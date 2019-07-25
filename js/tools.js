@@ -429,6 +429,7 @@ $(document).ready(function() {
     $('body').on('click', '.order-form-results-code-btn a', function(e) {
         var curValue = $('#order-promo').val();
         if (curValue != '') {
+            $('.main-events-form-results-value-price').html('<span class="loading"></span>');
             $.ajax({
                 type: 'POST',
                 url: 'ajax/order-promo.json',
@@ -458,6 +459,7 @@ $(document).ready(function() {
                     $('#order-promo').prop('disabled', false);
                     $('.order-form-results-code').removeClass('success');
                 }
+                $('.main-events-form-results-value-price span').removeClass('loading');
             });
         } else {
             var curProgrammID = $('#order-programm-select').val();
