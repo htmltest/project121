@@ -1807,3 +1807,11 @@ footer a {color:#cae3f9}
 .birthsertSeries {text-transform:uppercase}
 
 .promoMask {text-transform:uppercase}
+
+.form-field-at {float:left; line-height:65px; width:20px; text-align:center}
+.form-field-at+.form-field {width:calc(50% - 20px)}
+
+@media screen and (max-width:1199px) {
+    .form-field-at {display:none}
+    .form-field-at+.form-field {width:auto}
+}
