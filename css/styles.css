@@ -385,6 +385,20 @@ header {background:#004e96; padding:0 0 26px 0}
     .header-menu {display:none}
 }
 
+.header-view {float:right; margin:32px 10px 0 0}
+.header-view-link {display:block; width:36px; height:36px; text-align:center; line-height:36px; background:#005fb6; border-radius:3px}
+@media screen and (min-width:1200px) {
+    .header-view-link:hover {background:#0775da}
+    .header-view-link:active {background:#005fb6}
+}
+.header-view-link svg {display:inline-block; vertical-align:middle}
+.header-view-link path {fill:#fff}
+
+@media screen and (max-width:1199px) {
+    .header-view {margin:14px 60px 0 0; position:relative}
+    .header-view-link {padding:0; height:39px; line-height:40px; width:40px; position:relative}
+}
+
 .header-user {float:right; margin:32px 0 0 0}
 .header-user-link {display:inline-block; vertical-align:top; padding:0 14px; height:36px; font-size:14px; line-height:36px; font-weight:500; color:#fff; background:#005fb6; border-radius:3px}
 @media screen and (min-width:1200px) {
@@ -400,7 +414,7 @@ header {background:#004e96; padding:0 0 26px 0}
     .header-user-link svg {display:block; width:20px; height:20px; position:absolute; left:50%; top:50%; margin:-10px 0 0 -10px}
 }
 
-.header-search {float:right; margin:32px 15px 0 0}
+.header-search {float:right; margin:32px 10px 0 0}
 .header-search-link {display:block; width:36px; height:36px; text-align:center; line-height:36px; background:#005fb6; border-radius:3px}
 @media screen and (min-width:1200px) {
     .header-search-link:hover {background:#0775da}
