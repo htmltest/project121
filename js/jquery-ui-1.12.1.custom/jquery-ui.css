@@ -296,7 +296,8 @@ button.ui-button::-moz-focus-inner {
 	left: -71px;
 }
 .ui-spinner-down::before {
-    content: "–";
+    font-size: 44px !important;
+    content: "-";
 }
 
 /* Component containers

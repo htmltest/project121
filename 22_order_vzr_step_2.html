@@ -278,157 +278,340 @@
                 <div class="container">
                     <div class="breadcrumbs"><a href="#">СМП страхование</a> &nbsp; / &nbsp; <a href="#">Частным лицам</a> &nbsp; / &nbsp; <a href="#">Все просто</a> &nbsp; / &nbsp; Оформление</div>
 
-                    <h1>«Все просто!» — страхование квартиры</h1>
-                    <div class="order-descr">
-                        <p>Полис страхования имущества и ответственности при эксплуатации квартиры позволит сохранить спокойствие в самых неприятных жизненных ситуациях. Полис оформляется без осмотра и оценки стоимости квартиры, а выплаты производятся без учета износа.</p>
+                    <h1>«Пристегни ремни» - онлайн страхование путешественников, выезжающих за рубеж и путешествующих по России</h1>
+                    <div class="order-descr order-descr-vzr">
+                        <p>С заботой о собственном здоровье и спокойствии ваших близких во время путешествия с полисом ООО СМП-Страхование</p>
+                        <ul>
+                            <li>Быстрое оформление</li>
+                            <li>Удобное получение на почту, без визитов в офис</li>
+                            <li>Круглосуточная помощь в любой точке мира</li>
+                        </ul>
                     </div>
 
                     <div class="order-steps">
-                        <div class="order-step success">Рассчет стоимости</div>
-                        <div class="order-step success">Оформление</div>
-                        <div class="order-step active">Подтверждение</div>
+                        <div class="order-step active">Рассчет стоимости</div>
+                        <div class="order-step">Общие данные</div>
+                        <div class="order-step">Оформление</div>
                     </div>
 
-                    <h2>Данные полиса</h2>
-                    <table class="order-info">
-                        <tbody>
-                            <tr>
-                                <td>Програма страхования</td>
-                                <td>Имущество</td>
-                            </tr>
-                            <tr>
-                                <td>Вид имущества</td>
-                                <td>Квартира</td>
-                            </tr>
-                            <tr>
-                                <td>Дата начала страхования</td>
-                                <td>29.11.2018</td>
-                            </tr>
-                            <tr>
-                                <td>Дата окончания страхования</td>
-                                <td>29.11.2019</td>
-                            </tr>
-                            <tr>
-                                <td>Адрес объекта страхования</td>
-                                <td>г. Москва, ул. Ленина, 127</td>
-                            </tr>
-                            <tr>
-                                <td>Стоимость полиса</td>
-                                <td>2599 рублей</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- order form -->
+                    <div class="order-form">
+                        <form action="22_order_vzr_step_3.html" method="post">
+                            <div class="order-form-fields">
 
-                    <h2>Личные данные</h2>
-                    <table class="order-info">
-                        <tbody>
-                            <tr>
-                                <td>Фамилия</td>
-                                <td>Иванов</td>
-                            </tr>
-                            <tr>
-                                <td>Имя</td>
-                                <td>Иван</td>
-                            </tr>
-                            <tr>
-                                <td>Отчество</td>
-                                <td>Иванович</td>
-                            </tr>
-                            <tr>
-                                <td>Гражданство</td>
-                                <td>Россия</td>
-                            </tr>
-                            <tr>
-                                <td>Дата рождения</td>
-                                <td>29.03.1947</td>
-                            </tr>
-                            <tr>
-                                <td>Пол</td>
-                                <td>Мужской</td>
-                            </tr>
-                            <tr>
-                                <td>Фактический адрес страхователя</td>
-                                <td>г. Москва, ул. Ленина, 1</td>
-                            </tr>
-                            <tr>
-                                <td>Адрес регистрации</td>
-                                <td>г. Москва, ул. Ленина, 1</td>
-                            </tr>
-                        </table>
+                                <div class="vzr-programm-header">
+                                    <h2>Выберите программу страхования <span>*</span></h2>
+                                    <div class="vzr-currency">
+                                        <label>
+                                            <input type="checkbox" name="currency" id="vzr-currency" />
+                                            <span>USD</span>
+                                            <span>EUR</span>
+                                            <div class="vzr-currency-icon"></div>
+                                        </label>
+                                    </div>
+                                </div>
 
-                        <table class="order-info">
-                            <tr>
-                                <td>Документ удостоверяющий личность:</td>
-                                <td>Паспорт</td>
-                            </tr>
-                            <tr>
-                                <td>Серия</td>
-                                <td>01 11</td>
-                            </tr>
-                            <tr>
-                                <td>Номер</td>
-                                <td>123 456</td>
-                            </tr>
-                            <tr>
-                                <td>Дата выдачи</td>
-                                <td>01.01.2001</td>
-                            </tr>
-                            <tr>
-                                <td>Кем выдан</td>
-                                <td>УФМС по г. Москве</td>
-                            </tr>
-                        </table>
+                                <!-- vzr programms -->
+                                <div class="vzr-programms">
+                                    <div class="vzr-programms-headers">
+                                        <div class="vzr-programms-header-main"><div class="vzr-programms-header-main-inner">Включено<br /> в&nbsp;программу страхования</div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Медицинские расходы <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Экстренная стоматология <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Медицинская транспортировка <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Посмертная репатриация <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Возвращение после длительной госпитализации Застрахованного <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Оплата срочных сообщений <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Утеря/хищение документов <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Досрочное возвращение несовершеннолетних детей <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                        <div class="vzr-programms-header"><div class="vzr-programms-header-inner">Досрочное возвращение <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    </div>
+                                    <div class="vzr-programms-item">
+                                        <label>
+                                            <input type="radio" name="programm" value="1" checked="checked" />
+                                            <div class="vzr-programms-item-content">
+                                                <div class="vzr-programms-item-price"><span class="vzr-programms-item-price-1">$30 000</span><span class="vzr-programms-item-price-2">€30 000</span></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="vzr-programms-item">
+                                        <label>
+                                            <input type="radio" name="programm" value="2" />
+                                            <div class="vzr-programms-item-content">
+                                                <div class="vzr-programms-item-price"><span class="vzr-programms-item-price-1">$50 000</span><span class="vzr-programms-item-price-2">€50 000</span></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="vzr-programms-item">
+                                        <label>
+                                            <input type="radio" name="programm" value="3" />
+                                            <div class="vzr-programms-item-content">
+                                                <div class="vzr-programms-item-price"><span class="vzr-programms-item-price-1">$100 000</span><span class="vzr-programms-item-price-2">€100 000</span></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                                <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vzr-programms-mobile">
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Медицинские расходы <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Экстренная стоматология <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Медицинская транспортировка <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Посмертная репатриация <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Возвращение после длительной госпитализации Застрахованного <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Оплата срочных сообщений <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Утеря/хищение документов <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Досрочное возвращение несовершеннолетних детей <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                    <div class="vzr-programms-mobile-item"><div class="vzr-programms-mobile-inner">Досрочное возвращение <span class="desktop-menu-icon"><img src="images/vzr-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div></div>
+                                </div>
+                                <!-- vzr programms END -->
 
-                        <table class="order-info">
-                            <tr>
-                                <td>Мобильный телефон</td>
-                                <td>+7-911-123-45-67</td>
-                            </tr>
-                            <tr>
-                                <td>Адрес электронной почты</td>
-                                <td>hello@mail.ru</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <!-- vzr type -->
+                                <div class="vzr-type">
+                                    <div class="vzr-type-header">Выберите тип отдыха <span>*</span></div>
+                                    <div class="vzr-type-list">
+                                        <div class="vzr-type-item">
+                                            <div class="vzr-type-static">
+                                                <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g fill="#004e96"><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
+                                                <div class="vzr-type-title">Спокойный отдых</div>
+                                            </div>
+                                        </div>
+                                        <div class="vzr-type-item">
+                                            <label class="vzr-type-checkbox">
+                                                <input type="checkbox" name="type_active" id="vzr-type-active" />
+                                                <div class="vzr-type-checkbox-inner">
+                                                    <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
+                                                    <div class="vzr-type-title">Активный отдых</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="vzr-type-item">
+                                            <label class="vzr-type-checkbox vzr-type-checkbox-extreme">
+                                                <input type="checkbox" name="type_extreme" id="vzr-type-extreme" />
+                                                <div class="vzr-type-checkbox-inner">
+                                                    <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
+                                                    <div class="vzr-type-title">Экстремальный отдых</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- vzr type END -->
 
-                    <form action="ajax/order-sms.json" method="post" class="order-confirm-form">
-                        <div class="order-confirm-form-header">
-                            <input type="hidden" name="confirmPhone" value="+79111234567" id="confirmPhone" />
-                            <input type="hidden" name="confirmURL" value="https://smpins.ru/" id="confirmURL" />
-                            <div class="form-field">
-                                <div class="form-checkbox">
-                                    <label><input type="checkbox" name="order_confirm" id="order-confirm" class="required" /><span>Данные проверены и не содержат ошибок</span></label>
+                                <!-- vzr add -->
+                                <div class="vzr-add">
+                                    <div class="vzr-add-title">Выберите типы экстремального отдыха:</div>
+                                    <div class="vzr-add-list">
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_01" id="vzr_add_01" /><span>Вейкбординг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_02" id="vzr_add_02" /><span>Рафтинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_03" id="vzr_add_03" /><span>Фрирайд</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_04" id="vzr_add_04" /><span>Виндсерфинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_05" id="vzr_add_05" /><span>Фрибординг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_06" id="vzr_add_06" /><span>Хафпайп</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_07" id="vzr_add_07" /><span>Кайтсерфинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_08" id="vzr_add_08" /><span>Вейксерфинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_09" id="vzr_add_09" /><span>Боевые виды спорта</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_10" id="vzr_add_10" /><span>Каякинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_11" id="vzr_add_11" /><span>Гребной слалом</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_12" id="vzr_add_12" /><span>Айс-дайвинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_13" id="vzr_add_13" /><span>Паркур</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_14" id="vzr_add_14" /><span>Маунтинбайк</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_15" id="vzr_add_15" /><span>Дайвинг</span></label></div>
+                                    </div>
+                                </div>
+                                <!-- vzr add END -->
+
+                                <!-- vzr more -->
+                                <div class="vzr-more">
+                                    <div class="vzr-more-title">Сделайте Ваш полис ещё лучше с дополнительными опциями</div>
+                                    <div class="vzr-more-list">
+                                        <div class="vzr-more-item">
+                                            <label class="vzr-more-checkbox">
+                                                <input type="checkbox" name="more_01" id="vzr-more-01" />
+                                                <div class="vzr-more-checkbox-inner">
+                                                    <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
+                                                    <div class="vzr-more-checkbox-title">Защита багажа и&nbsp;отмена рейса</div>
+                                                    <div class="vzr-more-checkbox-price">+ 150 ₽</div>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="vzr-more-item">
+                                            <label class="vzr-more-checkbox">
+                                                <input type="checkbox" name="more_02" id="vzr-more-02" />
+                                                <div class="vzr-more-checkbox-inner">
+                                                    <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
+                                                    <div class="vzr-more-checkbox-title">Юридическая помощь и&nbsp;гражданская ответственность</div>
+                                                    <div class="vzr-more-checkbox-price">+ 150 ₽</div>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="vzr-more-item">
+                                            <label class="vzr-more-checkbox">
+                                                <input type="checkbox" name="more_03" id="vzr-more-03" />
+                                                <div class="vzr-more-checkbox-inner">
+                                                    <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
+                                                    <div class="vzr-more-checkbox-title">Страхование от&nbsp;несчастного случая</div>
+                                                    <div class="vzr-more-checkbox-price">+ 150 ₽</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- vzr more END -->
+
+                            </div>
+
+                            <div class="order-form-results">
+                                <div class="order-form-results-inner">
+                                    <div class="main-events-form-results-value">
+                                        <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Пристегни ремни»</div>
+                                        <div class="main-events-form-results-value-price"><span id="programCost">2599</span> ₽</div>
+                                    </div>
+                                    <div class="main-events-form-results-value">
+                                        <div class="order-form-results-code">
+                                            <div class="form-field">
+                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" id="order-promo" /><a href="#" class="form-input-clear"></a></div>
+                                            </div>
+                                            <div class="order-form-results-code-btn"><a href="#" class="btn-blue"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 12.8 12.8"><path d="M12.8,5.6H3L7.52,1.12,6.4,0,0,6.4l6.4,6.4,1.12-1.12L3,7.2H12.8Zm0,0"/></svg></a></div>
+                                        </div>
+                                    </div>
+                                    <div class="main-events-form-results-value">
+                                        <div class="main-events-form-results-info">
+                                            <h3>Информация о поездке</h3>
+                                            <div class="main-events-form-results-info-main">
+                                                <div class="main-events-form-results-info-main-row">
+                                                    <div class="main-events-form-results-info-main-label">Страна поездки:</div>
+                                                    <div class="main-events-form-results-info-main-value">Словакия</div>
+                                                </div>
+                                                <div class="main-events-form-results-info-main-row">
+                                                    <div class="main-events-form-results-info-main-label">Многократный въезд:</div>
+                                                    <div class="main-events-form-results-info-main-value">Да / 90 дней</div>
+                                                </div>
+                                                <div class="main-events-form-results-info-main-row">
+                                                    <div class="main-events-form-results-info-main-label">Срок действия полиса:</div>
+                                                    <div class="main-events-form-results-info-main-value">16.09.2019 — 30.11.2019</div>
+                                                </div>
+                                                <div class="main-events-form-results-info-main-row">
+                                                    <div class="main-events-form-results-info-main-label">Дата подачи документов:</div>
+                                                    <div class="main-events-form-results-info-main-value">06.08.2019</div>
+                                                </div>
+                                                <div class="main-events-form-results-info-main-row">
+                                                    <div class="main-events-form-results-info-main-label">Путешественники:</div>
+                                                    <div class="main-events-form-results-info-main-value">5 человек</div>
+                                                </div>
+                                                <div class="main-events-form-results-info-main-row">
+                                                    <div class="main-events-form-results-info-main-label">Выбранная программа:</div>
+                                                    <div class="main-events-form-results-info-main-value" id="vzr-results-programm">$30 000</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="main-events-form-results-info-type disabled">
+                                                <div class="main-events-form-results-info-type-header">
+                                                    <div class="main-events-form-results-info-type-header-label">Тип отдыха:</div>
+                                                    <div class="main-events-form-results-info-type-header-value"><span>Спокойный отдых</span></div>
+                                                </div>
+                                                <div class="main-events-form-results-info-type-content">
+                                                    <div class="main-events-form-results-info-type-content-inner">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="main-events-form-results-info-add">
+                                                <div class="main-events-form-results-info-add-title">Дополнительные услуги:</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="order-confirm-form-back"><a href="#" class="btn-blue btn-mini btn-form-send" data-name="toSecond">Редактировать данные</a></div>
-                        </div>
-                        <div class="order-confirm-form-detail">
-                            <div class="form-hint">На Ваш адрес <strong>ххххххххххх@mail.ru</strong> направлены: страховой полис, подписанный электронной подписью Страховщика, и правила страхования.<br /> На номер <strong>+х (ххх)ххх-хх-хх</strong> отправлено SMS с кодом подтверждения.</div>
-                            <div class="form-field">
-                                <div class="form-checkbox">
-                                    <label><input type="checkbox" name="order_confirm_data" class="required" id="order-confirm-data" checked="checked" /><span> Выражаю свое согласие ООО «СМП-Страхование» <a href="windows/policy-order.html" class="window-link">на обработку моих персональных данных</a>.</span></label>
-                                </div>
-                                <div class="form-checkbox">
-                                    <label><input type="checkbox" name="order_confirm_info" class="required" id="order-confirm-info" checked="checked" /><span> Выражаю свое согласие ООО «СМП-Страхование» на информационное сопровождение по страховым и сопутствующим услугам.</span></label>
+
+                            <div class="order-form-ctrl order-form-ctrl-2">
+                                <div class="form-field">
+                                    <div class="form-submit"><input type="submit" value="Оформить полис" class="btn-orange" /></div>
+                                    <div class="back-link"><a href="22_order_vzr_step_1.html" class="btn-border btn-mini" data-name="toFirst">Вернуться</a></div>
                                 </div>
                             </div>
-                            <div class="order-confirm-sms">
-                                <h2>Укажите СМС-код для подтверждения введенных данных</h2>
-                                <div class="order-confirm-sms-row">
-                                    <div class="form-input"><span class="form-input-label">СМС-код <em>*</em></span><input type="text" name="code" value="" class="required" /></div>
-                                    <div class="form-submit"><input type="submit" value="Подтвердить" class="btn-orange" /></div>
-                                    <div class="order-confirm-sms-new">Не пришел смс-код? <a href="#">Отправить повторно</a></div>
+                            <script>
+                                function onChangeProgramm()
+                                {
+                                    $('#programCost').addClass('loading').html('');
+
+                                    $.post(
+                                        'ajax/order-vzr.json',
+                                        {
+                                            currency: $('#vzr-currency').prop('checked'),
+                                            programm: $('.vzr-programms input:checked').val(),
+                                            active: $('#vzr-type-active').prop('checked'),
+                                            extreme: $('#vzr-type-extreme').prop('checked'),
+                                            add_01: $('#vzr_add_01').prop('checked'),
+                                            add_02: $('#vzr_add_02').prop('checked'),
+                                            add_03: $('#vzr_add_03').prop('checked'),
+                                            add_04: $('#vzr_add_04').prop('checked'),
+                                            add_05: $('#vzr_add_05').prop('checked'),
+                                            add_06: $('#vzr_add_06').prop('checked'),
+                                            add_07: $('#vzr_add_07').prop('checked'),
+                                            add_08: $('#vzr_add_08').prop('checked'),
+                                            add_09: $('#vzr_add_09').prop('checked'),
+                                            add_10: $('#vzr_add_10').prop('checked'),
+                                            add_11: $('#vzr_add_11').prop('checked'),
+                                            add_12: $('#vzr_add_12').prop('checked'),
+                                            add_13: $('#vzr_add_13').prop('checked'),
+                                            add_14: $('#vzr_add_14').prop('checked'),
+                                            add_15: $('#vzr_add_15').prop('checked'),
+                                            more_01: $('#vzr-more-01').prop('checked'),
+                                            more_02: $('#vzr-more-02').prop('checked'),
+                                            more_03: $('#vzr-more-03').prop('checked')
+                                        },
+                                        function (data) {
+                                            if (data.status) {
+                                                $('#programCost').removeClass('loading').html(data.response);
+                                            }
+                                        },
+                                        'json'
+                                    );
+                                }
+                            </script>
+
+                            <div class="vzr-form-window-mobile">
+                                <div class="vzr-form-window-mobile-header">
+                                    <div class="vzr-form-window-mobile-title">Полис «Пристегни ремни»</div>
+                                    <div class="vzr-form-window-mobile-cost"></div>
+                                </div>
+                                <div class="vzr-form-window-mobile-ctrl">
+                                    <div class="form-submit"><input type="submit" value="Оформить" class="btn-orange" /></div>
+                                    <div class="back-link"><a href="22_order_vzr_step_1.html" class="btn-border btn-mini" data-name="toFirst">Вернуться</a></div>
+                                    <div class="vzr-form-window-mobile-detail"><a href="#">Детали поездки</a></div>
                                 </div>
                             </div>
-                            <div class="order-success-sms">
-                                <div class="order-success-sms-content">
-                                    <h2>Спасибо!</h2>
-                                    <p class="order-success-sms-text">Ваш номер телефона подтвержден.</p>
-                                </div>
-                                <div class="order-success-sms-link"><a href="#" class="btn-orange">Оплатить</a></div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <!-- order form END -->
 
                 </div>
                 <!-- container END -->
