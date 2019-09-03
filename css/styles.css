@@ -2081,7 +2081,7 @@ footer a {color:#cae3f9}
 .product-header {margin:0 0 33px 0}
 .product-header-icon {display:inline-block; vertical-align:middle; margin:-2px 18px 0 0; line-height:0}
 .product-header-icon path {fill:#ff6200}
-.product-header h1 {display:inline-block; vertical-align:middle; margin:0}
+.product-header h1 {display:inline; vertical-align:middle; margin:0}
 .product-header+h2 {margin-top:33px}
 .product-header+.page-menu {margin-top:-17px}
 
