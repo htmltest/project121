@@ -266,6 +266,11 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-input-date-range input {position:relative; background:transparent}
 .form-input-date .form-input-label {right:40px}
 
+.main-events-form .form-input-date label.error,
+.main-events-form .form-input-date-range label.error {background:#deeff7; margin:0; padding:8px 0 0 0}
+.form-block .form-input-date label.error,
+.form-block .form-input-date-range label.error {background:#e5f6fe; margin:0; padding:8px 0 0 0}
+
 .form-hint {font-size:12px; line-height:18px; color:#7f7f7f; margin:6px 0 -4px 0}
 .form-hint.error {color:#ff1800}
 .form-required-notice {font-size:12px; line-height:20px; color:#7f7f7f; margin:44px 0 20px 0}

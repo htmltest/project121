@@ -692,19 +692,19 @@
 
                     <div class="form-block">
                         <h2>H2 — Формы</h2>
-                        <form action="#" method="post" enctype="multipart/form-data">
+                        <form action="#" method="post" enctype="multipart/form-data" data-product="ЗК" data-stage="stage_1">
                             <div class="form-field">
-                                <div class="form-input"><span class="form-input-label">Имя</span><input type="text" name="name" value="" class="required" /></div>
+                                <div class="form-input"><span class="form-input-label">Имя</span><input type="text" name="name" value="" class="required" data-analitycs="name" /></div>
                             </div>
                             <div class="form-field">
-                                <div class="form-input"><span class="form-input-label">E-mail</span><input type="text" name="email" value="" class="required email" /></div>
+                                <div class="form-input"><span class="form-input-label">E-mail</span><input type="text" name="email" value="" class="required email" data-analitycs="email" /></div>
                             </div>
                             <div class="form-field">
-                                <div class="form-input"><span class="form-input-label">Телефон</span><input type="text" name="phone" value="" class="required phoneRU" /></div>
+                                <div class="form-input"><span class="form-input-label">Телефон</span><input type="text" name="phone" value="" class="required phoneRU" data-analitycs="phone" /></div>
                             </div>
                             <div class="form-field">
                                 <div class="form-select">
-                                    <select name="country" data-placeholder="Страна поездки" class="required">
+                                    <select name="country" data-placeholder="Страна поездки" class="required" data-analitycs="country">
                                         <option value=""></option>
                                         <option value="1">Объедененные Арабские Эмираты</option>
                                         <option value="2">Эстония</option>
@@ -716,7 +716,7 @@
                                 </div>
                             </div>
                             <div class="form-field">
-                                <div class="form-input form-input-date-range"><span class="form-input-label">Период</span><input type="text" name="period" value="" class="required" /></div>
+                                <div class="form-input form-input-date-range"><span class="form-input-label">Период</span><input type="text" name="period" value="" class="required" data-analitycs="period" /></div>
                             </div>
                             <div class="form-field">
                                 <div class="form-input"><span class="form-input-label">Взрослые (cтарше 16 лет)</span><input type="number" name="parent" value="1" min="1" max="12" step="1" /></div>
@@ -726,7 +726,7 @@
                             </div>
                             <div class="form-field">
                                 <div class="form-checkbox">
-                                    <label><input type="checkbox" name="checkbox1" checked="checked" class="required" /><span>Принимаю согласие</span></label>
+                                    <label><input type="checkbox" name="checkbox1" checked="checked" class="required" data-analitycs="policy" /><span>Принимаю согласие</span></label>
                                 </div>
                                 <div class="form-checkbox">
                                     <label><input type="checkbox" name="checkbox2" /><span>Согласие на обработку персональных даных</span></label>

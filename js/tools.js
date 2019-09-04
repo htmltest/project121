@@ -785,6 +785,32 @@ $(document).ready(function() {
         validator.destroy();
         confirmForm.validate({
             ignore: '',
+            invalidHandler: function(event, validator) {
+                validator.showErrors();
+                if (typeof gtag === 'function') {
+                    var curForm = $(validator.currentForm);
+                    var productID = curForm.attr('data-product');
+                    var stageID = curForm.attr('data-stage');
+                    if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined') {
+                        var invalidElements = validator.invalidElements();
+                        for (var i = 0; i < invalidElements.length; i++) {
+                            var curElement = $(invalidElements[i]);
+                            var curAnalitycs = curElement.attr('data-analitycs');
+                            if (typeof (curAnalitycs) != 'undefined') {
+                                var curError = curElement.parent().find('label.error').text();
+                                var data = {
+                                    'description': curError,
+                                    'fatal': true,
+                                    'product_id': productID,
+                                    'stage_id': stageID,
+                                    'field_id': curAnalitycs
+                                };
+                                gtag('event', 'exception', data);
+                            }
+                        }
+                    }
+                }
+            },
             submitHandler: function(form) {
                 confirmForm.addClass('loading');
                 confirmForm.find('input[type="submit"]').prop('disabled', true);
@@ -1521,6 +1547,32 @@ function initForm(curForm) {
 
     curForm.validate({
         ignore: '',
+        invalidHandler: function(event, validator) {
+            validator.showErrors();
+            if (typeof gtag === 'function') {
+                var curForm = $(validator.currentForm);
+                var productID = curForm.attr('data-product');
+                var stageID = curForm.attr('data-stage');
+                if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined') {
+                    var invalidElements = validator.invalidElements();
+                    for (var i = 0; i < invalidElements.length; i++) {
+                        var curElement = $(invalidElements[i]);
+                        var curAnalitycs = curElement.attr('data-analitycs');
+                        if (typeof (curAnalitycs) != 'undefined') {
+                            var curError = curElement.parent().find('label.error').text();
+                            var data = {
+                                'description': curError,
+                                'fatal': true,
+                                'product_id': productID,
+                                'stage_id': stageID,
+                                'field_id': curAnalitycs
+                            };
+                            gtag('event', 'exception', data);
+                        }
+                    }
+                }
+            }
+        },
         submitHandler: function(form) {
             if ($(form).hasClass('ajax-form')) {
                 windowOpen($(form).attr('action'), false, new FormData(form));
