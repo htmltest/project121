@@ -1,7 +1,9 @@
 {
-    "status"        : "ok",
+    "status"    : true,
 
-    "errorMessage"  : "Промокод недействителен",
+    "response"  : {
+        "SUM"       : "2 599",
+        "MESSAGE"   : "Промокод недействителен"
+    }
 
-    "newcost"       : "12 350"
 }

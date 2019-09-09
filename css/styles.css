@@ -268,6 +268,8 @@ fieldset {margin:20px 0; padding:0; border:0}
 
 .main-events-form .form-input-date label.error,
 .main-events-form .form-input-date-range label.error {background:#deeff7; margin:0; padding:8px 0 0 0}
+.defense-form .form-input-date label.error,
+.defense-form .form-input-date-range label.error {background:#deeff7; margin:0; padding:8px 0 0 0}
 .form-block .form-input-date label.error,
 .form-block .form-input-date-range label.error {background:#e5f6fe; margin:0; padding:8px 0 0 0}
 

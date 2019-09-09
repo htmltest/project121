@@ -291,11 +291,11 @@
 
                     <!-- order form -->
                     <div class="order-form">
-                        <form action="#" method="post">
+                        <form action="#" method="post" data-calcForm="ajax/order-precalc.json" data-calcFormPromo="ajax/order-promo.json">
                             <div class="order-form-fields">
                                 <div class="form-field">
                                     <div class="form-select">
-                                        <select name="programm" data-placeholder="Программа страхования" class="required" id="order-programm-select">
+                                        <select name="programm" data-placeholder="Программа страхования" class="required" id="order-programm-select" data-calcField="programm">
                                             <option value=""></option>
                                             <option value="1" selected="selected">Страховая сумма продукта 250 000 рублей</option>
                                             <option value="2">Страховая сумма продукта 500 000 рублей</option>
@@ -304,21 +304,21 @@
                                     </div>
                                 </div>
                                 <div class="order-programm-details">
-                                    <div class="order-programm-detail" data-id="1" data-cost="1250">
+                                    <div class="order-programm-detail" data-id="1">
                                         <p><strong>Страховая сумма продукта 250 000 ₽</strong></p>
                                         <p>Конструктивные элементы квартиры 100 000 ₽</p>
                                         <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 50 000 ₽</p>
                                         <p>Домашнее имущество 50 000 ₽</p>
                                         <p>Гражданская ответственность при эксплуатации квартиры 50 000 ₽</p>
                                     </div>
-                                    <div class="order-programm-detail" data-id="2" data-cost="2250">
+                                    <div class="order-programm-detail" data-id="2">
                                         <p><strong>Страховая сумма продукта 500 000 ₽</strong></p>
                                         <p>Конструктивные элементы квартиры 200 000 ₽</p>
                                         <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 100 000 ₽</p>
                                         <p>Домашнее имущество 100 000 ₽</p>
                                         <p>Гражданская ответственность при эксплуатации квартиры 100 000 ₽</p>
                                     </div>
-                                    <div class="order-programm-detail" data-id="3" data-cost="4100">
+                                    <div class="order-programm-detail" data-id="3">
                                         <p><strong>Страховая сумма продукта 1 000 000 ₽</strong></p>
                                         <p>Конструктивные элементы квартиры 400 000 ₽</p>
                                         <p>Внутренняя отделка, инженерно-техническое оборудование квартиры 200 000 ₽</p>
@@ -328,18 +328,18 @@
                                 </div>
                                 <div class="form-field" style="display:none">
                                     <div class="form-select">
-                                        <select name="type" data-placeholder="Вид имущества" class="required">
+                                        <select name="type" data-placeholder="Вид имущества" class="required" data-calcField="type">
                                             <option value="1" selected="selected">Квартира</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="order-form-row">
                                     <div class="form-field">
-                                        <div class="form-input form-input-date"><span class="form-input-label">Дата начала страхования <em>*</em></span><input type="text" name="dateStart" value="" min="31.12.2018" class="required" id="order-date-start" /></div>
+                                        <div class="form-input form-input-date"><span class="form-input-label">Дата начала страхования <em>*</em></span><input type="text" name="dateStart" value="" min="31.12.2018" class="required" id="order-date-start" data-calcField="dateStart" /></div>
                                         <div class="form-hint">Через 15 дней после текущей даты</div>
                                     </div>
                                     <div class="form-field">
-                                        <div class="form-input form-input-date form-input-disabled"><span class="form-input-label">Дата окончания страхования</span><input type="text" name="dateEnd" value="" id="order-date-end" disabled="disabled" /></div>
+                                        <div class="form-input form-input-date form-input-disabled"><span class="form-input-label">Дата окончания страхования</span><input type="text" name="dateEnd" value="" id="order-date-end" disabled="disabled" data-calcField="dateEnd" /></div>
                                         <div class="form-hint">По умолчанию полис заключается сроком на один год</div>
                                     </div>
                                 </div>
@@ -350,12 +350,12 @@
                                 <div class="order-form-results-inner">
                                     <div class="main-events-form-results-value">
                                         <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Всё просто»</div>
-                                        <div class="main-events-form-results-value-price"><span>2599</span> ₽</div>
+                                        <div class="main-events-form-results-value-price"><span id="programCost">2599</span></div>
                                     </div>
                                     <div class="main-events-form-results-value">
                                         <div class="order-form-results-code">
                                             <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" id="order-promo" class="promoMask" /><a href="#" class="form-input-clear"></a></div>
+                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="123" id="order-promo" class="promoMask" data-calcField="promo" /><a href="#" class="form-input-clear"></a></div>
                                             </div>
                                             <div class="order-form-results-code-btn"><a href="#" class="btn-blue"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 12.8 12.8"><path d="M12.8,5.6H3L7.52,1.12,6.4,0,0,6.4l6.4,6.4,1.12-1.12L3,7.2H12.8Zm0,0"/></svg></a></div>
                                         </div>
@@ -529,7 +529,9 @@
         <script src="js/nouislider/nouislider.min.js"></script>
         <script src="js/wnumb/wNumb.js"></script>
         <script src="js/air-datepicker/datepicker.min.js"></script>
-        <script src="js/tools.js"></script>
+        <script src="js/f-main.js"></script>
+        <script src="js/main-visual.js"></script>
+        <script src="js/f-logic.js"></script>
 
     </body>
 </html>

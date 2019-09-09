@@ -296,14 +296,14 @@
 
                     <!-- order form -->
                     <div class="order-form">
-                        <form action="22_order_vzr_step_3.html" method="post">
+                        <form action="22_order_vzr_step_3.html" method="post" data-calcForm="ajax/order-precalc.json" data-calcFormPromo="ajax/order-promo.json">
                             <div class="order-form-fields">
 
                                 <div class="vzr-programm-header">
                                     <h2>Выберите программу страхования <span>*</span></h2>
                                     <div class="vzr-currency">
                                         <label>
-                                            <input type="checkbox" name="currency" id="vzr-currency" />
+                                            <input type="checkbox" name="currency" id="vzr-currency" data-calcField="currency" />
                                             <span>USD</span>
                                             <span>EUR</span>
                                             <div class="vzr-currency-icon"></div>
@@ -327,7 +327,7 @@
                                     </div>
                                     <div class="vzr-programms-item">
                                         <label>
-                                            <input type="radio" name="programm" value="1" checked="checked" />
+                                            <input type="radio" name="programm" value="1" checked="checked" data-calcField="programm" />
                                             <div class="vzr-programms-item-content">
                                                 <div class="vzr-programms-item-price"><span class="vzr-programms-item-price-1">$30 000</span><span class="vzr-programms-item-price-2">€30 000</span></div>
                                                 <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
@@ -344,7 +344,7 @@
                                     </div>
                                     <div class="vzr-programms-item">
                                         <label>
-                                            <input type="radio" name="programm" value="2" />
+                                            <input type="radio" name="programm" value="2" data-calcField="programm" />
                                             <div class="vzr-programms-item-content">
                                                 <div class="vzr-programms-item-price"><span class="vzr-programms-item-price-1">$50 000</span><span class="vzr-programms-item-price-2">€50 000</span></div>
                                                 <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
@@ -361,7 +361,7 @@
                                     </div>
                                     <div class="vzr-programms-item">
                                         <label>
-                                            <input type="radio" name="programm" value="3" />
+                                            <input type="radio" name="programm" value="3" data-calcField="programm" />
                                             <div class="vzr-programms-item-content">
                                                 <div class="vzr-programms-item-price"><span class="vzr-programms-item-price-1">$100 000</span><span class="vzr-programms-item-price-2">€100 000</span></div>
                                                 <div class="vzr-programms-item-option"><img src="images/vzr-programms-item-option.svg" alt="" /></div>
@@ -402,7 +402,7 @@
                                         </div>
                                         <div class="vzr-type-item">
                                             <label class="vzr-type-checkbox">
-                                                <input type="checkbox" name="type_active" id="vzr-type-active" />
+                                                <input type="checkbox" name="type_active" id="vzr-type-active" data-calcField="type_active" />
                                                 <div class="vzr-type-checkbox-inner">
                                                     <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
                                                     <div class="vzr-type-title">Активный отдых</div>
@@ -411,7 +411,7 @@
                                         </div>
                                         <div class="vzr-type-item">
                                             <label class="vzr-type-checkbox vzr-type-checkbox-extreme">
-                                                <input type="checkbox" name="type_extreme" id="vzr-type-extreme" />
+                                                <input type="checkbox" name="type_extreme" id="vzr-type-extreme" data-calcField="type_extreme" />
                                                 <div class="vzr-type-checkbox-inner">
                                                     <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
                                                     <div class="vzr-type-title">Экстремальный отдых</div>
@@ -426,21 +426,21 @@
                                 <div class="vzr-add">
                                     <div class="vzr-add-title">Выберите типы экстремального отдыха:</div>
                                     <div class="vzr-add-list">
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_01" id="vzr_add_01" /><span>Вейкбординг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_02" id="vzr_add_02" /><span>Рафтинг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_03" id="vzr_add_03" /><span>Фрирайд</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_04" id="vzr_add_04" /><span>Виндсерфинг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_05" id="vzr_add_05" /><span>Фрибординг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_06" id="vzr_add_06" /><span>Хафпайп</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_07" id="vzr_add_07" /><span>Кайтсерфинг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_08" id="vzr_add_08" /><span>Вейксерфинг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_09" id="vzr_add_09" /><span>Боевые виды спорта</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_10" id="vzr_add_10" /><span>Каякинг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_11" id="vzr_add_11" /><span>Гребной слалом</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_12" id="vzr_add_12" /><span>Айс-дайвинг</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_13" id="vzr_add_13" /><span>Паркур</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_14" id="vzr_add_14" /><span>Маунтинбайк</span></label></div>
-                                        <div class="form-checkbox"><label><input type="checkbox" name="add_15" id="vzr_add_15" /><span>Дайвинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_01" id="vzr_add_01" data-calcField="add_01" /><span>Вейкбординг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_02" id="vzr_add_02" data-calcField="add_02" /><span>Рафтинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_03" id="vzr_add_03" data-calcField="add_03" /><span>Фрирайд</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_04" id="vzr_add_04" data-calcField="add_04" /><span>Виндсерфинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_05" id="vzr_add_05" data-calcField="add_05" /><span>Фрибординг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_06" id="vzr_add_06" data-calcField="add_06" /><span>Хафпайп</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_07" id="vzr_add_07" data-calcField="add_07" /><span>Кайтсерфинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_08" id="vzr_add_08" data-calcField="add_08" /><span>Вейксерфинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_09" id="vzr_add_09" data-calcField="add_09" /><span>Боевые виды спорта</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_10" id="vzr_add_10" data-calcField="add_10" /><span>Каякинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_11" id="vzr_add_11" data-calcField="add_11" /><span>Гребной слалом</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_12" id="vzr_add_12" data-calcField="add_12" /><span>Айс-дайвинг</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_13" id="vzr_add_13" data-calcField="add_13" /><span>Паркур</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_14" id="vzr_add_14" data-calcField="add_14" /><span>Маунтинбайк</span></label></div>
+                                        <div class="form-checkbox"><label><input type="checkbox" name="add_15" id="vzr_add_15" data-calcField="add_15" /><span>Дайвинг</span></label></div>
                                     </div>
                                 </div>
                                 <!-- vzr add END -->
@@ -451,7 +451,7 @@
                                     <div class="vzr-more-list">
                                         <div class="vzr-more-item">
                                             <label class="vzr-more-checkbox">
-                                                <input type="checkbox" name="more_01" id="vzr-more-01" />
+                                                <input type="checkbox" name="more_01" id="vzr-more-01" data-calcField="more_01" />
                                                 <div class="vzr-more-checkbox-inner">
                                                     <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
                                                     <div class="vzr-more-checkbox-title">Защита багажа и&nbsp;отмена рейса</div>
@@ -462,7 +462,7 @@
 
                                         <div class="vzr-more-item">
                                             <label class="vzr-more-checkbox">
-                                                <input type="checkbox" name="more_02" id="vzr-more-02" />
+                                                <input type="checkbox" name="more_02" id="vzr-more-02" data-calcField="more_02" />
                                                 <div class="vzr-more-checkbox-inner">
                                                     <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
                                                     <div class="vzr-more-checkbox-title">Юридическая помощь и&nbsp;гражданская ответственность</div>
@@ -473,7 +473,7 @@
 
                                         <div class="vzr-more-item">
                                             <label class="vzr-more-checkbox">
-                                                <input type="checkbox" name="more_03" id="vzr-more-03" />
+                                                <input type="checkbox" name="more_03" id="vzr-more-03" data-calcField="more_03" />
                                                 <div class="vzr-more-checkbox-inner">
                                                     <span class="desktop-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><g><circle cx="256" cy="378.5" r="25"/><path d="M256,0C114.52,0,0,114.5,0,256S114.5,512,256,512,512,397.5,512,256,397.5,0,256,0Zm0,472A216,216,0,1,1,472,256,215.88,215.88,0,0,1,256,472Z"/><path d="M256,128.5a80.09,80.09,0,0,0-80,80,20,20,0,0,0,40,0,40,40,0,1,1,40,40,20,20,0,0,0-20,20v50a20,20,0,0,0,40,0V286A80,80,0,0,0,256,128.5Z"/></g></svg><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span>
                                                     <div class="vzr-more-checkbox-title">Страхование от&nbsp;несчастного случая</div>
@@ -491,12 +491,12 @@
                                 <div class="order-form-results-inner">
                                     <div class="main-events-form-results-value">
                                         <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Пристегни ремни»</div>
-                                        <div class="main-events-form-results-value-price"><span id="programCost">2599</span> ₽</div>
+                                        <div class="main-events-form-results-value-price"><span id="programCost">2599</span></div>
                                     </div>
                                     <div class="main-events-form-results-value">
                                         <div class="order-form-results-code">
                                             <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" id="order-promo" /><a href="#" class="form-input-clear"></a></div>
+                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" id="order-promo" data-calcField="promo" /><a href="#" class="form-input-clear"></a></div>
                                             </div>
                                             <div class="order-form-results-code-btn"><a href="#" class="btn-blue"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 12.8 12.8"><path d="M12.8,5.6H3L7.52,1.12,6.4,0,0,6.4l6.4,6.4,1.12-1.12L3,7.2H12.8Zm0,0"/></svg></a></div>
                                         </div>
@@ -770,7 +770,10 @@
         <script src="js/nouislider/nouislider.min.js"></script>
         <script src="js/wnumb/wNumb.js"></script>
         <script src="js/air-datepicker/datepicker.min.js"></script>
-        <script src="js/tools.js"></script>
+        <script src="js/f-main.js"></script>
+        <script src="js/main-visual.js"></script>
+        <script src="js/f-logic.js"></script>
+        <script src="js/f-vzr.js"></script>
 
     </body>
 </html>

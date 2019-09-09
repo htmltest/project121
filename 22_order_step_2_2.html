@@ -638,61 +638,10 @@
         <script src="js/nouislider/nouislider.min.js"></script>
         <script src="js/wnumb/wNumb.js"></script>
         <script src="js/air-datepicker/datepicker.min.js"></script>
-        <script src="js/tools.js"></script>
-
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
-        <script type="text/javascript">
-            $("#address").attr('autocomplete', 'off');
-            $("#address").suggestions({
-                token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
-                type: "ADDRESS",
-                count: 5,
-                onSelect: function(suggestion) {
-                    var curDataField = $(this).parent().find('.form-input-dadata');
-                    curDataField.html('');
-                    for(curItem in suggestion.data) {
-                        if (suggestion.data[curItem] != null) {
-                            curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
-                        }
-                    }
-                },
-                onSelectNothing: function() {
-                    $(this).val('');
-                    var curDataField = $(this).parent().find('.form-input-dadata');
-                    curDataField.html('');
-                }
-            });
-            $("#address_jur").attr('autocomplete', 'off');
-            $("#address_jur").suggestions({
-                token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
-                type: "ADDRESS",
-                count: 5,
-                onSelect: function(suggestion) {
-                    var curDataField = $(this).parent().find('.form-input-dadata');
-                    curDataField.html('');
-                    if (suggestion.data.flat != null) {
-                        $(this).removeClass('error');
-                        $(this).parent().find('label.error').remove();
-                        for(curItem in suggestion.data) {
-                            if (suggestion.data[curItem] != null) {
-                                curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
-                            }
-                        }
-                    } else {
-                        $(this).addClass('error');
-                        $(this).parent().find('label.error').remove();
-                        $(this).after('<label class="error">Необходимо ввести квартиру</label>');
-                    }
-                },
-                onSelectNothing: function() {
-                    $(this).val('');
-                    $(this).removeClass('error');
-                    $(this).parent().find('label.error').remove();
-                    var curDataField = $(this).parent().find('.form-input-dadata');
-                    curDataField.html('');
-                }
-            });
-        </script>
+        <script src="js/f-main.js"></script>
+        <script src="js/main-visual.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
+        <script src="js/f-logic.js"></script>
 
     </body>
 </html>

@@ -296,12 +296,12 @@
 
                     <!-- order form -->
                     <div class="order-form">
-                        <form action="22_order_vzr_step_2.html" method="post">
+                        <form action="22_order_vzr_step_2.html" method="post" data-calcForm="ajax/order-precalc.json" data-calcFormPromo="ajax/order-promo.json">
                             <div class="order-form-fields">
                                 <h2>Рассчитайте стоимость страховки для себя и&nbsp;своих близких по всему миру</h2>
                                 <div class="form-field">
                                     <div class="form-select">
-                                        <select name="country" data-placeholder="Страна поездки" class="required" onchange="onChangeParams()" id="vzr-country-select">
+                                        <select name="country" data-placeholder="Страна поездки" class="required" id="vzr-country-select" data-calcField="country">
                                             <option value=""></option>
                                             <option value="1" data-schengen="1">Австрия</option>
                                             <option value="2">Англия</option>
@@ -339,20 +339,20 @@
                                 <div class="order-vzr-schengen">Согласно визовым требованиям Шенгенской зоны, действие полиса будет продлено на 15 дней после окончания поездки без изменения стоимости</div>
 
                                 <div class="form-checkbox">
-                                    <label><input type="checkbox" name="multiple" id="vzr-multiple" onchange="onChangeParams()" /><span>Полис для многократных поездок</span></label>
+                                    <label><input type="checkbox" name="multiple" id="vzr-multiple" data-calcField="multiple" /><span>Полис для многократных поездок</span></label>
                                 </div>
 
                                 <div class="order-form-row order-form-row-vzr order-form-row-vzr-dates">
                                     <div class="form-field">
                                         <div class="form-input form-input-date">
                                             <span class="form-input-label">Дата начала <em>*</em></span>
-                                            <input type="text" name="vzr_date_start" value="" class="required inputDate" onchange="onChangeParams()" id="vzr-date-start" />
+                                            <input type="text" name="vzr_date_start" value="" class="required inputDate" data-calcField="vzr_date_start" id="vzr-date-start" />
                                         </div>
                                     </div>
                                     <div class="form-field">
                                         <div class="form-input form-input-date">
                                             <span class="form-input-label">Дата окончания <em>*</em></span>
-                                            <input type="text" name="vzr_date_end" value="" class="required inputDate" onchange="onChangeParams()" id="vzr-date-end" />
+                                            <input type="text" name="vzr_date_end" value="" class="required inputDate" data-calcField="vzr_date_end" id="vzr-date-end" />
                                         </div>
                                     </div>
                                     <div class="form-field form-field-vzr-days-count">
@@ -363,7 +363,7 @@
                                     </div>
                                     <div class="form-field form-field-vzr-days-select">
                                         <div class="form-select">
-                                            <select name="days" data-placeholder="Количество дней" class="required" onchange="onChangeParams()" id="vzr-days-select">
+                                            <select name="days" data-placeholder="Количество дней" class="required" data-calcField="days" id="vzr-days-select">
                                                 <option value=""></option>
                                                 <option value="30">30</option>
                                                 <option value="60">60</option>
@@ -378,7 +378,7 @@
                                         <div class="form-field form-field-wide">
                                             <div class="form-input form-input-date">
                                                 <span class="form-input-label">Дата подачи документов <em>*</em></span>
-                                                <input type="text" name="vzr_date_docs" value="" class="inputDate" onchange="onChangeParams()" id="vzr-date-docs" />
+                                                <input type="text" name="vzr_date_docs" value="" class="inputDate" data-calcField="vzr_date_docs" id="vzr-date-docs" />
                                             </div>
                                         </div>
                                     </div>
@@ -391,17 +391,17 @@
 
                                 <div class="order-form-row order-form-row-vzr">
                                     <div class="form-field form-field-wide">
-                                        <div class="form-input"><span class="form-input-label">Возраст (0-7 лет)</span><input type="number" name="childrens" id="vzr-childrens" onchange="onChangeParams()" value="0" min="0" max="12" step="1" /></div>
+                                        <div class="form-input"><span class="form-input-label">Возраст (0-7 лет)</span><input type="number" name="childrens" id="vzr-childrens" data-calcField="childrens" value="0" min="0" max="12" step="1" /></div>
                                     </div>
                                 </div>
                                 <div class="order-form-row order-form-row-vzr">
                                     <div class="form-field form-field-wide">
-                                        <div class="form-input"><span class="form-input-label">Возраст (8-64 лет)</span><input type="number" name="adults" id="vzr-adults" onchange="onChangeParams()" value="1" min="1" max="12" step="1" /></div>
+                                        <div class="form-input"><span class="form-input-label">Возраст (8-64 лет)</span><input type="number" name="adults" id="vzr-adults" data-calcField="adults" value="1" min="1" max="12" step="1" /></div>
                                     </div>
                                 </div>
                                 <div class="order-form-row order-form-row-vzr">
                                     <div class="form-field form-field-wide">
-                                        <div class="form-input"><span class="form-input-label">Возраст (65-70 лет)</span><input type="number" name="olders" id="vzr-olders" onchange="onChangeParams()" value="0" min="0" max="12" step="1" /></div>
+                                        <div class="form-input"><span class="form-input-label">Возраст (65-70 лет)</span><input type="number" name="olders" id="vzr-olders" data-calcField="olders" value="0" min="0" max="12" step="1" /></div>
                                     </div>
                                 </div>
                                 <div class="form-required-notice"><span>*</span> Обязательный для заполнения поля</div>
@@ -411,12 +411,12 @@
                                 <div class="order-form-results-inner">
                                     <div class="main-events-form-results-value">
                                         <div class="main-events-form-results-value-title">Стоимость полиса<br /> «Пристегни ремни»</div>
-                                        <div class="main-events-form-results-value-price"><span id="programCost">2599</span> ₽</div>
+                                        <div class="main-events-form-results-value-price"><span id="programCost">2599</span></div>
                                     </div>
                                     <div class="main-events-form-results-value">
                                         <div class="order-form-results-code">
                                             <div class="form-field">
-                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="" id="order-promo" /><a href="#" class="form-input-clear"></a></div>
+                                                <div class="form-input"><span class="form-input-label">Промокод</span><input type="text" name="promo" value="345" id="order-promo" /><a href="#" class="form-input-clear"></a></div>
                                             </div>
                                             <div class="order-form-results-code-btn"><a href="#" class="btn-blue"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 12.8 12.8"><path d="M12.8,5.6H3L7.52,1.12,6.4,0,0,6.4l6.4,6.4,1.12-1.12L3,7.2H12.8Zm0,0"/></svg></a></div>
                                         </div>
@@ -429,33 +429,6 @@
                                     <div class="form-submit"><input type="submit" value="Рассчитать" class="btn-orange" /></div>
                                 </div>
                             </div>
-                            <script>
-                                function onChangeParams()
-                                {
-                                    $('#programCost').addClass('loading').html('');
-
-                                    $.post(
-                                        'ajax/order-vzr.json',
-                                        {
-                                            country: $('#vzr-country-select').val(),
-                                            multiple: $('#vzr-multiple').prop('checked'),
-                                            start: $('#vzr-date-start').val(),
-                                            end: $('#vzr-date-end').val(),
-                                            days: $('#vzr-days-select').val(),
-                                            docs: $('#vzr-date-docs').val(),
-                                            childrens: $('#vzr-childrens').val(),
-                                            adults: $('#vzr-adults').val(),
-                                            olders: $('#vzr-olders').val()
-                                        },
-                                        function (data) {
-                                            if (data.status) {
-                                                $('#programCost').removeClass('loading').html(data.response);
-                                            }
-                                        },
-                                        'json'
-                                    );
-                                }
-                            </script>
 
                             <div class="vzr-form-window-mobile">
                                 <div class="vzr-form-window-mobile-header">
@@ -627,7 +600,9 @@
         <script src="js/nouislider/nouislider.min.js"></script>
         <script src="js/wnumb/wNumb.js"></script>
         <script src="js/air-datepicker/datepicker.min.js"></script>
-        <script src="js/tools.js"></script>
+        <script src="js/f-main.js"></script>
+        <script src="js/main-visual.js"></script>
+        <script src="js/f-logic.js"></script>
 
     </body>
 </html>
