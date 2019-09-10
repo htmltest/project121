@@ -115,6 +115,12 @@ $(document).ready(function() {
                         $('.main-events-form').html(html);
                         initForm($('.main-events-form form'));
                         updatePrecalc($('.main-events-form form'));
+                        $('#order-programm-select').each(function() {
+                            var curValue = $(this).val();
+                            $('.order-programm-detail').hide();
+                            var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
+                            curProgramm.show();
+                        });
                     });
                 }
                 e.preventDefault();

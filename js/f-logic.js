@@ -935,7 +935,12 @@ function updatePrecalc(curForm) {
     var curData = {};
     curForm.find('[data-calcField]').each(function() {
         var curField = $(this);
-        curData[curField.attr('data-calcField')] = curField.val();
+        if (curField.attr('id') == 'order-programm-select') {
+            var selected = curField.find('option:selected');
+            curData[curField.attr('data-calcField')] = selected.attr('data-value');
+        } else {
+            curData[curField.attr('data-calcField')] = curField.val();
+        }
     });
     var curURL = curForm.attr('data-calcForm');
     var promo = $('#order-promo').val();
