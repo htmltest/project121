@@ -1588,8 +1588,8 @@ h2+.order-form {padding-top:0}
 .order-field-type {padding:0 0 0 26px}
 .order-field-type .form-radio {float:left; margin:10px 35px 10px 0}
 
-.order-address-checkbox {margin:-9px 0 -2px 23px; font-size:12px}
-.order-middlename-checkbox {margin:-9px 0 -2px 23px; font-size:12px}
+.order-address-checkbox {margin:-9px 0 0 23px; font-size:12px}
+.order-middlename-checkbox {margin:-9px 0 0 23px; font-size:12px}
 
 @media screen and (max-width:1199px) {
     .order-address-checkbox {margin:-10px 0 17px 23px}

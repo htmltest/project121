@@ -347,19 +347,19 @@
                                     </div>
                                 </div>
 
-                                <input data-analitycs="email" type="hidden" name="USER_EMAIL" value="" />
-                                <input data-analitycs="email_compare" type="hidden" name="USER_EMAIL_CONFIRM" value="" />
+                                <input data-analitycs="email" type="hidden" name="USER_EMAIL" value="" class="user-email" />
+                                <input data-analitycs="email_compare" type="hidden" name="USER_EMAIL_CONFIRM" value="" class="user-email-confirm" />
                                 <div class="order-form-row">
                                     <div class="form-field">
                                         <div class="form-input">
                                             <span class="form-input-label">Почта <em>*</em></span>
-                                            <input id="email" autocomplete="off" onchange="combineEmail()" onkeyup="combineEmail()" type="text" name="USER_EMAIL_ONE" value="" />
+                                            <input id="email" type="text" name="USER_EMAIL_ONE" value="" class="user-email-one" />
                                         </div>
                                     </div>
                                     <div class="form-field-at">@</div>
                                     <div class="form-field">
                                         <div class="form-select">
-                                            <select data-placeholder="Домен" onchange="combineEmail()" name="USER_EMAIL_TWO">
+                                            <select data-placeholder="Домен" name="USER_EMAIL_TWO" class="user-email-two">
                                                 <option value="mail.ru">mail.ru</option>
                                                 <option value="gmail.com">gmail.com</option>
                                             </select>
@@ -370,13 +370,13 @@
                                     <div class="form-field">
                                         <div class="form-input">
                                             <span class="form-input-label">Почта подтверждение <em>*</em></span>
-                                            <input id="emailCopy" equalTo="#email" autocomplete="off" onchange="combineEmail()" onkeyup="combineEmail()" type="text" name="USER_EMAIL_CONFIRM_ONE" value="" />
+                                            <input id="emailCopy" equalTo="#email" type="text" name="USER_EMAIL_CONFIRM_ONE" value="" class="user-email-confirm-one" />
                                         </div>
                                     </div>
                                     <div class="form-field-at">@</div>
                                     <div class="form-field">
                                         <div class="form-select">
-                                            <select disabled data-placeholder="Домен" onchange="combineEmail()" name="USER_EMAIL_CONFIRM_TWO">
+                                            <select disabled data-placeholder="Домен" name="USER_EMAIL_CONFIRM_TWO" class="user-email-confirm-two">
                                                 <option value="mail.ru">mail.ru</option>
                                                 <option value="gmail.com">gmail.com</option>
                                             </select>

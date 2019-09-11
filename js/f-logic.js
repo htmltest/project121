@@ -83,7 +83,13 @@ $(document).ready(function() {
                 $('#phone-hint').hide();
                 return false;
             }
-            windowOpen(window.location.href + '?auth-form=Y');
+            var curURL = window.location.href;
+            if (curURL.indexOf('?') > -1) {
+                curURL += '&auth-form=Y';
+            } else {
+                curURL += '?auth-form=Y';
+            }
+            windowOpen(curURL);
         }, 'json');
     });
 
@@ -475,6 +481,8 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.order-form-results-code .form-input-clear', function(e) {
+        $('#order-promo').removeClass('error').prop('disabled', true);
+        $('#order-promo').parent().find('label.error').remove();
         $('#order-promo').val('').trigger('change');
         e.preventDefault();
     });
@@ -861,6 +869,18 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('.user-email-one, .user-email-two').each(function() {
+        $(this).attr('autocomplete', 'off');
+    });
+
+    $('body').on('change', '.user-email-one, .user-email-two, .user-email-confirm-one, .user-email-confirm-two', function(e) {
+        combineEmail();
+    });
+
+    $('body').on('keyup', '.user-email-one, .user-email-confirm-one', function(e) {
+        combineEmail();
+    });
+
 });
 
 function checkPassportDate(passportDate, dudeDate) {
@@ -966,7 +986,8 @@ function updatePrecalc(curForm) {
                         });
                     }
                 } else {
-                    $('#order-promo').removeClass('error').prop('disabled', true).parent().find('label.error').remove();
+                    $('#order-promo').removeClass('error').prop('disabled', true);
+                    $('#order-promo').parent().find('label.error').remove();
                     $('.order-form-results-code').addClass('success');
                 }
 
@@ -1016,14 +1037,14 @@ function sendUserCode(_code_)
 
 function combineEmail()
 {
-    $('[name="USER_EMAIL_CONFIRM_TWO"] option:selected').removeAttr('selected');
+    $('.user-email-confirm-two option:selected').removeAttr('selected');
 
-    $('[name="USER_EMAIL_CONFIRM_TWO"] option').each(function () {
-        if ($(this).attr('value') == $('[name="USER_EMAIL_TWO"]').val()) {
+    $('.user-email-confirm-two option').each(function () {
+        if ($(this).attr('value') == $('.user-email-two').val()) {
             $(this).attr('selected', 'selected');
-            $('[name="USER_EMAIL_CONFIRM_TWO"]').chosen('destroy');
-            $('[name="USER_EMAIL_CONFIRM_TWO"]').chosen({disable_search: true})
-            $('[name="USER_EMAIL_CONFIRM_TWO"]').each(function() {
+            $('.user-email-confirm-two').chosen('destroy');
+            $('.user-email-confirm-two').chosen({disable_search: true})
+            $('.user-email-confirm-two').each(function() {
                 var curSelect = $(this);
                 if (curSelect.data('placeholder') != '') {
                     curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
@@ -1032,12 +1053,12 @@ function combineEmail()
         }
     });
 
-    $('[name="USER_EMAIL"]').val(
-        $('[name="USER_EMAIL_ONE"]').val() + '@' + $('[name="USER_EMAIL_TWO"]').val()
+    $('.user-email').val(
+        $('.user-email-one').val() + '@' + $('.user-email-two').val()
     );
 
-    $('[name="USER_EMAIL_CONFIRM"]').val(
-        $('[name="USER_EMAIL_CONFIRM_ONE"]').val() + '@' + $('[name="USER_EMAIL_CONFIRM_TWO"]').val()
+    $('.user-email-confirm').val(
+        $('.user-email-confirm-one').val() + '@' + $('.user-email-confirm-two').val()
     );
 }
 
