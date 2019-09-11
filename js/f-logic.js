@@ -83,7 +83,7 @@ $(document).ready(function() {
                 $('#phone-hint').hide();
                 return false;
             }
-            windowOpen('ТЕКУЩАЯ СТРАНИЦА?auth-form=Y');
+            windowOpen(window.location.href + '?auth-form=Y');
         }, 'json');
     });
 
