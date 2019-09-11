@@ -577,7 +577,9 @@ $(document).ready(function() {
             }
 
             if (typeof (curOption.attr('data-rus')) != 'undefined') {
-                $('#vzr-multiple').prop('checked', false).trigger('change');
+                $('#vzr-multiple').prop('checked', false).prop('disabled', true).trigger('change');
+            } else {
+                $('#vzr-multiple').prop('disabled', false);
             }
         }
     });
