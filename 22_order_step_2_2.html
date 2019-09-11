@@ -346,31 +346,53 @@
                                         <div class="form-input form-input-date form-input-disabled"><span class="form-input-label">Дата окончания <em>*</em></span><input type="text" name="endDate" value="" class="required" id="order-date-end" disabled="disabled" /></div>
                                     </div>
                                 </div>
+
+                                <input data-analitycs="email" type="hidden" name="USER_EMAIL" value="" />
+                                <input data-analitycs="email_compare" type="hidden" name="USER_EMAIL_CONFIRM" value="" />
                                 <div class="order-form-row">
                                     <div class="form-field">
-                                        <div class="form-input"><span class="form-input-label">Адрес электронной почты <em>*</em></span><input type="text" name="email" value="" class="email required" /></div>
+                                        <div class="form-input">
+                                            <span class="form-input-label">Почта <em>*</em></span>
+                                            <input id="email" autocomplete="off" onchange="combineEmail()" onkeyup="combineEmail()" type="text" name="USER_EMAIL_ONE" value="" />
+                                        </div>
                                     </div>
                                     <div class="form-field-at">@</div>
                                     <div class="form-field">
                                         <div class="form-select">
-                                            <select name="period" data-placeholder="Домен">
-                                                <option value="1">mail.ru</option>
+                                            <select data-placeholder="Домен" onchange="combineEmail()" name="USER_EMAIL_TWO">
+                                                <option value="mail.ru">mail.ru</option>
+                                                <option value="gmail.com">gmail.com</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="order-form-row">
+                                    <div class="form-field">
+                                        <div class="form-input">
+                                            <span class="form-input-label">Почта подтверждение <em>*</em></span>
+                                            <input id="emailCopy" equalTo="#email" autocomplete="off" onchange="combineEmail()" onkeyup="combineEmail()" type="text" name="USER_EMAIL_CONFIRM_ONE" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-field-at">@</div>
+                                    <div class="form-field">
+                                        <div class="form-select">
+                                            <select disabled data-placeholder="Домен" onchange="combineEmail()" name="USER_EMAIL_CONFIRM_TWO">
+                                                <option value="mail.ru">mail.ru</option>
+                                                <option value="gmail.com">gmail.com</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-field">
                                     <div class="form-input"><span class="form-input-label">Купон</span><input type="text" name="coupon" value="" /></div>
                                 </div>
                                 <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Мобильный телефон <em>*</em></span><input type="text" name="phone" id="phone" value="" class="phoneRU required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
-                                    <div class="form-hint" id="phone-hint">Пользователь с данным номером телефон найден в системе. <a href="windows/auth.html" class="window-link">Авторизоваться</a></div>
+                                    <div class="form-input"><span class="form-input-label">Мобильный телефон <em>*</em></span><input type="text" name="USER_PHONE" id="phone" value="" class="phoneRU required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
+                                    <div class="form-hint" id="phone-hint">Пользователь с данным номером телефон найден в системе. <a href="javascript:void(0)" id="auth-link">Авторизоваться</a></div>
                                 </div>
                                 <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Адрес электронной почты <em>*</em></span><input type="text" name="email" value="" class="email required" /></div>
-                                </div>
-                                <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" id="address" value="" class="required" /><div class="form-input-dadata"></div></div>
+                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" value="" class="address required" /><div class="form-input-dadata"></div></div>
                                 </div>
                                 <div class="form-field order-field-gender">
                                     <div class="form-input-title">Арендованное здание/помещение <em>*</em></div>
@@ -439,11 +461,7 @@
                                     </div>
                                 </div>
                                 <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" id="address_jur" value="" class="required" /><div class="form-input-dadata"></div></div>
-                                    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
-                                    <!--[if lt IE 10]>
-                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
-                                    <![endif]-->
+                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" value="" class="address required" /><div class="form-input-dadata"></div></div>
                                 </div>
                                 <h2>Документ, удостоверяющий личность Страхователя</h2>
                                 <div class="form-field order-field-doc" data-birthday="05.06.2000">
@@ -640,6 +658,10 @@
         <script src="js/air-datepicker/datepicker.min.js"></script>
         <script src="js/f-main.js"></script>
         <script src="js/main-visual.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
+        <!--[if lt IE 10]>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+        <![endif]-->
         <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
         <script src="js/f-logic.js"></script>
 

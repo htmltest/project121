@@ -296,12 +296,12 @@
 
                     <!-- order form -->
                     <div class="order-form">
-                        <form action="22_order_vzr_step_2.html" method="post" data-calcForm="ajax/order-precalc.json" data-calcFormPromo="ajax/order-promo.json">
+                        <form action="22_order_vzr_step_2.html" method="post">
                             <div class="order-form-fields">
                                 <h2>Рассчитайте стоимость страховки для себя и&nbsp;своих близких по всему миру</h2>
                                 <div class="form-field">
                                     <div class="form-select">
-                                        <select name="country" data-placeholder="Страна поездки" class="required" id="vzr-country-select" data-calcField="country">
+                                        <select name="country" data-placeholder="Страна поездки" class="required" id="vzr-country-select">
                                             <option value=""></option>
                                             <option value="1" data-schengen="1">Австрия</option>
                                             <option value="2">Англия</option>
@@ -322,6 +322,7 @@
                                             <option value="17" data-schengen="1">Норвегия</option>
                                             <option value="18" data-schengen="1">Польша</option>
                                             <option value="19" data-schengen="1">Португалия</option>
+                                            <option value="30" data-rus="1">Россия</option>
                                             <option value="20" data-schengen="1">Словакия</option>
                                             <option value="21" data-schengen="1">Словения</option>
                                             <option value="22">Соединенные Штаты Америки</option>
@@ -339,20 +340,20 @@
                                 <div class="order-vzr-schengen">Согласно визовым требованиям Шенгенской зоны, действие полиса будет продлено на 15 дней после окончания поездки без изменения стоимости</div>
 
                                 <div class="form-checkbox">
-                                    <label><input type="checkbox" name="multiple" id="vzr-multiple" data-calcField="multiple" /><span>Полис для многократных поездок</span></label>
+                                    <label><input type="checkbox" name="multiple" id="vzr-multiple" /><span>Полис для многократных поездок</span></label>
                                 </div>
 
                                 <div class="order-form-row order-form-row-vzr order-form-row-vzr-dates">
                                     <div class="form-field">
                                         <div class="form-input form-input-date">
                                             <span class="form-input-label">Дата начала <em>*</em></span>
-                                            <input type="text" name="vzr_date_start" value="" class="required inputDate" data-calcField="vzr_date_start" id="vzr-date-start" />
+                                            <input type="text" name="vzr_date_start" value="" class="required inputDate" id="vzr-date-start" />
                                         </div>
                                     </div>
                                     <div class="form-field">
                                         <div class="form-input form-input-date">
                                             <span class="form-input-label">Дата окончания <em>*</em></span>
-                                            <input type="text" name="vzr_date_end" value="" class="required inputDate" data-calcField="vzr_date_end" id="vzr-date-end" />
+                                            <input type="text" name="vzr_date_end" value="" class="required inputDate" id="vzr-date-end" />
                                         </div>
                                     </div>
                                     <div class="form-field form-field-vzr-days-count">
@@ -363,7 +364,7 @@
                                     </div>
                                     <div class="form-field form-field-vzr-days-select">
                                         <div class="form-select">
-                                            <select name="days" data-placeholder="Количество дней" class="required" data-calcField="days" id="vzr-days-select">
+                                            <select name="days" data-placeholder="Количество дней" class="required" id="vzr-days-select">
                                                 <option value=""></option>
                                                 <option value="30">30</option>
                                                 <option value="60">60</option>
@@ -378,7 +379,7 @@
                                         <div class="form-field form-field-wide">
                                             <div class="form-input form-input-date">
                                                 <span class="form-input-label">Дата подачи документов <em>*</em></span>
-                                                <input type="text" name="vzr_date_docs" value="" class="inputDate" data-calcField="vzr_date_docs" id="vzr-date-docs" />
+                                                <input type="text" name="vzr_date_docs" value="" class="inputDate" id="vzr-date-docs" />
                                             </div>
                                         </div>
                                     </div>
@@ -391,17 +392,17 @@
 
                                 <div class="order-form-row order-form-row-vzr">
                                     <div class="form-field form-field-wide">
-                                        <div class="form-input"><span class="form-input-label">Возраст (0-7 лет)</span><input type="number" name="childrens" id="vzr-childrens" data-calcField="childrens" value="0" min="0" max="12" step="1" /></div>
+                                        <div class="form-input"><span class="form-input-label">Возраст (0-7 лет)</span><input type="number" name="childrens" id="vzr-childrens" value="0" min="0" max="12" step="1" /></div>
                                     </div>
                                 </div>
                                 <div class="order-form-row order-form-row-vzr">
                                     <div class="form-field form-field-wide">
-                                        <div class="form-input"><span class="form-input-label">Возраст (8-64 лет)</span><input type="number" name="adults" id="vzr-adults" data-calcField="adults" value="1" min="1" max="12" step="1" /></div>
+                                        <div class="form-input"><span class="form-input-label">Возраст (8-64 лет)</span><input type="number" name="adults" id="vzr-adults" value="1" min="1" max="12" step="1" /></div>
                                     </div>
                                 </div>
                                 <div class="order-form-row order-form-row-vzr">
                                     <div class="form-field form-field-wide">
-                                        <div class="form-input"><span class="form-input-label">Возраст (65-70 лет)</span><input type="number" name="olders" id="vzr-olders" data-calcField="olders" value="0" min="0" max="12" step="1" /></div>
+                                        <div class="form-input"><span class="form-input-label">Возраст (65-70 лет)</span><input type="number" name="olders" id="vzr-olders" value="0" min="0" max="12" step="1" /></div>
                                     </div>
                                 </div>
                                 <div class="form-required-notice"><span>*</span> Обязательный для заполнения поля</div>

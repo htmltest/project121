@@ -48,20 +48,20 @@ $(document).ready(function() {
         'Неверный формат промокода'
     );
 
-    $('#phone').on('keyup', function(e) {
+    $('#phone').change(function(e) {
         var curInput = $(this);
         var curValue = curInput.val();
         if (curValue.match(/^\+7 \(\d{3}\) \d{3}\-\d{2}\-\d{2}$/)) {
             curInput.parent().addClass('loading');
             $.ajax({
                 type: 'POST',
-                url: 'ajax/order-phone.json',
+                url: '/jsonResponse/checkPhone/',
                 dataType: 'json',
-                data: JSON.stringify({'phone': curValue}),
+                data: {'phone': curValue},
                 cache: false
             }).done(function(data) {
                 curInput.parent().removeClass('loading');
-                if (data.status == 'ok') {
+                if (data.status) {
                     $('#phone-hint').show();
                 } else {
                     $('#phone-hint').hide();
@@ -70,6 +70,21 @@ $(document).ready(function() {
         } else {
             $('#phone-hint').hide();
         }
+    });
+
+    $('#auth-link').click(function () {
+        if (!$('#phone').val().match(/^\+7 \(\d{3}\) \d{3}\-\d{2}\-\d{2}$/)) {
+            $('#phone-hint').hide();
+            return false;
+        }
+        $.post('/jsonResponse/LoginByPhone/', {'phone': $('#phone').val()}, function (data) {
+            if (!data.status)
+            {
+                $('#phone-hint').hide();
+                return false;
+            }
+            windowOpen('ТЕКУЩАЯ СТРАНИЦА?auth-form=Y');
+        }, 'json');
     });
 
     $('.order-address-checkbox input').change(function() {
@@ -464,57 +479,35 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    $("#address").each(function() {
-        $("#address").attr('autocomplete', 'off');
-        $("#address").suggestions({
-            token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
-            type: "ADDRESS",
+    $('.address').each(function() {
+        var curInput = $(this);
+        curInput.attr('autocomplete', 'off');
+        curInput.suggestions({
+            token: 'b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b',
+            type: 'ADDRESS',
             count: 5,
             onSelect: function(suggestion) {
-                var curDataField = $(this).parent().find('.form-input-dadata');
-                curDataField.html('');
-                for(curItem in suggestion.data) {
-                    if (suggestion.data[curItem] != null) {
-                        curDataField.append('<input type="hidden" name="address[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
-                    }
-                }
-            },
-            onSelectNothing: function() {
-                $(this).val('');
-                var curDataField = $(this).parent().find('.form-input-dadata');
-                curDataField.html('');
-            }
-        });
-    });
-
-    $("#address_jur").each(function() {
-        $("#address_jur").attr('autocomplete', 'off');
-        $("#address_jur").suggestions({
-            token: "b1ef55f1fac05ac03f0b616c47ace94e60ff6f0b",
-            type: "ADDRESS",
-            count: 5,
-            onSelect: function(suggestion) {
-                var curDataField = $(this).parent().find('.form-input-dadata');
+                var curDataField = curInput.parent().find('.form-input-dadata');
                 curDataField.html('');
                 if (suggestion.data.flat != null) {
-                    $(this).removeClass('error');
-                    $(this).parent().find('label.error').remove();
+                    curInput.removeClass('error');
+                    curInput.parent().find('label.error').remove();
                     for(curItem in suggestion.data) {
                         if (suggestion.data[curItem] != null) {
-                            curDataField.append('<input type="hidden" name="address_jur[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                            curDataField.append('<input type="hidden" name="' + curInput.attr('name') + '_DETAIL[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
                         }
                     }
                 } else {
-                    $(this).addClass('error');
-                    $(this).parent().find('label.error').remove();
-                    $(this).after('<label class="error">Необходимо ввести квартиру</label>');
+                    curInput.addClass('error');
+                    curInput.parent().find('label.error').remove();
+                    curInput.after('<label class="error">Необходимо ввести квартиру</label>');
                 }
             },
             onSelectNothing: function() {
-                $(this).val('');
-                $(this).removeClass('error');
-                $(this).parent().find('label.error').remove();
-                var curDataField = $(this).parent().find('.form-input-dadata');
+                curInput.val('');
+                curInput.removeClass('error');
+                curInput.parent().find('label.error').remove();
+                var curDataField = curInput.parent().find('.form-input-dadata');
                 curDataField.html('');
             }
         });
@@ -581,6 +574,10 @@ $(document).ready(function() {
             } else {
                 $('.order-vzr-docs').removeClass('visible');
                 $('#vzr-date-docs').removeClass('required');
+            }
+
+            if (typeof (curOption.attr('data-rus')) != 'undefined') {
+                $('#vzr-multiple').prop('checked', false).trigger('change');
             }
         }
     });
@@ -993,4 +990,55 @@ $(window).on('load', function() {
         updatePrecalc($(this));
     });
 
+});
+
+function sendUserCode(_code_)
+{
+    if (!$('#phone').val().match(/^\+7 \(\d{3}\) \d{3}\-\d{2}\-\d{2}$/)) {
+        windowClose();
+        $('#phone-hint').hide();
+        return false;
+    }
+    $.post('/jsonResponse/CheckLoginByPhone/', {'phone': $('#phone').val(), 'code':_code_}, function (data) {
+        if (!data.status)
+        {
+            $('#phone-hint').hide();
+            $('#codeFormError').removeAttr('style').find('.form-error-text').html(data.error);
+            return false;
+        }
+        windowClose();
+        $('#phone-hint').remove();
+        $('#ajaxPersonalText').html('Профиль');
+    }, 'json');
+}
+
+function combineEmail()
+{
+    $('[name="USER_EMAIL_CONFIRM_TWO"] option:selected').removeAttr('selected');
+
+    $('[name="USER_EMAIL_CONFIRM_TWO"] option').each(function () {
+        if ($(this).attr('value') == $('[name="USER_EMAIL_TWO"]').val()) {
+            $(this).attr('selected', 'selected');
+            $('[name="USER_EMAIL_CONFIRM_TWO"]').chosen('destroy');
+            $('[name="USER_EMAIL_CONFIRM_TWO"]').chosen({disable_search: true})
+            $('[name="USER_EMAIL_CONFIRM_TWO"]').each(function() {
+                var curSelect = $(this);
+                if (curSelect.data('placeholder') != '') {
+                    curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
+                }
+            });
+        }
+    });
+
+    $('[name="USER_EMAIL"]').val(
+        $('[name="USER_EMAIL_ONE"]').val() + '@' + $('[name="USER_EMAIL_TWO"]').val()
+    );
+
+    $('[name="USER_EMAIL_CONFIRM"]').val(
+        $('[name="USER_EMAIL_CONFIRM_ONE"]').val() + '@' + $('[name="USER_EMAIL_CONFIRM_TWO"]').val()
+    );
+}
+
+$(document).ready(function () {
+    combineEmail();
 });

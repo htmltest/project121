@@ -325,8 +325,8 @@
                             <div class="order-form-fields">
                                 <h2 class="on-mobile">Cтрахователь</h2>
                                 <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Мобильный телефон <em>*</em></span><input type="text" name="phone" id="phone" value="" class="phoneRU required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
-                                    <div class="form-hint" id="phone-hint">Пользователь с данным номером телефон найден в системе. <a href="windows/auth.html" class="window-link">Авторизоваться</a></div>
+                                    <div class="form-input"><span class="form-input-label">Мобильный телефон <em>*</em></span><input type="text" name="USER_PHONE" id="phone" value="" class="phoneRU required" /><span class="desktop-menu-icon"><img src="images/desktop-menu-icon-help.svg" alt="" /><span class="desktop-menu-icon-text">Текст с подсказкой<br /> в две строки</span></span></div>
+                                    <div class="form-hint" id="phone-hint">Пользователь с данным номером телефон найден в системе. <a href="javascript:void(0)" id="auth-link">Авторизоваться</a></div>
                                 </div>
                                 <div class="form-field">
                                     <div class="form-input"><span class="form-input-label">Адрес электронной почты <em>*</em></span><input type="text" name="email" id="email" value="" class="email required" /></div>
@@ -373,17 +373,13 @@
                                     </div>
                                 </div>
                                 <div class="form-field">
-                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" id="address" value="" class="required" /><div class="form-input-dadata"></div></div>
+                                    <div class="form-input"><span class="form-input-label">Адрес застрахованного имущества <em>*</em></span><input type="text" name="address" value="" class="address required" /><div class="form-input-dadata"></div></div>
                                 </div>
                                 <div class="form-checkbox order-address-checkbox">
                                     <label><input type="checkbox" name="address_equal" checked="checked" /><span>Адрес регистрации совпадает с адресом застрахованного имущества</span></label>
                                 </div>
                                 <div class="form-field order-address-jur">
-                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" id="address_jur" value="" class="required" /><div class="form-input-dadata"></div></div>
-                                    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
-                                    <!--[if lt IE 10]>
-                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
-                                    <![endif]-->
+                                    <div class="form-input"><span class="form-input-label">Адрес регистрации <em>*</em></span><input type="text" name="address_jur" value="" class="address required" /><div class="form-input-dadata"></div></div>
                                 </div>
                                 <h2>Паспорт страхователя</h2>
                                 <div class="order-passport">
@@ -572,6 +568,10 @@
         <script src="js/air-datepicker/datepicker.min.js"></script>
         <script src="js/f-main.js"></script>
         <script src="js/main-visual.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
+        <!--[if lt IE 10]>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+        <![endif]-->
         <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.11.1/dist/js/jquery.suggestions.min.js"></script>
         <script src="js/f-logic.js"></script>
 
