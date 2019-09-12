@@ -391,33 +391,51 @@
                         </tbody>
                     </table>
 
-                    <form action="ajax/order-sms.json" method="post" class="order-confirm-form">
+                    <form action="<?=$APPLICATION->GetCurPage(false)?>#top" method="post" class="order-confirm-form-back-edit">
                         <div class="order-confirm-form-header">
-                            <input type="hidden" name="confirmPhone" value="+79111234567" id="confirmPhone" />
-                            <input type="hidden" name="confirmURL" value="https://smpins.ru/" id="confirmURL" />
+                            <div class="order-confirm-form-back"><a href="#" class="btn-blue btn-mini btn-form-send" data-name="toFirst">Изменить данные</a></div>
+                        </div>
+                    </form>
+
+                    <form action="/jsonResponse/createPayFormMyDefense/" method="post" class="order-confirm-form">
+                        <input type="hidden" name="confirmPhone" value="+79111234567" id="confirmPhone" />
+                        <input type="hidden" name="confirmURL" value="https://smpins.ru/" id="confirmURL" />
+
+                        <div class="form-field">
+                            <div class="form-checkbox">
+                                <label><input type="checkbox" name="order_confirm_data" class="required" id="order-confirm-data" /><span> Выражаю свое согласие ООО «СМП-Страхование» <a href="windows/policy-order.html" class="window-link">на обработку моих персональных данных</a>.<em>*</em></span></label>
+                            </div>
+                        </div>
+
+                        <div class="order-confirm-form-detail">
+                            <div class="form-field">
+                                <div class="form-checkbox">
+                                    <label><input type="checkbox" name="order_confirm_info" id="order-confirm-info" /><span> Выражаю свое согласие ООО «СМП-Страхование» на <a href="windows/policy-order.html" class="window-link">направление мне рекламной информации</a>.</span></label>
+                                </div>
+                            </div>
                             <div class="form-field">
                                 <div class="form-checkbox">
                                     <label><input type="checkbox" name="order_confirm" id="order-confirm" class="required" /><span>Данные проверены и не содержат ошибок</span></label>
                                 </div>
                             </div>
-                            <div class="order-confirm-form-back"><a href="#" class="btn-blue btn-mini btn-form-send" data-name="toSecond">Редактировать данные</a></div>
-                        </div>
-                        <div class="order-confirm-form-detail">
-                            <div class="form-hint">На Ваш адрес <strong>ххххххххххх@mail.ru</strong> направлены: страховой полис, подписанный электронной подписью Страховщика, и правила страхования.<br /> На номер <strong>+х (ххх)ххх-хх-хх</strong> отправлено SMS с кодом подтверждения.</div>
-                            <div class="form-field">
-                                <div class="form-checkbox">
-                                    <label><input type="checkbox" name="order_confirm_data" class="required" id="order-confirm-data" checked="checked" /><span> Выражаю свое согласие ООО «СМП-Страхование» <a href="windows/policy-order.html" class="window-link">на обработку моих персональных данных</a>.</span></label>
-                                </div>
-                                <div class="form-checkbox">
-                                    <label><input type="checkbox" name="order_confirm_info" class="required" id="order-confirm-info" checked="checked" /><span> Выражаю свое согласие ООО «СМП-Страхование» на информационное сопровождение по страховым и сопутствующим услугам.</span></label>
-                                </div>
-                            </div>
                             <div class="order-confirm-sms">
+                                <div class="form-hint">
+                                    На Ваш адрес <strong>cokolheaven@gmail.com</strong> направлены: проект страхового полиса и правила страхования.<br />
+                                    На номер <strong>+79154796853</strong> отправлено SMS с кодом подтверждения.<br />
+                                    Страхователь — физическое лицо уплачивает страховую премию (страховой взнос) после ознакомления с условиями, содержащимися в проекте Договора,  а также Правилах, направленных Страховщиком на электронную почту Страхователя, подтверждая тем самым свое согласие заключить Договор на изложенных в нем условиях.<br />
+                                    Непосредственно после оплаты Страхователем страховой премии в полном объеме Страховщик направляет на электронную почту Страхователя оплаченный им и заключенный между Страховщиком и Страхователем Договор (электронный полис), который подписывается усиленной квалифицированной электронной подписью Страховщика с соблюдением требований Федерального закона от 06.04.2011 г. N 63-ФЗ «Об электронной подписи» и признается электронным документом, равнозначным документу на бумажном носителе, подписанному собственноручной подписью.
+                                </div>
                                 <h2>Укажите СМС-код для подтверждения введенных данных</h2>
                                 <div class="order-confirm-sms-row">
-                                    <div class="form-input"><span class="form-input-label">СМС-код <em>*</em></span><input type="text" name="code" value="" class="required" /></div>
+                                    <div class="form-input">
+                                        <input type="hidden" name="phone" value="<?=$arResult['PRINT_VALUES']['USER_PHONE']['VALUE']?>" />
+                                        <input type="hidden" name="OK_URL" value="<?='http://' . $_SERVER['HTTP_HOST']?><?=rtrim($APPLICATION->GetCurPage(false), '/')?>/success/" />
+                                        <input type="hidden" name="FAIL_URL" value="<?='http://' . $_SERVER['HTTP_HOST']?><?=rtrim($APPLICATION->GetCurPage(false), '/')?>/fail/" />
+                                        <span class="form-input-label">СМС-код <em>*</em></span>
+                                        <input type="text" name="code" id="userCode" value="" class="required" />
+                                    </div>
                                     <div class="form-submit"><input type="submit" value="Подтвердить" class="btn-orange" /></div>
-                                    <div class="order-confirm-sms-new">Не пришел смс-код? <a href="#">Отправить повторно</a></div>
+                                    <div class="order-confirm-sms-new">СМС-код приходит в течении 2-х минут. <a href="#">Отправить повторно</a></div>
                                 </div>
                             </div>
                             <div class="order-success-sms">
@@ -425,9 +443,11 @@
                                     <h2>Спасибо!</h2>
                                     <p class="order-success-sms-text">Ваш номер телефона подтвержден.</p>
                                 </div>
-                                <div class="order-success-sms-link"><a href="#" class="btn-orange">Оплатить</a></div>
+                                <div class="order-success-sms-link"><a href="#" class="btn-orange">Оплатить и получить полис</a></div>
                             </div>
                         </div>
+
+                        <div class="form-required-notice"><span>*</span> Обязательный для заполнения поля</div>
                     </form>
 
                 </div>

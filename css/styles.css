@@ -321,6 +321,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-checkbox label input.error+span::before,
 .form-checkbox label input.error+label+span::before {border-color:#ff1800}
 .form-checkbox label.error {display:none !important}
+.form-checkbox span em {font-style:normal; color:#ff6200}
 
 .form-radio {margin:14px 0; line-height:22px; user-select:none}
 .form-radio::after {content:""; display:block; clear:both}
@@ -1618,7 +1619,9 @@ h2+.order-form {padding-top:0}
     .wrapper table.order-info td:first-child {width:auto; font-size:12px; line-height:20px; font-weight:300; color:#7f7f7f; padding-top:0}
 }
 
-.order-confirm-form {margin:50px 0 0 0}
+.order-confirm-form-back-edit {margin:50px 0 0 0}
+
+.order-confirm-form {margin:0}
 
 .order-confirm-form-detail {display:none}
 .order-confirm-form-detail .form-hint strong {font-weight:bold; color:#005fb6}
@@ -1626,6 +1629,8 @@ h2+.order-form {padding-top:0}
 
 .order-confirm-form-detail .form-hint {margin:-12px 0 -4px 33px}
 .order-confirm-form-detail h2 {margin-top:41px}
+
+.order-confirm-sms {display:none}
 
 .order-confirm-sms-row::after {content:""; display:block; clear:both}
 .order-confirm-sms-row .form-input {float:left; width:374px}
@@ -1643,8 +1648,6 @@ h2+.order-form {padding-top:0}
     .order-confirm-sms-row .form-submit {float:right; width:267px; margin:0}
     .order-confirm-sms-new {padding:5px 0 0 0}
 }
-
-.order-confirm-form.sms-success .order-confirm-sms {display:none}
 
 .order-success-sms {display:none}
 .order-success-sms::after {content:""; display:block; clear:both}
@@ -1700,8 +1703,7 @@ h2+.order-form {padding-top:0}
 @media screen and (max-width:1199px) {
     .order-confirm-form-header .form-field {float:none; width:auto}
     .order-confirm-form-back {float:none}
-    .order-confirm-form-back a {margin:20px 0 0 0; width:100%}
-    .order-confirm-form-back-vzr a {width:auto; margin:0}
+    .order-confirm-form-back a {margin:0; width:auto}
 }
 
 .order-types-tab {display:none}

@@ -83,13 +83,14 @@ $(document).ready(function() {
                 $('#phone-hint').hide();
                 return false;
             }
-            var curURL = window.location.href;
-            if (curURL.indexOf('?') > -1) {
-                curURL += '&auth-form=Y';
+            var newSearch = window.location.search;
+            if (newSearch == '') {
+                newSearch += '?auth-form=Y';
             } else {
-                curURL += '?auth-form=Y';
+                newSearch += '&auth-form=Y';
             }
-            windowOpen(curURL);
+            var newURL = window.location.origin + window.location.pathname + newSearch + window.location.hash;
+            windowOpen(newURL);
         }, 'json');
     });
 
@@ -133,36 +134,75 @@ $(document).ready(function() {
         }
     });
 
+    $('#order-confirm-data').change(function() {
+        if ($(this).prop('checked')) {
+            $(this).prop('disabled', true);
+            var curCheckbox = $(this).parents().filter('.form-checkbox');
+            var curForm = $(this).parents().filter('form');
+            $('.order-confirm-form').addClass('open');
+        } else {
+            $('.order-confirm-form').removeClass('open');
+        }
+    });
+
+    $('#order-confirm-data').each(function() {
+        if ($(this).prop('checked')) {
+            $(this).prop('disabled', true);
+            var curCheckbox = $(this).parents().filter('.form-checkbox');
+            var curForm = $(this).parents().filter('form');
+            $('.order-confirm-form').addClass('open');
+        } else {
+            $('.order-confirm-form').removeClass('open');
+        }
+    });
+
+    $('#order-confirm-info').change(function() {
+        var accept = ($(this).prop('checked') ? 'Y' : 'N');
+        $.post(
+            window.location.href,
+            {
+                ADDITIONAL_PROMO: accept,
+                secondStep: true
+            },
+            function (data) {
+            },
+            'json'
+        );
+    });
+
+    $('#order-confirm').each(function() {
+        $(this).prop('checked', false);
+    });
+
     $('#order-confirm').change(function() {
         if ($(this).prop('checked')) {
             $(this).prop('disabled', true);
             var curCheckbox = $(this).parents().filter('.form-checkbox');
             var curForm = $(this).parents().filter('form');
-            curForm.find('.order-confirm-form-back').hide();
             curCheckbox.addClass('loading');
             $.ajax({
                 type: 'POST',
-                url: 'ajax/order-confirm.json',
+                url: '/jsonResponse/checkPhoneBeforeBay/',
                 data: {'phone': $('#confirmPhone').val(), 'url': $('#confirmURL').val()},
                 dataType: 'json',
                 cache: false,
-                timeout: 5000
+                timeout: 30000
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 curCheckbox.removeClass('loading');
                 curForm.find('.form-error').remove();
-                curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
+                curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Сервис временно недоступен, попробуйте позже.</div></div>');
             }).done(function(data) {
                 curCheckbox.removeClass('loading');
-                if (data.status == 'ok') {
+                if (data.status) {
                     curForm.find('.form-error').remove();
-                    $('.order-confirm-form').addClass('open');
+                    $('.order-confirm-sms').show();
                 } else {
                     curForm.find('.form-error').remove();
-                    curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
+                    curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.error + '</div></div>');
                 }
             });
         } else {
-            $('.order-confirm-form').removeClass('open');
+            $('.order-confirm-sms').css('display', 'none');
         }
     });
 
@@ -172,77 +212,25 @@ $(document).ready(function() {
         $('.order-confirm-sms-new a').addClass('loading');
         $.ajax({
             type: 'POST',
-            url: 'ajax/order-confirm.json',
+            url: '/jsonResponse/checkPhoneBeforeBay/',
             data: {'phone': $('#confirmPhone').val(), 'url': $('#confirmURL').val()},
             dataType: 'json',
             cache: false,
-            timeout: 5000
+            timeout: 30000
         }).fail(function(jqXHR, textStatus, errorThrown) {
             $('.order-confirm-sms-new a').removeClass('loading');
             curForm.find('.form-error').remove();
-            curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
+            curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Сервис временно недоступен, попробуйте позже.</div></div>');
         }).done(function(data) {
             $('.order-confirm-sms-new a').removeClass('loading');
-            if (data.status == 'ok') {
+            if (data.status) {
                 curForm.find('.form-error').remove();
             } else {
                 curForm.find('.form-error').remove();
-                curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
+                curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.error + '</div></div>');
             }
         });
         e.preventDefault();
-    });
-
-    $('#order-confirm').each(function() {
-        $(this).prop('checked', false);
-    });
-
-    $('#order-confirm-data').change(function() {
-        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
-            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
-            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
-            $('.order-confirm-form').addClass('close');
-        } else {
-            $('.order-confirm-form').removeClass('close');
-            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
-            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
-        }
-    });
-
-    $('#order-confirm-data').each(function() {
-        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
-            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
-            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
-            $('.order-confirm-form').addClass('close');
-        } else {
-            $('.order-confirm-form').removeClass('close');
-            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
-            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
-        }
-    });
-
-    $('#order-confirm-info').change(function() {
-        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
-            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
-            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
-            $('.order-confirm-form').addClass('close');
-        } else {
-            $('.order-confirm-form').removeClass('close');
-            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
-            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
-        }
-    });
-
-    $('#order-confirm-info').each(function() {
-        if (!($('#order-confirm-info').prop('checked') && $('#order-confirm-data').prop('checked'))) {
-            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
-            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
-            $('.order-confirm-form').addClass('close');
-        } else {
-            $('.order-confirm-form').removeClass('close');
-            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
-            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
-        }
     });
 
     var confirmForm = $('.order-confirm-form');
@@ -279,32 +267,33 @@ $(document).ready(function() {
             },
             submitHandler: function(form) {
                 confirmForm.addClass('loading');
-                confirmForm.find('input[type="submit"]').prop('disabled', true);
-                confirmForm.find('input[type="text"]').prop('disabled', true);
+                confirmForm.find('input[type="submit"]').attr('disabled', true);
+                confirmForm.find('input[type="text"]').attr('readonly', true);
                 confirmForm.find('input[type="text"]').parent().addClass('form-input-disabled');
                 $(form).find('.form-error').remove();
                 $.ajax({
                     type: 'POST',
                     url: $(form).attr('action'),
                     dataType: 'json',
-                    data: JSON.stringify({'sms': $(form).find('input[type="text"]').val()}),
+                    data: $(form).serialize(),
                     cache: false,
-                    timeout: 5000
+                    timeout: 30000
                 }).fail(function(jqXHR, textStatus, errorThrown) {
                     confirmForm.removeClass('loading');
-                    confirmForm.find('input[type="submit"]').prop('disabled', false);
-                    confirmForm.find('input[type="text"]').prop('disabled', false);
+                    confirmForm.find('input[type="submit"]').removeAttr('disabled');
+                    confirmForm.find('input[type="text"]').removeAttr('readonly');
                     confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
-                    $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + errorThrown + '</div></div>');
+                    $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Сервис временно недоступен, попробуйте позже.</div></div>');
                 }).done(function(data) {
                     confirmForm.removeClass('loading');
-                    confirmForm.find('input[type="submit"]').prop('disabled', false);
-                    confirmForm.find('input[type="text"]').prop('disabled', false);
+                    confirmForm.find('input[type="submit"]').removeAttr('disabled');
+                    confirmForm.find('input[type="text"]').removeAttr('readonly');
                     confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
-                    if (data.status == 'ok') {
+                    if (data.status) {
                         $('.order-confirm-form').addClass('sms-success');
+                        $(form).find('.order-success-sms-link a.btn-orange').attr('href', data.response);
                     } else {
-                        $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.errorMessage + '</div></div>');
+                        $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.error + '</div></div>');
                     }
                 });
             }
@@ -497,7 +486,21 @@ $(document).ready(function() {
             onSelect: function(suggestion) {
                 var curDataField = curInput.parent().find('.form-input-dadata');
                 curDataField.html('');
-                if (suggestion.data.flat != null) {
+                if (curInput.hasClass('address-with-flat')) {
+                    if (suggestion.data.flat != null) {
+                        curInput.removeClass('error');
+                        curInput.parent().find('label.error').remove();
+                        for(curItem in suggestion.data) {
+                            if (suggestion.data[curItem] != null) {
+                                curDataField.append('<input type="hidden" name="' + curInput.attr('name') + '_DETAIL[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
+                            }
+                        }
+                    } else {
+                        curInput.addClass('error');
+                        curInput.parent().find('label.error').remove();
+                        curInput.after('<label class="error">Необходимо ввести квартиру</label>');
+                    }
+                } else {
                     curInput.removeClass('error');
                     curInput.parent().find('label.error').remove();
                     for(curItem in suggestion.data) {
@@ -505,10 +508,6 @@ $(document).ready(function() {
                             curDataField.append('<input type="hidden" name="' + curInput.attr('name') + '_DETAIL[' + curItem + ']" value="' + suggestion.data[curItem] + '" />');
                         }
                     }
-                } else {
-                    curInput.addClass('error');
-                    curInput.parent().find('label.error').remove();
-                    curInput.after('<label class="error">Необходимо ввести квартиру</label>');
                 }
             },
             onSelectNothing: function() {
@@ -519,52 +518,6 @@ $(document).ready(function() {
                 curDataField.html('');
             }
         });
-    });
-
-    $('#vzr-confirm-data').change(function() {
-        if ($(this).prop('checked')) {
-            $(this).prop('disabled', true);
-            var curCheckbox = $(this).parents().filter('.form-checkbox');
-            var curForm = $(this).parents().filter('form');
-            $('.order-confirm-form').addClass('open');
-        } else {
-            $('.order-confirm-form').removeClass('open');
-        }
-    });
-
-    $('#vzr-confirm-data').each(function() {
-        if ($(this).prop('checked')) {
-            $(this).prop('disabled', true);
-            var curCheckbox = $(this).parents().filter('.form-checkbox');
-            var curForm = $(this).parents().filter('form');
-            $('.order-confirm-form').addClass('open');
-        } else {
-            $('.order-confirm-form').removeClass('open');
-        }
-    });
-
-    $('#vzr-confirm-info, #vzr-confirm').change(function() {
-        if (!($('#vzr-confirm-info').prop('checked') && $('#vzr-confirm').prop('checked'))) {
-            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
-            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
-            $('.order-confirm-form').addClass('close');
-        } else {
-            $('.order-confirm-form').removeClass('close');
-            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
-            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
-        }
-    });
-
-    $('#vzr-confirm-info, #vzr-confirm').each(function() {
-        if (!($('#vzr-confirm-info').prop('checked') && $('#vzr-confirm').prop('checked'))) {
-            $('.order-confirm-sms-row .form-input input').prop('disabled', true);
-            $('.order-confirm-sms-row .form-input').addClass('form-input-disabled');
-            $('.order-confirm-form').addClass('close');
-        } else {
-            $('.order-confirm-form').removeClass('close');
-            $('.order-confirm-sms-row .form-input input').prop('disabled', false);
-            $('.order-confirm-sms-row .form-input').removeClass('form-input-disabled');
-        }
     });
 
     $('body').on('change', '#vzr-country-select', function() {
