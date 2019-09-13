@@ -291,6 +291,7 @@ $(document).ready(function() {
                     confirmForm.find('input[type="text"]').parent().removeClass('form-input-disabled');
                     if (data.status) {
                         $('.order-confirm-form').addClass('sms-success');
+                        $('.order-confirm-sms').hide();
                         $(form).find('.order-success-sms-link a.btn-orange').attr('href', data.response);
                     } else {
                         $(form).append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.error + '</div></div>');
@@ -467,6 +468,13 @@ $(document).ready(function() {
     $('body').on('click', '.order-form-results-code-btn a', function(e) {
         $('#order-promo').trigger('change');
         e.preventDefault();
+    });
+
+    $('body').on('change', '#order-promo', function(e) {
+        if ($(this).val() == '') {
+            $('#order-promo').removeClass('error').prop('disabled', true);
+            $('#order-promo').parent().find('label.error').remove();
+        }
     });
 
     $('body').on('click', '.order-form-results-code .form-input-clear', function(e) {
