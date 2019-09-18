@@ -1972,10 +1972,9 @@ footer a {color:#cae3f9}
 .vzr-programms-item-option {position:relative; border-bottom:1px solid #d9d9d9; height:59px; line-height:0}
 .vzr-programms-item-option::before {content:""; display:block; position:absolute; left:-8px; bottom:-1px; width:8px; height:1px; background:#d9d9d9; pointer-events:none}
 .vzr-programms-item-option img {position:absolute; display:block; left:50%; top:50%; transform:translate(-50%, -50%)}
-.vzr-programms-item-price-2 {display:none}
-.vzr-programms.vzr-programms-currency-2 .vzr-programms-item-price-1 {display:none}
-.vzr-programms.vzr-programms-currency-2 .vzr-programms-item-price-2 {display:inline}
 .vzr-programms-mobile {display:none}
+.vzr-params-item {display:none}
+.vzr-params-item.active {display:block}
 
 @media screen and (max-width:1199px) {
     .vzr-programms-item {width:33.33%; margin:0; padding:0 5px; background:none; position:relative}
@@ -1989,18 +1988,20 @@ footer a {color:#cae3f9}
     .vzr-programms-item-price::before {display:none}
     .vzr-programms-item-option {display:none}
     .vzr-programms-mobile {display:block; border-top:1px solid #d9d9d9; margin:20px 0 0 0}
+    .vzr-programms-mobile-tab {display:none}
+    .vzr-programms-mobile-tab.active {display:block}
     .vzr-programms-mobile-item {display:table; width:100%; font-size:16px; line-height:22px; color:#000; font-weight:normal; border-bottom:1px solid #d9d9d9}
     .vzr-programms-mobile-inner {display:table-cell; vertical-align:middle; height:58px; padding:0 160px 0 0; position:relative}
-    .vzr-programms-mobile-inner::after {content:""; display:block; position:absolute; width:15px; height:12px; right:54px; top:50%; margin-top:-6px; background:url(../images/vzr-programms-item-option.svg)}
+    .vzr-programms-mobile-inner.active::after {content:""; display:block; position:absolute; width:15px; height:12px; right:54px; top:50%; margin-top:-6px; background:url(../images/vzr-programms-item-option.svg)}
     .vzr-programms-mobile-inner .desktop-menu-icon {display:inline-block; vertical-align:middle; position:relative; right:auto; top:auto; margin:-2px 0 0 5px}
 }
 
 .vzr-type {margin:36px 0 0 0}
 .vzr-type-header {font-size:18px; font-weight:normal}
 .vzr-type-header span {color:#ff6200}
-.vzr-type-list {margin:10px -6px 0 -6px}
+.vzr-type-list {margin:0 -6px}
 .vzr-type-list::after {content:""; display:block; clear:both}
-.vzr-type-item {float:left; width:33.33%; padding:0 6px}
+.vzr-type-item {float:left; width:33.33%; padding:12px 6px 0 6px}
 .vzr-type-item .desktop-menu-icon {right:5px; top:5px}
 .vzr-type-static {position:relative; text-align:center; background:#afd2e3 url(../images/vzr-type-static.svg) no-repeat center 21px; height:91px; font-size:16px; font-weight:bold; color:#004e96; padding:45px 0 0 0}
 .vzr-type-checkbox {display:block; cursor:pointer}
@@ -2020,8 +2021,7 @@ footer a {color:#cae3f9}
     .vzr-type-static {background-position:16px center; height:auto; padding:10px 0 7px 50px; text-align:left}
 }
 
-.vzr-add {display:none; padding:13px 0 0 0}
-.vzr-add.visible {display:block}
+.vzr-add {padding:13px 0 0 0}
 .vzr-add-title {font-size:18px; font-weight:normal}
 .vzr-add-list {font-size:0; line-height:0; letter-spacing:-1px; padding:3px 0 0 0}
 .vzr-add-list .form-checkbox {display:inline-block; vertical-align:top; width:210px; margin:0; font-size:14px; line-height:24px; letter-spacing:0; margin:8px 0 0 0; font-weight:normal}
@@ -2033,9 +2033,9 @@ footer a {color:#cae3f9}
 
 .vzr-more {padding:33px 0}
 .vzr-more-title {font-size:18px; font-weight:normal}
-.vzr-more-list {margin:10px -6px 0 -6px}
+.vzr-more-list {margin:0 -6px}
 .vzr-more-list::after {content:""; display:block; clear:both}
-.vzr-more-item {float:left; width:33.33%; padding:0 6px}
+.vzr-more-item {float:left; width:33.33%; padding:12px 6px 0 6px}
 .vzr-more-item .desktop-menu-icon {right:5px; top:5px}
 .vzr-more-checkbox {display:block; cursor:pointer}
 .vzr-more-checkbox input {display:none}
@@ -2045,6 +2045,8 @@ footer a {color:#cae3f9}
 .vzr-more-checkbox input:checked+.vzr-more-checkbox-inner .desktop-menu-icon g {fill:#fff}
 .vzr-more-checkbox-title {padding:0 20px; min-height:60px}
 .vzr-more-checkbox-price {font-weight:500; font-size:14px; line-height:17px; padding:1px 0 0 0}
+.vzr-more-checkbox-price em {font-style:normal; font-size:12px; opacity:0.5; text-decoration:line-through}
+.vzr-more-checkbox-price-old-mobile {display:none}
 
 @media screen and (max-width:1199px) {
     .vzr-more-list {margin:10px 0 0 0}
@@ -2054,6 +2056,8 @@ footer a {color:#cae3f9}
     .vzr-more-checkbox input:checked+.vzr-more-checkbox-inner {background-position:16px center}
     .vzr-more-checkbox-title {padding:10px 0 7px 0; min-height:0}
     .vzr-more-checkbox-price {padding:0; position:absolute; right:40px; top:50%; transform:translateY(-50%)}
+    .vzr-more-checkbox-price em {display:none}
+    .vzr-more-checkbox-price em.vzr-more-checkbox-price-old-mobile {display:block; text-align:right; margin:0 0 -3px 0}
 }
 
 .order-confirm-form-detail .form-hint-vzr {margin-left:0; margin-top:0}
@@ -2075,8 +2079,8 @@ footer a {color:#cae3f9}
 }
 .vzr-form-window-mobile-header {position:relative; padding:0 134px 0 20px}
 .vzr-form-window-mobile-title {font-weight:normal; font-size:20px; line-height:22px; color:#000; padding:10px 0 0 0}
-.vzr-form-window-mobile-cost {position:absolute; right:0; top:10px; width:134px; font-size:20px; line-height:22px; color:#000; font-weight:bold}
-.vzr-form-window-mobile-cost em {font-size:12px; color:#7f7f7f; text-decoration:line-through}
+.vzr-form-window-mobile-cost {position:absolute; right:0; top:10px; width:134px; font-size:20px; line-height:22px; color:#000; font-weight:bold; white-space:nowrap}
+.vzr-form-window-mobile-cost em {display:none; font-size:12px; color:#7f7f7f; text-decoration:line-through}
 .vzr-form-window-mobile-ctrl {padding:8px 0 0 0}
 .vzr-form-window-mobile-ctrl::after {content:""; display:block; clear:both}
 .vzr-form-window-mobile-ctrl .form-submit {float:right; margin:0; width:134px}
@@ -2099,3 +2103,13 @@ footer a {color:#cae3f9}
     .product-header h1 {margin:0}
     .product-header+h2 {margin-top:16px}
 }
+
+.order-vzr {position:relative}
+.order-vzr .loading {position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(255, 255, 255, 0.5) url(../images/loading.gif) no-repeat center}
+
+.vzr-programms-header-template {display:none}
+.vzr-programms-mobile-template {display:none}
+.vzr-programms-item-template {display:none}
+.vzr-params-hint-template {display:none}
+.vzr-type-add-item {display:none}
+.vzr-type-add-item.active {display:block}

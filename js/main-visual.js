@@ -283,9 +283,17 @@ $(document).ready(function() {
 
 $(window).on('load resize scroll', function() {
     var curScroll = $(window).scrollTop();
+    var curHeight = $(window).height();
+    $('.vzr-form-window-mobile').each(function() {
+        if ((curScroll + curHeight > $('.order-form').offset().top) && (curScroll + curHeight < $('.order-form').offset().top + $('.order-form').height())) {
+            $('.vzr-form-window-mobile').addClass('visible');
+        } else {
+            $('.vzr-form-window-mobile').removeClass('visible');
+        }
+    });
 
     $('.order-form-results-inner').each(function() {
-        if (curScroll >= $('.order-form-results').offset().top - 20) {
+        if (($('.order-form-results-inner').height() < $(window).height() + 20) && ($('.order-form-results-inner').height() < $('.order-form-fields').height()) && (curScroll >= $('.order-form-results').offset().top - 20)) {
             $('.order-form-results').addClass('fixed');
             $('.order-form-results-inner').css({'left': $('.order-form-results').offset().left, 'top': 20});
             var curDiff = ($('.order-form-results-inner').offset().top + $('.order-form-results-inner').height() - curScroll) - ($('.order-form-ctrl').offset().top - curScroll);

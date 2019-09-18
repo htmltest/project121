@@ -472,13 +472,13 @@ $(document).ready(function() {
 
     $('body').on('change', '#order-promo', function(e) {
         if ($(this).val() == '') {
-            $('#order-promo').removeClass('error').prop('disabled', true);
+            $('#order-promo').removeClass('error').prop('disabled', false);
             $('#order-promo').parent().find('label.error').remove();
         }
     });
 
     $('body').on('click', '.order-form-results-code .form-input-clear', function(e) {
-        $('#order-promo').removeClass('error').prop('disabled', true);
+        $('#order-promo').removeClass('error').prop('disabled', false);
         $('#order-promo').parent().find('label.error').remove();
         $('#order-promo').val('').trigger('change');
         e.preventDefault();
@@ -646,7 +646,7 @@ $(document).ready(function() {
             var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
             if (startDate) {
                 if ($('#vzr-multiple').prop('checked')) {
-                    var curDays = Number($('#vzr-days-select').val());
+                    var curDays = Number($('#vzr-days-select option:selected').attr('data-days'));
                     var newDate = new Date(startDate.getTime());
                     newDate.setDate(newDate.getDate() + curDays);
                     $('#vzr-date-end').data('datepicker').selectDate(newDate);
@@ -670,7 +670,7 @@ $(document).ready(function() {
     }
 
     $('body').on('change', '#vzr-days-select', function() {
-        var curDays = Number($(this).val());
+        var curDays = Number($('#vzr-days-select option:selected').attr('data-days'));
         var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
         if (curDate) {
             var newDate = new Date(curDate.getTime());
@@ -680,7 +680,7 @@ $(document).ready(function() {
     });
 
     $('#vzr-days-select').each(function() {
-        var curDays = Number($(this).val());
+        var curDays = Number($('#vzr-days-select option:selected').attr('data-days'));
         var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
         if (curDate) {
             var newDate = new Date(curDate.getTime());
@@ -710,113 +710,538 @@ $(document).ready(function() {
         }
     });
 
-    $('body').on('change', '#vzr-currency', function() {
-        if ($(this).prop('checked')) {
-            $('.vzr-programms').addClass('vzr-programms-currency-2');
-        } else {
-            $('.vzr-programms').removeClass('vzr-programms-currency-2');
-        }
-        $('.vzr-programms-item input').trigger('change');
-    });
+    $('.order-vzr').each(function() {
 
-    $('#vzr-currency').each(function() {
-        if ($(this).prop('checked')) {
-            $('.vzr-programms').addClass('vzr-programms-currency-2');
-        } else {
-            $('.vzr-programms').removeClass('vzr-programms-currency-2');
+        function CalculatorVZR(parameters) {
+            this.context = parameters;
         }
-    });
 
-    $('body').on('change', '#vzr-type-active', function() {
-        if ($(this).prop('checked')) {
-            $('#vzr-type-extreme').prop('checked', false);
-            $('.vzr-add').removeClass('visible');
-            $('.main-events-form-results-info-type').addClass('disabled');
-            $('.main-events-form-results-info-type-header-value span').html($(this).parent().find('.vzr-type-title').html());
-        } else {
-            $('.main-events-form-results-info-type').addClass('disabled');
-            $('.main-events-form-results-info-type-header-value span').html($('.vzr-type-static .vzr-type-title').html());
+        CalculatorVZR.prototype.sendRequest = function(currency, packOptions, promocode) {
+            var obj = this;
+            var data;
+
+            data = {
+                dateStart: this.context.dateStart,
+                dateEnd: this.context.dateEnd,
+                country: this.context.country,
+                countDays: this.context.countDays,
+                people: this.context.people,
+                currency: this.context.currency,
+                packOptions: [],
+                promo: ''
+            };
+
+            if (typeof currency === 'string' && currency.length > 0) {
+                data.currency = currency;
+            }
+
+            if (typeof packOptions === 'object') {
+                data.packOptions = packOptions;
+            }
+
+            if (typeof currency === 'string' && currency.length > 0) {
+                data.promo = promocode;
+            }
+
+            $('.order-vzr .loading').remove();
+            $('.order-vzr').append('<div class="loading"></div>');
+
+            $.post({
+                url: this.context.method,
+                data: data,
+                dataType: 'json'
+            }).done(function(data) {
+                if (data.status) {
+                    $('.order-vzr .form-error').remove();
+
+                    $('#vzr-currency').attr('name', obj.context.inputs.currency);
+                    if (obj.context.currency == 'EUR') {
+                        $('#vzr-currency').prop('checked', true);
+                    } else {
+                        $('#vzr-currency').prop('checked', false);
+                    }
+
+                    $('.vzr-programms-header').remove();
+                    $('.vzr-programms-mobile-item').remove();
+                    var programmsTitles = data.response.programs.titles;
+                    for (var i = 0; i < programmsTitles.length; i++) {
+                        var newProgrammTitle = $('<div class="vzr-programms-header">' + $('.vzr-programms-header-template').html() + '</div>');
+                        newProgrammTitle.find('.vzr-programms-header-inner').prepend(programmsTitles[i].title);
+
+                        var newProgrammMobileTitle = $('<div class="vzr-programms-mobile-item">' + $('.vzr-programms-mobile-template').html() + '</div>');
+                        newProgrammMobileTitle.find('.vzr-programms-mobile-inner').prepend(programmsTitles[i].title);
+
+                        if (typeof (programmsTitles[i].description) != 'undefined' && programmsTitles[i].description != '') {
+                            newProgrammTitle.find('.desktop-menu-icon-text').html(programmsTitles[i].description);
+                            newProgrammMobileTitle.find('.desktop-menu-icon-text').html(programmsTitles[i].description);
+                        } else {
+                            newProgrammTitle.find('.desktop-menu-icon').remove();
+                            newProgrammMobileTitle.find('.desktop-menu-icon').remove();
+                        }
+                        $('.vzr-programms-headers').append(newProgrammTitle);
+                        $('.vzr-programms-mobile-tab').append(newProgrammMobileTitle);
+                    }
+
+                    $('.vzr-programms-item').remove();
+                    var programmsItems = data.response.programs.items;
+                    for (var i = 0; i < programmsItems.length; i++) {
+                        var htmlOptions = '';
+                        for (var j = 0; j < programmsItems[i].values.length; j++) {
+                            htmlOptions += '<div class="vzr-programms-item-option">';
+                            if (programmsItems[i].values[j]) {
+                                htmlOptions += $('.vzr-programms-item-template').html();
+                            } else {
+                                $('.vzr-programms-mobile-tab').eq(i).find('.vzr-programms-mobile-item').eq(j).remove();
+                            }
+                            htmlOptions += '</div>';
+                        }
+                        $('.vzr-programms').append('<div class="vzr-programms-item" data-id="' + programmsItems[i].id + '" data-cost="' + programmsItems[i].cost + '" data-costOld="' + programmsItems[i].oldCost + '">' +
+                                                        '<label>' +
+                                                            '<input type="radio" name="' + obj.context.inputs.program + '" value="' + programmsItems[i].inputValue + '" />' +
+                                                            '<div class="vzr-programms-item-content">' +
+                                                                '<div class="vzr-programms-item-price">' + programmsItems[i].name + '</div>' +
+                                                                htmlOptions +
+                                                            '</div>' +
+                                                        '</label>' +
+                                                    '</div>');
+
+                        var curParams = $('.vzr-params-item').eq(i);
+                        curParams.find('.vzr-type-checkbox').each(function() {
+                            $(this).parent().remove();
+                        });
+                        curParams.find('.vzr-type-add-item:gt(0)').remove();
+
+                        for (var j = 0; j < programmsItems[i].packs.length; j++) {
+                            var curPack = programmsItems[i].packs[j];
+                            var newParam = $('<div class="vzr-type-item" data-id="' + curPack.id + '" data-cost="' + curPack.cost + '" data-costOld="' + curPack.oldCost + '">' +
+                                                '<label class="vzr-type-checkbox">' +
+                                                    '<input type="checkbox" name="' + obj.context.inputs.packs + '[\'' + curPack.value + '\']" />' +
+                                                    '<div class="vzr-type-checkbox-inner">' +
+                                                        '<div class="vzr-type-title">' + curPack.name + '</div>' +
+                                                    '</div>' +
+                                                '</label>' +
+                                            '</div>');
+                            if (curPack.selected) {
+                                newParam.find('input').prop('checked', true);
+                            }
+                            if (typeof (curPack.description) != 'undefined' && curPack.description != '') {
+                                newParam.find('.vzr-type-checkbox-inner').prepend($('.vzr-params-hint-template').html());
+                                newParam.find('.desktop-menu-icon-text').html(curPack.description);
+                            }
+                            curParams.find('.vzr-type-list').append(newParam);
+
+                            if (typeof (curPack.options) != 'undefined') {
+                                var active = '';
+                                if (curPack.selected) {
+                                    active = ' active';
+                                }
+                                var htmlOptions = '<div class="vzr-type-add-item' + active +'">';
+                                if (curPack.options.length > 0) {
+                                    htmlOptions += '<div class="vzr-add">' +
+                                                        '<div class="vzr-add-title">' + curPack.nameOptions +'</div>' +
+                                                        '<div class="vzr-add-list">';
+                                    for (var k = 0; k < curPack.options.length; k++) {
+                                        var curOption = curPack.options[k];
+                                        var selected = '';
+                                        if (curOption.selected) {
+                                            selected = ' checked="checked"';
+                                        }
+                                        htmlOptions += '<div class="form-checkbox"><label><input type="checkbox" data-id="' + curOption.value + '"  name="' + obj.context.inputs.packOptions +'[\'' + curOption.value + '\']"' + selected + ' /><span>' + curOption.name + '</span></label></div>';
+                                    }
+                                    htmlOptions += '</div>';
+                                }
+                                htmlOptions += '</div>';
+                            }
+                            curParams.find('.vzr-type-add').append(htmlOptions);
+                        }
+
+                        curParams.find('.vzr-more-item').remove();
+
+                        for (var j = 0; j < programmsItems[i].options.length; j++) {
+                            var curOption = programmsItems[i].options[j];
+                            var costOption = curOption.oldCost;
+                            var costOptionOld = '';
+                            var costOptionOldMobile = '';
+                            if (data.response.promocode.status) {
+                                costOption = curOption.cost;
+                                costOptionOld = ' <em>' + curOption.oldCost + ' ₽</em>';
+                                costOptionOldMobile = '<em class="vzr-more-checkbox-price-old-mobile">' + curOption.oldCost + ' ₽</em>';
+                            }
+                            var newOption = $('<div class="vzr-more-item" data-id="' + curOption.id + '" data-cost="' + curOption.cost + '" data-costOld="' + curOption.oldCost + '">' +
+                                                    '<label class="vzr-more-checkbox">' +
+                                                        '<input type="checkbox" name="' + obj.context.inputs.options + '[\'' + curOption.value + '\']" />' +
+                                                        '<div class="vzr-more-checkbox-inner">' +
+                                                            '<div class="vzr-more-checkbox-title">' + curOption.name + '</div>' +
+                                                            '<div class="vzr-more-checkbox-price">' + costOptionOldMobile + '+ ' + costOption + ' ₽' + costOptionOld + '</div>' +
+                                                        '</div>' +
+                                                    '</label>' +
+                                                '</div>');
+
+                            if (curOption.selected) {
+                                newOption.find('input').prop('checked', true);
+                            }
+                            if (typeof (curOption.description) != 'undefined' && curOption.description != '') {
+                                newOption.find('.vzr-more-checkbox-inner').prepend($('.vzr-params-hint-template').html());
+                                newOption.find('.desktop-menu-icon-text').html(curOption.description);
+                            }
+                            curParams.find('.vzr-more-list').append(newOption);
+                        }
+                    }
+
+                    if (calculatorUserVZR == null) {
+                        $('.vzr-programms-item').eq(data.response.programs.selected).find('input').prop('checked', true);
+                    } else {
+                        $('.vzr-programms-item[data-id="' + calculatorUserVZR['programm'] + '"]').find('input').prop('checked', true);
+                    }
+
+                    $('.vzr-programms-item input:checked').each(function() {
+                        var curInput = $(this);
+                        var curIndex = $('.vzr-programms-item input').index(curInput);
+                        $('.vzr-programms-mobile-tab.active').removeClass('active');
+                        $('.vzr-programms-mobile-tab').eq(curIndex).addClass('active');
+
+                        $('.vzr-params-item.active').removeClass('active');
+                        $('.vzr-params-item').eq(curIndex).addClass('active');
+                        $('.vzr-params-item').each(function() {
+                            var curItem = $(this);
+                            if (curItem.hasClass('active')) {
+                                curItem.find('input').each(function() {
+                                    var curInput = $(this);
+                                    var curName = curInput.attr('name');
+                                    curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
+                                    curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
+                                    curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
+                                    curInput.attr('name', curName);
+                                });
+                            } else {
+                                curItem.find('input').each(function() {
+                                    var curInput = $(this);
+                                    var curName = curInput.attr('name');
+                                    curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
+                                    curName = curName.replace(calculatorObj.context.inputs.packs, calculatorObj.context.inputs.packs + '_');
+                                    curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
+                                    curName = curName.replace(calculatorObj.context.inputs.packOptions, calculatorObj.context.inputs.packOptions + '_');
+                                    curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
+                                    curName = curName.replace(calculatorObj.context.inputs.options, calculatorObj.context.inputs.options + '_');
+                                    curInput.attr('name', curName);
+                                });
+                            }
+                        });
+                    });
+
+                    restoreUserVZR();
+
+                    recalcVZR();
+
+                    if (data.response.promocode.value != '') {
+                        $('#order-promo').parent().addClass('focus');
+                        $('#order-promo').val(data.response.promocode.value);
+                    } else {
+                        $('#order-promo').parent().removeClass('focus');
+                        $('#order-promo').val('');
+                    }
+                    if (data.response.promocode.status) {
+                        $('#order-promo').removeClass('error').prop('disabled', true);
+                        $('#order-promo').parent().find('label.error').remove();
+                        $('.order-form-results-code').addClass('success');
+                    } else {
+                        if (data.response.promocode.error != '') {
+                            $('#order-promo').addClass('error').parent().find('label.error').remove();
+                            $('#order-promo').prop('disabled', false).after('<label class="error">' + data.response.promocode.error + '</label>');
+                            $('.order-form-results-code').removeClass('success');
+                        }
+                    }
+
+                    $('.order-vzr .loading').remove();
+                } else {
+                    $('.order-vzr .loading').remove();
+                    $('.order-vzr .form-error').remove();
+                    $('.order-vzr').prepend('<div class="form-error">' + data.error + '</div>');
+                }
+            }).fail(function() {
+                $('.order-vzr .loading').remove();
+                $('.order-vzr').prepend('<div class="form-error">Сервис временно недоступен, попробуйте позже.</div>');
+            });
         }
-    });
 
-    $('#vzr-type-active').each(function() {
-        if ($(this).prop('checked')) {
-            $('.main-events-form-results-info-type').addClass('disabled');
-            $('.main-events-form-results-info-type-header-value span').html($(this).parent().find('.vzr-type-title').html());
-        }
-    });
+        var calculatorObj = new CalculatorVZR(parameters);
+        calculatorObj.sendRequest();
 
-    $('body').on('change', '#vzr-type-extreme', function() {
-        if ($(this).prop('checked')) {
-            $('#vzr-type-active').prop('checked', false);
-            $('.vzr-add').addClass('visible');
-            $('.main-events-form-results-info-type').removeClass('disabled');
-            $('.main-events-form-results-info-type-header-value span').html($(this).parent().find('.vzr-type-title').html());
-        } else {
-            $('.vzr-add').removeClass('visible');
-            $('.main-events-form-results-info-type').addClass('disabled');
-            $('.main-events-form-results-info-type-header-value span').html($('.vzr-type-static .vzr-type-title').html());
-        }
-    });
-
-    $('#vzr-type-extreme').each(function() {
-        if ($(this).prop('checked')) {
-            $('.vzr-add').addClass('visible');
-            $('.main-events-form-results-info-type').removeClass('disabled');
-            $('.main-events-form-results-info-type-header-value span').html($(this).parent().find('.vzr-type-title').html());
-        }
-    });
-
-    $('body').on('change', '.vzr-programms-item input', function() {
-        var curItem = $('.vzr-programms-item input:checked').parents().filter('.vzr-programms-item');
-        if ($('#vzr-currency').prop('checked')) {
-            $('#vzr-results-programm').html(curItem.find('.vzr-programms-item-price-2').html());
-        } else {
-            $('#vzr-results-programm').html(curItem.find('.vzr-programms-item-price-1').html());
-        }
-    });
-
-    $('.vzr-programms-item input').each(function() {
-        var curItem = $('.vzr-programms-item input:checked').parents().filter('.vzr-programms-item');
-        if ($('#vzr-currency').prop('checked')) {
-            $('#vzr-results-programm').html(curItem.find('.vzr-programms-item-price-2').html());
-        } else {
-            $('#vzr-results-programm').html(curItem.find('.vzr-programms-item-price-1').html());
-        }
-    });
-
-    $('body').on('change', '.vzr-add-list input', function() {
-        var newHTML = '';
-        $('.vzr-add-list input:checked').each(function() {
-            newHTML += '<div class="main-events-form-results-info-type-item">' + $(this).parent().find('span').html() + '</div>';
+        $('body').on('change', '#vzr-currency', function() {
+            saveUserVZR();
+            resendVZR();
         });
-        $('.main-events-form-results-info-type-content-inner').html(newHTML);
-    });
 
-    $('.vzr-add-list').each(function() {
-        var newHTML = '';
-        $('.vzr-add-list input:checked').each(function() {
-            newHTML += '<div class="main-events-form-results-info-type-item">' + $(this).parent().find('span').html() + '</div>';
-        });
-        $('.main-events-form-results-info-type-content-inner').html(newHTML);
-    });
+        $('body').on('change', '.vzr-programms-item input', function() {
+            var curInput = $(this);
+            if (curInput.prop('checked')) {
+                var curIndex = $('.vzr-programms-item input').index(curInput);
+                $('.vzr-programms-mobile-tab.active').removeClass('active');
+                $('.vzr-programms-mobile-tab').eq(curIndex).addClass('active');
 
-    $('body').on('change', '.vzr-more-item input', function() {
-        var newHTML = '';
-        $('.vzr-more-item input:checked').each(function() {
-            newHTML += '<div class="main-events-form-results-info-add-row"><span class="main-events-form-results-info-add-label">' + $(this).parent().find('.vzr-more-checkbox-title').html() + '</span><span class="main-events-form-results-info-add-value">' + $(this).parent().find('.vzr-more-checkbox-price').html() + '</span></div>';
-        });
-        $('.main-events-form-results-info-add-row').remove();
-        $('.main-events-form-results-info-add').append(newHTML);
-    });
+                $('.vzr-params-item.active').removeClass('active');
+                $('.vzr-params-item').eq(curIndex).addClass('active');
+                $('.vzr-params-item').each(function() {
+                    var curItem = $(this);
+                    if (curItem.hasClass('active')) {
+                        curItem.find('input').each(function() {
+                            var curInput = $(this);
+                            var curName = curInput.attr('name');
+                            curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
+                            curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
+                            curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
+                            curInput.attr('name', curName);
+                        });
+                    } else {
+                        curItem.find('input').each(function() {
+                            var curInput = $(this);
+                            var curName = curInput.attr('name');
+                            curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
+                            curName = curName.replace(calculatorObj.context.inputs.packs, calculatorObj.context.inputs.packs + '_');
+                            curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
+                            curName = curName.replace(calculatorObj.context.inputs.packOptions, calculatorObj.context.inputs.packOptions + '_');
+                            curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
+                            curName = curName.replace(calculatorObj.context.inputs.options, calculatorObj.context.inputs.options + '_');
+                            curInput.attr('name', curName);
+                        });
+                    }
+                });
+            }
 
-    $('.vzr-more-list').each(function() {
-        var newHTML = '';
-        $('.vzr-more-item input:checked').each(function() {
-            newHTML += '<div class="main-events-form-results-info-add-row"><span class="main-events-form-results-info-add-label">' + $(this).parent().find('.vzr-more-checkbox-title').html() + '</span><span class="main-events-form-results-info-add-value">' + $(this).parent().find('.vzr-more-checkbox-price').html() + '</span></div>';
+            saveUserVZR();
+            recalcVZR();
         });
-        $('.main-events-form-results-info-add-row').remove();
-        $('.main-events-form-results-info-add').append(newHTML);
+
+        $('#vzr-results-country').html(calculatorObj.context.country);
+        if (calculatorObj.context.multiple) {
+            $('#vzr-results-multiple').html('Да');
+        } else {
+            $('#vzr-results-multiple').html('Нет');
+        }
+        $('#vzr-results-days').html(calculatorObj.context.countDays + ' ' + getDaysText(calculatorObj.context.countDays));
+        $('#vzr-results-dates').html(calculatorObj.context.dateStart + ' — ' + calculatorObj.context.dateEnd);
+        if (typeof (calculatorObj.context.dateDocs) != 'undefined') {
+            $('#vzr-results-date-docs').html(calculatorObj.context.dateDocs);
+            $('#vzr-results-date-docs').parent().show();
+        } else {
+            $('#vzr-results-date-docs').parent().hide();
+        }
+        $('#vzr-results-people').html(calculatorObj.context.people.small + calculatorObj.context.people.middle + calculatorObj.context.people.large);
+
+        function recalcVZR() {
+            var curProgramm = $('.vzr-programms-item input:checked').parent().parent();
+            var curIndexProgramm = $('.vzr-programms-item').index(curProgramm);
+
+            $('#vzr-results-programm').html(curProgramm.find('.vzr-programms-item-price').html());
+            var cost = parseFloat(curProgramm.attr('data-cost'));
+            var costOld = parseFloat(curProgramm.attr('data-costOld'));
+
+            var curParams = $('.vzr-params-item').eq(curIndexProgramm);
+            if (curParams.find('.vzr-type-checkbox input:checked').length == 1) {
+                var curType = curParams.find('.vzr-type-checkbox input:checked').parent().parent();
+                cost += parseFloat(curType.attr('data-cost'));
+                costOld += parseFloat(curType.attr('data-costOld'));
+
+                var curTypeIndex = curParams.find('.vzr-type-item').index(curType);
+                if (curParams.find('.vzr-type-add-item').eq(curTypeIndex).find('.vzr-add').length > 0) {
+                    $('.main-events-form-results-info-type').removeClass('disabled');
+                    $('.main-events-form-results-info-type-header-value span').html(curType.find('.vzr-type-title').html());
+
+                    var newHTML = '';
+                    curParams.find('.vzr-type-add-item').eq(curTypeIndex).find('.vzr-add-list input:checked').each(function() {
+                        newHTML += '<div class="main-events-form-results-info-type-item">' + $(this).parent().find('span').html() + '</div>';
+                    });
+                    $('.main-events-form-results-info-type-content-inner').html(newHTML);
+                } else {
+                    $('.main-events-form-results-info-type').addClass('disabled');
+                    $('.main-events-form-results-info-type-header-value span').html(curType.find('.vzr-type-title').html());
+                    $('.main-events-form-results-info-type-content-inner').html('');
+                }
+            } else {
+                $('.main-events-form-results-info-type').addClass('disabled');
+                $('.main-events-form-results-info-type-header-value span').html(curParams.find('.vzr-type-static .vzr-type-title').html());
+                $('.main-events-form-results-info-type-content-inner').html('');
+            }
+
+            var newHTML = '';
+            curParams.find('.vzr-more-item input:checked').each(function() {
+                newHTML += '<div class="main-events-form-results-info-add-row"><span class="main-events-form-results-info-add-label">' + $(this).parent().find('.vzr-more-checkbox-title').html() + '</span><span class="main-events-form-results-info-add-value">' + $(this).parent().find('.vzr-more-checkbox-price').html() + '</span></div>';
+                cost += parseFloat($(this).parent().parent().attr('data-cost'));
+                costOld += parseFloat($(this).parent().parent().attr('data-costOld'));
+            });
+            $('.main-events-form-results-info-add-row').remove();
+            $('.main-events-form-results-info-add').append(newHTML);
+            $('.main-events-form-results-info-add').find('em').remove();
+
+            $('.main-events-form-results-value-price em').remove();
+            $('#programCost').html(cost.toFixed(2) + ' ₽');
+            if (costOld > 0) {
+                $('.main-events-form-results-value-price').append('<em>' + costOld.toFixed(2) + ' ₽</em>');
+            }
+        }
+
+        function resendVZR() {
+            var currency = 'USD';
+            if ($('#vzr-currency').prop('checked')) {
+                currency = 'EUR';
+            }
+            var programm = $('.vzr-programms-item input:checked').val();
+            var programmItem = $('.vzr-programms-item input:checked').parent().parent();
+            var programmIndex = $('.vzr-programms-item').index(programmItem);
+            var curParams = $('.vzr-params-item').eq(programmIndex);
+
+            var packOptions = null;
+
+            if (curParams.find('.vzr-type-checkbox input:checked').length == 1) {
+                var curPackIndex = curParams.find('.vzr-type-checkbox input').index(curParams.find('.vzr-type-checkbox input:checked'));
+                if (curParams.find('.vzr-type-add-item').eq(curPackIndex + 1).find('.form-checkbox input:checked').length > 0) {
+                    packOptions = [];
+                    curParams.find('.vzr-type-add-item').eq(curPackIndex + 1).find('.form-checkbox input:checked').each(function() {
+                        packOptions.push($(this).val());
+                    });
+                }
+            }
+
+            var promocode = $('#order-promo').val();
+
+            calculatorObj.sendRequest(currency, packOptions, promocode);
+        }
+
+        $('body').on('change', '.vzr-type-checkbox input', function() {
+            var curInput = $(this);
+            var curParams = curInput.parents().filter('.vzr-params-item');
+            var curIndex = curParams.find('.vzr-type-checkbox input').index(curInput);
+            if (curInput.prop('checked')) {
+                curParams.find('.vzr-type-checkbox input').each(function() {
+                    var newIndex = curParams.find('.vzr-type-checkbox input').index($(this));
+                    if (newIndex != curIndex) {
+                       $(this).prop('checked', false);
+                   }
+                });
+
+                curParams.find('.vzr-type-add-item.active').removeClass('active');
+                curParams.find('.vzr-type-add-item').eq(curIndex + 1).addClass('active');
+            } else {
+                curParams.find('.vzr-type-add-item.active').removeClass('active');
+            }
+            saveUserVZR();
+            recalcVZR();
+        });
+
+        $('body').on('change', '.vzr-add-list input', function() {
+            saveUserVZR();
+            resendVZR();
+        });
+
+        $('body').on('change', '.vzr-more-item input', function() {
+            saveUserVZR();
+            recalcVZR();
+        });
+
+        $('body').on('change', '#order-promo', function(e) {
+            saveUserVZR();
+            resendVZR();
+        });
+
+        var calculatorUserVZR = null;
+
+        function restoreUserVZR() {
+            if (calculatorUserVZR != null) {
+                if (calculatorUserVZR['currency'] == 'EUR') {
+                    $('#vzr-currency').prop('checked', true);
+                } else {
+                    $('#vzr-currency').prop('checked', false);
+                }
+
+                for (var i = 0; i < calculatorUserVZR['type'].length; i++) {
+                    var curType = calculatorUserVZR['type'][i];
+                    var curProgramm = curType.programm;
+                    var curIndexParams = $('.vzr-programms-item').index($('.vzr-programms-item[data-id="' + curProgramm + '"]'));
+                    $('.vzr-params-item').eq(curIndexParams).find('.vzr-type-item[data-id="' + curType.id + '"]').find('input').prop('checked', curType.checked);
+                    $('.vzr-params-item').eq(curIndexParams).find('.vzr-type-item[data-id="' + curType.id + '"]').find('input').each(function() {
+                        var curInput = $(this);
+                        var curParams = curInput.parents().filter('.vzr-params-item');
+                        var curIndex = curParams.find('.vzr-type-checkbox input').index(curInput);
+                        if (curInput.prop('checked')) {
+                            curParams.find('.vzr-type-checkbox input').each(function() {
+                                var newIndex = curParams.find('.vzr-type-checkbox input').index($(this));
+                                if (newIndex != curIndex) {
+                                   $(this).prop('checked', false);
+                               }
+                            });
+
+                            curParams.find('.vzr-type-add-item.active').removeClass('active');
+                            curParams.find('.vzr-type-add-item').eq(curIndex + 1).addClass('active');
+                        } else {
+                            curParams.find('.vzr-type-add-item.active').removeClass('active');
+                        }
+                    });
+                }
+
+                for (var i = 0; i < calculatorUserVZR['typeAdd'].length; i++) {
+                    var curAdd = calculatorUserVZR['typeAdd'][i];
+                    var curProgramm = curAdd.programm;
+                    var curIndexParams = $('.vzr-programms-item').index($('.vzr-programms-item[data-id="' + curProgramm + '"]'));
+                    var curType = curAdd.type;
+                    var curIndexType = $('.vzr-type-item').index($('.vzr-params-item').eq(curIndexParams).find('.vzr-type-item[data-id="' + curType + '"]'));
+                    $('.vzr-type-add-item').eq(curIndexType).find('.vzr-add-list .form-checkbox input[data-id="' + curAdd.id + '"]').prop('checked', curAdd.checked);
+                }
+
+                for (var i = 0; i < calculatorUserVZR['more'].length; i++) {
+                    var curMore = calculatorUserVZR['more'][i];
+                    var curProgramm = curMore.programm;
+                    var curIndexParams = $('.vzr-programms-item').index($('.vzr-programms-item[data-id="' + curProgramm + '"]'));
+                    $('.vzr-params-item').eq(curIndexParams).find('.vzr-more-item[data-id="' + curMore.id + '"]').find('input').prop('checked', curMore.checked);
+                }
+            }
+        }
+
+        function saveUserVZR() {
+            calculatorUserVZR = [];
+            if ($('#vzr-currency').prop('checked')) {
+                calculatorUserVZR['currency'] = 'EUR';
+            } else {
+                calculatorUserVZR['currency'] = 'USD';
+            }
+
+            calculatorUserVZR['programm'] = $('.vzr-programms-item input:checked').parent().parent().attr('data-id');
+
+            calculatorUserVZR['type'] = [];
+            $('.vzr-type-checkbox').each(function() {
+                var curType = $(this).parent();
+                var curIndexParams = $('.vzr-params-item').index(curType.parents().filter('.vzr-params-item'));
+                calculatorUserVZR['type'].push({
+                    "programm"  : $('.vzr-programms-item').eq(curIndexParams).attr('data-id'),
+                    "id"        : curType.attr('data-id'),
+                    "checked"   : curType.find('input').prop('checked')
+                });
+            });
+
+            calculatorUserVZR['typeAdd'] = [];
+            $('.vzr-add-list .form-checkbox input').each(function() {
+                var curAdd = $(this);
+                var curIndexParams = $('.vzr-params-item').index(curAdd.parents().filter('.vzr-params-item'));
+                var curIndexType = $('.vzr-type-add-item').index(curAdd.parents().filter('.vzr-type-add-item'));
+                calculatorUserVZR['typeAdd'].push({
+                    "programm"  : $('.vzr-programms-item').eq(curIndexParams).attr('data-id'),
+                    "type"      : $('.vzr-type-item').eq(curIndexType).attr('data-id'),
+                    "id"        : curAdd.attr('data-id'),
+                    "checked"   : curAdd.prop('checked')
+                });
+            });
+
+            calculatorUserVZR['more'] = [];
+            $('.vzr-more-item').each(function() {
+                var curMore = $(this);
+                var curIndexParams = $('.vzr-params-item').index(curMore.parents().filter('.vzr-params-item'));
+                calculatorUserVZR['more'].push({
+                    "programm"  : $('.vzr-programms-item').eq(curIndexParams).attr('data-id'),
+                    "id"        : curMore.attr('data-id'),
+                    "checked"   : curMore.find('input').prop('checked')
+                });
+            });
+        }
+
     });
 
     $('.vzr-form-window-mobile').each(function() {
@@ -843,6 +1268,26 @@ $(document).ready(function() {
     });
 
 });
+
+function getDaysText(number) {
+    var endings = Array('дней', 'день', 'дня');
+    var num100 = number % 100;
+    var num10 = number % 10;
+    if (num100 >= 5 && num100 <= 20) {
+        return endings[0];
+    } else if (num10 == 0) {
+        return endings[0];
+    } else if (num10 == 1) {
+        return endings[1];
+    } else if (num10 >= 2 && num10 <= 4) {
+        return endings[2];
+    } else if (num10 >= 5 && num10 <= 9) {
+        return endings[0];
+    } else {
+        return endings[2];
+    }
+}
+
 
 function checkPassportDate(passportDate, dudeDate) {
     var dob = new Date(dudeDate.replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$2-$1'));
