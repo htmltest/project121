@@ -877,13 +877,13 @@ $(document).ready(function() {
                             }
                             var newOption = $('<div class="vzr-more-item" data-id="' + curOption.id + '" data-cost="' + curOption.cost + '" data-costOld="' + curOption.oldCost + '">' +
                                                     '<label class="vzr-more-checkbox">' +
-                                                        '<input type="checkbox" name="" value="' + curOption.id + '" />' +
+                                                        '<input type="checkbox" name="' + obj.context.inputs.options + '[]" value="' + curOption.id + '" />' +
                                                         '<div class="vzr-more-checkbox-inner">' +
                                                             '<div class="vzr-more-checkbox-title">' + curOption.name + '</div>' +
                                                             '<div class="vzr-more-checkbox-price">' + costOptionOldMobile + '+ ' + costOption + ' ₽' + costOptionOld + '</div>' +
                                                         '</div>' +
                                                     '</label>' +
-                                                    '<input type="hidden" class="vzr-more-hidden-price" name="" value="' + curOption.cost + '" />' +
+                                                    '<input type="hidden" class="vzr-more-hidden-price" name="' + obj.context.inputs.options + '[]" value="' + curOption.cost + '" />' +
                                                 '</div>');
 
                             if (curOption.selected) {
@@ -916,9 +916,17 @@ $(document).ready(function() {
                             if (curItem.hasClass('active')) {
                                 curItem.find('.vzr-type-checkbox input').attr('name', calculatorObj.context.inputs.packs + '[]');
                                 curItem.find('.vzr-add-list .form-checkbox input').attr('name', calculatorObj.context.inputs.packOptions + '[]');
+                                var i = 0;
+                                curItem.find('.vzr-more-item').each(function() {
+                                    $(this).find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[' + i + '][ID]');
+                                    $(this).find('.vzr-more-hidden-price').attr('name', calculatorObj.context.inputs.options + '[' + i + '][PRICE]');
+                                    i++;
+                                });
                             } else {
                                 curItem.find('.vzr-type-checkbox input').attr('name', '');
                                 curItem.find('.vzr-add-list .form-checkbox input').attr('name', '');
+                                curItem.find('.vzr-more-checkbox input').attr('name', '');
+                                curItem.find('.vzr-more-hidden-price').attr('name', '');
                             }
                         });
                     });
@@ -985,9 +993,17 @@ $(document).ready(function() {
                     if (curItem.hasClass('active')) {
                         curItem.find('.vzr-type-checkbox input').attr('name', calculatorObj.context.inputs.packs + '[]');
                         curItem.find('.vzr-add-list .form-checkbox input').attr('name', calculatorObj.context.inputs.packOptions + '[]');
+                        var i = 0;
+                        curItem.find('.vzr-more-item').each(function() {
+                            $(this).find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[' + i + '][ID]');
+                            $(this).find('.vzr-more-hidden-price').attr('name', calculatorObj.context.inputs.options + '[' + i + '][PRICE]');
+                            i++;
+                        });
                     } else {
                         curItem.find('.vzr-type-checkbox input').attr('name', '');
                         curItem.find('.vzr-add-list .form-checkbox input').attr('name', '');
+                        curItem.find('.vzr-more-checkbox input').attr('name', '');
+                        curItem.find('.vzr-more-hidden-price').attr('name', '');
                     }
                 });
             }
@@ -1048,16 +1064,10 @@ $(document).ready(function() {
             }
 
             var newHTML = '';
-            $('.vzr-more-inputs').html('');
-            var i = 0;
             curParams.find('.vzr-more-item input:checked').each(function() {
                 newHTML += '<div class="main-events-form-results-info-add-row"><span class="main-events-form-results-info-add-label">' + $(this).parent().find('.vzr-more-checkbox-title').html() + '</span><span class="main-events-form-results-info-add-value">' + $(this).parent().find('.vzr-more-checkbox-price').html() + '</span></div>';
                 cost += parseFloat($(this).parent().parent().attr('data-cost'));
                 costOld += parseFloat($(this).parent().parent().attr('data-costOld'));
-
-                $('.vzr-more-inputs').append('<input type="hidden" name="' + calculatorObj.context.inputs.options + '[' + i + '][ID]" value="' + $(this).val() + '" />');
-                $('.vzr-more-inputs').append('<input type="hidden" name="' + calculatorObj.context.inputs.options + '[' + i + '][PRICE]" value="' + $(this).parents('.vzr-more-item').find('.vzr-more-hidden-price').val() + '" />');
-                i++;
             });
             $('.main-events-form-results-info-add-row').remove();
             $('.main-events-form-results-info-add').append(newHTML);
@@ -1128,7 +1138,6 @@ $(document).ready(function() {
         });
 
         $('body').on('change', '.vzr-more-item input', function() {
-            $(this).parents().filter('.vzr-more-item').find('.vzr-more-hidden-price').prop('checked', $(this).prop('checked'));
             saveUserVZR();
             recalcVZR();
         });
