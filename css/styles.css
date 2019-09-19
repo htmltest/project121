@@ -209,10 +209,18 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-field {position:relative; margin:20px 0}
 .form-field::after {content:""; display:block; clear:both}
 
-.desktop-menu-icon {position:absolute; right:-23px; top:23px; line-height:0; width:18px}
-.desktop-menu-icon-text {display:none; position:absolute; z-index:999; left:50%; bottom:30px; width:237px; margin-left:-118px; padding:8px 10px 11px 10px; background:#fff; font-size:14px; line-height:18px; letter-spacing:0; text-align:left; box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); color:#111; font-weight:normal}
+.desktop-menu-icon {position:absolute; right:-23px; top:23px; line-height:0; width:18px; cursor:pointer}
+.desktop-menu-icon-text {display:none; position:absolute; z-index:99; left:50%; bottom:30px; width:237px; margin-left:-118px; padding:8px 10px 11px 10px; background:#fff; font-size:14px; line-height:18px; letter-spacing:0; text-align:left; box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.25); color:#111; font-weight:normal}
 .desktop-menu-icon:hover .desktop-menu-icon-text {display:block}
 .desktop-menu-icon-text::after {content:""; display:block; width:0; height:0; position:absolute; left:50%; bottom:-6px; margin-left:-6px; border-top:6px solid #fff; border-left:6px solid transparent; border-right:6px solid transparent}
+
+.vzr-programms-header-inner .desktop-menu-icon-text {width:550px}
+.desktop-menu-icon-text::after {left:118px}
+
+@media screen and (max-width:1199px) {
+    .vzr-programms-header-inner .desktop-menu-icon-text {width:237px}
+    .desktop-menu-icon-text::after {left:50%}
+}
 
 .form-input {position:relative; border-radius:3px}
 .form-input.loading::after {content:""; display:block; position:absolute; top:20px; right:10px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
