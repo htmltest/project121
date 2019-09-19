@@ -1119,7 +1119,7 @@ $(document).ready(function() {
                 curParams.find('.vzr-type-add-item.active').removeClass('active');
             }
             saveUserVZR();
-            recalcVZR();
+            resendVZR();
         });
 
         $('body').on('change', '.vzr-add-list input', function() {
