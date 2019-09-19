@@ -304,23 +304,27 @@
                                     packs: 'VZR_PACKS', // name для пакетов
                                     packOptions: 'VZR_PACKS_OPTIONS', // name для доп опций пакетов
                                     options: 'VZR_OPTIONS', // name для опций
+                                    sum: 'VZR_SUM',
+                                    oldSum: 'VZR_OLD_SUM'
                                 },
                                 currency: 'EUR',
                                 method: '/jsonResponse/methodCalc',
                                 dateStart: '10.09.2019',
                                 dateEnd: '10.10.2019',
-                                dateDocs: '08.09.2019',
                                 country: 'Австралия',
-                                multiple: true,
                                 countDays: '30',
                                 people: {
                                     small: 2,
                                     middle: 1,
                                     large: 0
-                                }
+                                },
+                                promo: 'VZR'
                             };
                         </script>
-                        <form action="#" method="get">
+                        <form action="#" method="post">
+                            <input type="hidden" name="" value="" id="vzr-hidden-sum" />
+                            <input type="hidden" name="" value="" id="vzr-hidden-sum-old" />
+                            <input type="hidden" name="" value="" id="vzr-hidden-currency" />
 
                             <!-- order form fields -->
                             <div class="order-form-fields">
@@ -329,7 +333,7 @@
                                     <h2>Выберите программу страхования <span>*</span></h2>
                                     <div class="vzr-currency">
                                         <label>
-                                            <input type="checkbox" name="" id="vzr-currency" />
+                                            <input type="checkbox" name="vzr-currency" id="vzr-currency" />
                                             <span>USD</span>
                                             <span>EUR</span>
                                             <div class="vzr-currency-icon"></div>

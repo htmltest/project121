@@ -739,7 +739,11 @@ $(document).ready(function() {
                 data.packOptions = packOptions;
             }
 
-            if (typeof currency === 'string' && currency.length > 0) {
+            if (typeof this.context.promo === 'string' && this.context.promo.length > 0) {
+                data.promo = this.context.promo;
+            }
+
+            if (typeof promocode === 'string' && promocode.length > 0) {
                 data.promo = promocode;
             }
 
@@ -752,13 +756,18 @@ $(document).ready(function() {
                 dataType: 'json'
             }).done(function(data) {
                 if (data.status) {
+                    $('#vzr-hidden-sum').attr('name', obj.context.inputs.sum);
+                    $('#vzr-hidden-sum-old').attr('name', obj.context.inputs.oldSum);
+
                     $('.order-vzr .form-error').remove();
 
-                    $('#vzr-currency').attr('name', obj.context.inputs.currency);
+                    $('#vzr-hidden-currency').attr('name', obj.context.inputs.currency);
                     if (obj.context.currency == 'EUR') {
                         $('#vzr-currency').prop('checked', true);
+                        $('#vzr-hidden-currency').val('EUR');
                     } else {
                         $('#vzr-currency').prop('checked', false);
+                        $('#vzr-hidden-currency').val('USD');
                     }
 
                     $('.vzr-programms-header').remove();
@@ -797,7 +806,7 @@ $(document).ready(function() {
                         }
                         $('.vzr-programms').append('<div class="vzr-programms-item" data-id="' + programmsItems[i].id + '" data-cost="' + programmsItems[i].cost + '" data-costOld="' + programmsItems[i].oldCost + '">' +
                                                         '<label>' +
-                                                            '<input type="radio" name="' + obj.context.inputs.program + '" value="' + programmsItems[i].inputValue + '" />' +
+                                                            '<input type="radio" name="' + obj.context.inputs.program + '" value="' + programmsItems[i].value + '" />' +
                                                             '<div class="vzr-programms-item-content">' +
                                                                 '<div class="vzr-programms-item-price">' + programmsItems[i].name + '</div>' +
                                                                 htmlOptions +
@@ -815,7 +824,7 @@ $(document).ready(function() {
                             var curPack = programmsItems[i].packs[j];
                             var newParam = $('<div class="vzr-type-item" data-id="' + curPack.id + '" data-cost="' + curPack.cost + '" data-costOld="' + curPack.oldCost + '">' +
                                                 '<label class="vzr-type-checkbox">' +
-                                                    '<input type="checkbox" name="' + obj.context.inputs.packs + '[\'' + curPack.value + '\']" />' +
+                                                    '<input type="checkbox" name="' + obj.context.inputs.packs + '[]" value="' + curPack.value + '" />' +
                                                     '<div class="vzr-type-checkbox-inner">' +
                                                         '<div class="vzr-type-title">' + curPack.name + '</div>' +
                                                     '</div>' +
@@ -846,7 +855,7 @@ $(document).ready(function() {
                                         if (curOption.selected) {
                                             selected = ' checked="checked"';
                                         }
-                                        htmlOptions += '<div class="form-checkbox"><label><input type="checkbox" data-id="' + curOption.value + '"  name="' + obj.context.inputs.packOptions +'[\'' + curOption.value + '\']"' + selected + ' /><span>' + curOption.name + '</span></label></div>';
+                                        htmlOptions += '<div class="form-checkbox"><label><input type="checkbox" data-id="' + curOption.value + '"  name="' + obj.context.inputs.packOptions +'[]" value="' + curOption.value + '"' + selected + ' /><span>' + curOption.name + '</span></label></div>';
                                     }
                                     htmlOptions += '</div>';
                                 }
@@ -859,17 +868,16 @@ $(document).ready(function() {
 
                         for (var j = 0; j < programmsItems[i].options.length; j++) {
                             var curOption = programmsItems[i].options[j];
-                            var costOption = curOption.oldCost;
+                            var costOption = curOption.cost;
                             var costOptionOld = '';
                             var costOptionOldMobile = '';
                             if (data.response.promocode.status) {
-                                costOption = curOption.cost;
                                 costOptionOld = ' <em>' + curOption.oldCost + ' ₽</em>';
                                 costOptionOldMobile = '<em class="vzr-more-checkbox-price-old-mobile">' + curOption.oldCost + ' ₽</em>';
                             }
                             var newOption = $('<div class="vzr-more-item" data-id="' + curOption.id + '" data-cost="' + curOption.cost + '" data-costOld="' + curOption.oldCost + '">' +
                                                     '<label class="vzr-more-checkbox">' +
-                                                        '<input type="checkbox" name="' + obj.context.inputs.options + '[\'' + curOption.value + '\']" />' +
+                                                        '<input type="checkbox" name="' + obj.context.inputs.options + '[]" value="' + curOption.value + '" />' +
                                                         '<div class="vzr-more-checkbox-inner">' +
                                                             '<div class="vzr-more-checkbox-title">' + curOption.name + '</div>' +
                                                             '<div class="vzr-more-checkbox-price">' + costOptionOldMobile + '+ ' + costOption + ' ₽' + costOptionOld + '</div>' +
@@ -968,6 +976,11 @@ $(document).ready(function() {
         calculatorObj.sendRequest();
 
         $('body').on('change', '#vzr-currency', function() {
+            if ($('#vzr-currency').prop('checked')) {
+                $('#vzr-hidden-currency').val('EUR');
+            } else {
+                $('#vzr-hidden-currency').val('USD');
+            }
             saveUserVZR();
             resendVZR();
         });
@@ -1078,6 +1091,10 @@ $(document).ready(function() {
             if (costOld > 0) {
                 $('.main-events-form-results-value-price').append('<em>' + costOld.toFixed(2) + ' ₽</em>');
             }
+
+            $('#vzr-hidden-sum').val(cost.toFixed(0));
+            $('#vzr-hidden-sum-old').val(costOld.toFixed(0));
+
         }
 
         function resendVZR() {
@@ -1149,8 +1166,10 @@ $(document).ready(function() {
             if (calculatorUserVZR != null) {
                 if (calculatorUserVZR['currency'] == 'EUR') {
                     $('#vzr-currency').prop('checked', true);
+                    $('#vzr-hidden-currency').val('EUR');
                 } else {
                     $('#vzr-currency').prop('checked', false);
+                    $('#vzr-hidden-currency').val('USD');
                 }
 
                 for (var i = 0; i < calculatorUserVZR['type'].length; i++) {
@@ -1200,8 +1219,10 @@ $(document).ready(function() {
             calculatorUserVZR = [];
             if ($('#vzr-currency').prop('checked')) {
                 calculatorUserVZR['currency'] = 'EUR';
+                $('#vzr-hidden-currency').val('EUR');
             } else {
                 calculatorUserVZR['currency'] = 'USD';
+                $('#vzr-hidden-currency').val('USD');
             }
 
             calculatorUserVZR['programm'] = $('.vzr-programms-item input:checked').parent().parent().attr('data-id');
