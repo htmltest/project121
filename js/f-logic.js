@@ -877,12 +877,13 @@ $(document).ready(function() {
                             }
                             var newOption = $('<div class="vzr-more-item" data-id="' + curOption.id + '" data-cost="' + curOption.cost + '" data-costOld="' + curOption.oldCost + '">' +
                                                     '<label class="vzr-more-checkbox">' +
-                                                        '<input type="checkbox" name="' + obj.context.inputs.options + '[]" value="' + curOption.value + '" />' +
+                                                        '<input type="checkbox" name="' + obj.context.inputs.options + '[]" value="' + curOption.id + '" />' +
                                                         '<div class="vzr-more-checkbox-inner">' +
                                                             '<div class="vzr-more-checkbox-title">' + curOption.name + '</div>' +
                                                             '<div class="vzr-more-checkbox-price">' + costOptionOldMobile + '+ ' + costOption + ' ₽' + costOptionOld + '</div>' +
                                                         '</div>' +
                                                     '</label>' +
+                                                    '<input type="hidden" class="vzr-more-hidden-price" name="' + obj.context.inputs.options + '[]" value="' + curOption.cost + '" />' +
                                                 '</div>');
 
                             if (curOption.selected) {
@@ -915,11 +916,17 @@ $(document).ready(function() {
                             if (curItem.hasClass('active')) {
                                 curItem.find('.vzr-type-checkbox input').attr('name', calculatorObj.context.inputs.packs + '[]');
                                 curItem.find('.vzr-add-list .form-checkbox input').attr('name', calculatorObj.context.inputs.packOptions + '[]');
-                                curItem.find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[]');
+                                var i = 0;
+                                curItem.find('.vzr-more-item').each(function() {
+                                    $(this).find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[' + i + '][ID]');
+                                    $(this).find('.vzr-more-hidden-price').attr('name', calculatorObj.context.inputs.options + '[' + i + '][PRICE]');
+                                    i++;
+                                });
                             } else {
                                 curItem.find('.vzr-type-checkbox input').attr('name', '');
                                 curItem.find('.vzr-add-list .form-checkbox input').attr('name', '');
                                 curItem.find('.vzr-more-checkbox input').attr('name', '');
+                                curItem.find('.vzr-more-hidden-price').attr('name', '');
                             }
                         });
                     });
@@ -986,11 +993,17 @@ $(document).ready(function() {
                     if (curItem.hasClass('active')) {
                         curItem.find('.vzr-type-checkbox input').attr('name', calculatorObj.context.inputs.packs + '[]');
                         curItem.find('.vzr-add-list .form-checkbox input').attr('name', calculatorObj.context.inputs.packOptions + '[]');
-                        curItem.find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[]');
+                        var i = 0;
+                        curItem.find('.vzr-more-item').each(function() {
+                            $(this).find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[' + i + '][ID]');
+                            $(this).find('.vzr-more-hidden-price').attr('name', calculatorObj.context.inputs.options + '[' + i + '][PRICE]');
+                            i++;
+                        });
                     } else {
                         curItem.find('.vzr-type-checkbox input').attr('name', '');
                         curItem.find('.vzr-add-list .form-checkbox input').attr('name', '');
                         curItem.find('.vzr-more-checkbox input').attr('name', '');
+                        curItem.find('.vzr-more-hidden-price').attr('name', '');
                     }
                 });
             }
