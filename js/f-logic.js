@@ -913,26 +913,13 @@ $(document).ready(function() {
                         $('.vzr-params-item').each(function() {
                             var curItem = $(this);
                             if (curItem.hasClass('active')) {
-                                curItem.find('input').each(function() {
-                                    var curInput = $(this);
-                                    var curName = curInput.attr('name');
-                                    curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
-                                    curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
-                                    curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
-                                    curInput.attr('name', curName);
-                                });
+                                curItem.find('.vzr-type-checkbox input').attr('name', calculatorObj.context.inputs.packs + '[]');
+                                curItem.find('.vzr-add-list .form-checkbox input').attr('name', calculatorObj.context.inputs.packOptions + '[]');
+                                curItem.find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[]');
                             } else {
-                                curItem.find('input').each(function() {
-                                    var curInput = $(this);
-                                    var curName = curInput.attr('name');
-                                    curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
-                                    curName = curName.replace(calculatorObj.context.inputs.packs, calculatorObj.context.inputs.packs + '_');
-                                    curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
-                                    curName = curName.replace(calculatorObj.context.inputs.packOptions, calculatorObj.context.inputs.packOptions + '_');
-                                    curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
-                                    curName = curName.replace(calculatorObj.context.inputs.options, calculatorObj.context.inputs.options + '_');
-                                    curInput.attr('name', curName);
-                                });
+                                curItem.find('.vzr-type-checkbox input').attr('name', '');
+                                curItem.find('.vzr-add-list .form-checkbox input').attr('name', '');
+                                curItem.find('.vzr-more-checkbox input').attr('name', '');
                             }
                         });
                     });
@@ -997,26 +984,13 @@ $(document).ready(function() {
                 $('.vzr-params-item').each(function() {
                     var curItem = $(this);
                     if (curItem.hasClass('active')) {
-                        curItem.find('input').each(function() {
-                            var curInput = $(this);
-                            var curName = curInput.attr('name');
-                            curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
-                            curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
-                            curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
-                            curInput.attr('name', curName);
-                        });
+                        curItem.find('.vzr-type-checkbox input').attr('name', calculatorObj.context.inputs.packs + '[]');
+                        curItem.find('.vzr-add-list .form-checkbox input').attr('name', calculatorObj.context.inputs.packOptions + '[]');
+                        curItem.find('.vzr-more-checkbox input').attr('name', calculatorObj.context.inputs.options + '[]');
                     } else {
-                        curItem.find('input').each(function() {
-                            var curInput = $(this);
-                            var curName = curInput.attr('name');
-                            curName = curName.replace(calculatorObj.context.inputs.packs + '_', calculatorObj.context.inputs.packs);
-                            curName = curName.replace(calculatorObj.context.inputs.packs, calculatorObj.context.inputs.packs + '_');
-                            curName = curName.replace(calculatorObj.context.inputs.packOptions + '_', calculatorObj.context.inputs.packOptions);
-                            curName = curName.replace(calculatorObj.context.inputs.packOptions, calculatorObj.context.inputs.packOptions + '_');
-                            curName = curName.replace(calculatorObj.context.inputs.options + '_', calculatorObj.context.inputs.options);
-                            curName = curName.replace(calculatorObj.context.inputs.options, calculatorObj.context.inputs.options + '_');
-                            curInput.attr('name', curName);
-                        });
+                        curItem.find('.vzr-type-checkbox input').attr('name', '');
+                        curItem.find('.vzr-add-list .form-checkbox input').attr('name', '');
+                        curItem.find('.vzr-more-checkbox input').attr('name', '');
                     }
                 });
             }
