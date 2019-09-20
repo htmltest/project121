@@ -7,6 +7,22 @@ $(document).ready(function() {
         'Ошибка заполнения'
     );
 
+    $.validator.addMethod('onlyRUS',
+        function(value, element) {
+            var pattern = /^[а-яё\ \-]+$/i;
+            return this.optional(element) || pattern.test(value);
+        },
+        'Ошибка заполнения'
+    );
+
+    $.validator.addMethod('onlyEN',
+        function(value, element) {
+            var pattern = /^[a-z\ \-]+$/i;
+            return this.optional(element) || pattern.test(value);
+        },
+        'Ошибка заполнения'
+    );
+
     $.validator.addMethod('inputDate',
         function(curDate, element) {
             if (this.optional(element) && curDate == '') {
@@ -307,6 +323,16 @@ function initForm(curForm) {
         $(this).keypress(function(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if ((charCode > 1039 && charCode < 1104) || charCode == 1105 || charCode == 1025 || charCode == 45 || charCode == 32) {
+                return true;
+            }
+            return false;
+        });
+    });
+
+    curForm.find('.onlyEN').each(function() {
+        $(this).keypress(function(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 96 && charCode < 123) || (charCode > 64 && charCode < 91) || charCode == 45 || charCode == 32) {
                 return true;
             }
             return false;
