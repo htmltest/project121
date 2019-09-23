@@ -1852,6 +1852,15 @@ footer a {color:#cae3f9}
 .vzr-item:first-child {margin:4px 0 0 0}
 .vzr-item h2 {margin:0 0 29px 0}
 .vzr-item+h2 {margin-top:40px}
+.vzr-item-header {margin:0 0 29px 0}
+.vzr-item-header::after {content:""; display:block; clear:both}
+.vzr-item-header h2 {float:left; margin:0}
+.vzr-item-hint {float:right; color:#7c7c7c; margin:7px 0 0 0}
+
+@media screen and (max-width:1199px) {
+    .vzr-item-header h2 {float:none}
+    .vzr-item-hint {float:none; margin:17px 0 0 0}
+}
 
 .main-events-form-results-info {padding:21px 0 0 0; font-size:14px; line-height:17px}
 .main-events-form-results-info h3 {margin:0}
@@ -1895,6 +1904,8 @@ footer a {color:#cae3f9}
 .order-form-row-vzr .form-field {width:33.33%}
 .order-form-row-vzr .form-field-wide {width:66.66%}
 .order-form-row-vzr .form-input-number {max-width:none}
+.order-form-vzr-peoples {position:relative}
+.order-form-vzr-peoples .form-input label.error {display:none !important}
 
 @media screen and (max-width:1199px) {
     .order-form-row-vzr-dates {margin-top:30px}
@@ -2077,6 +2088,7 @@ footer a {color:#cae3f9}
 @media screen and (max-width:1199px) {
     .vzr-form-step-3 {position:relative; padding:5px 0 0 0}
     .vzr-form-step-3 .order-form-fields {margin:0 0 235px 0}
+    .vzr-form-step-3 .order-form-results-inner {position:static !important}
     .vzr-form-step-3 .vzr-form-step-3-cost {position:absolute; left:0; bottom:93px; right:0}
     .vzr-form-step-3 .order-form-results:first-child {padding-top:0}
 }

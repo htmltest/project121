@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $.validator.addMethod('onlyRUS',
         function(value, element) {
-            var pattern = /^[а-яё\ \-]+$/i;
+            var pattern = /^[а-яё][а-яё\ \-’]+$/i;
             return this.optional(element) || pattern.test(value);
         },
         'Ошибка заполнения'
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     $.validator.addMethod('onlyEN',
         function(value, element) {
-            var pattern = /^[a-z\ \-]+$/i;
+            var pattern = /^[a-z][a-z\ \-’]+$/i;
             return this.optional(element) || pattern.test(value);
         },
         'Ошибка заполнения'
