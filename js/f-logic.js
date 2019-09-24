@@ -640,32 +640,42 @@ $(document).ready(function() {
         selfyear.setMonth(selfyear.getMonth() + 6);
 
         var year = new Date(tommorow.getTime());
+        year.setDate(year.getDate() - 1);
         year.setFullYear(year.getFullYear() + 1);
 
         $('#vzr-date-start').data('datepicker').update({
             minDate: tommorow,
             maxDate: selfyear
         });
+        $('#vzr-date-start').attr('min', getDateString(tommorow));
+        $('#vzr-date-start').attr('max', getDateString(selfyear));
 
         $('#vzr-date-docs').data('datepicker').update({
             minDate: tommorow,
             maxDate: selfyear
         });
+        $('#vzr-date-docs').attr('min', getDateString(tommorow));
+        $('#vzr-date-docs').attr('max', getDateString(selfyear));
 
         $('#vzr-date-end').data('datepicker').update({
             minDate: tommorow,
             maxDate: year
         });
+        $('#vzr-date-end').attr('min', getDateString(tommorow));
+        $('#vzr-date-end').attr('max', getDateString(year));
 
         $('#vzr-date-start').change(function() {
             var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
             if (curDate) {
                 var newDate = new Date(curDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
                 newDate.setFullYear(newDate.getFullYear() + 1);
                 $('#vzr-date-end').data('datepicker').update({
                     minDate: curDate,
                     maxDate: newDate
                 });
+                $('#vzr-date-end').attr('min', getDateString(curDate));
+                $('#vzr-date-end').attr('max', getDateString(newDate));
                 var endDateCurr = $('#vzr-date-end').data('datepicker').selectedDates[0];
                 if (endDateCurr && endDateCurr < curDate) {
                     $('#vzr-date-end').data('datepicker').selectDate(curDate);
@@ -1611,4 +1621,17 @@ function checkVZRAge65(value) {
     }
 
     return false;
+}
+
+function getDateString(curDate) {
+    var curDay = curDate.getDate();
+    if (curDay < 10) {
+        curDay = '0' + curDay;
+    }
+    var curMonth = curDate.getMonth() + 1;
+    if (curMonth < 10) {
+        curMonth = '0' + curMonth;
+    }
+    var curYear = curDate.getFullYear();
+    return curDay + '.' + curMonth + '.' + curYear;
 }
