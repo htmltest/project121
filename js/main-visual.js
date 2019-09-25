@@ -279,6 +279,33 @@ $(document).ready(function() {
         curItem.replaceWith('<a href="' + curItem.attr('data-href') + '" target="_blank">' + curItem.html() + '</a>');
     });
 
+    $('.form-input .desktop-menu-icon').each(function() {
+        $(this).parent().addClass('form-input-with-hint');
+    });
+
+    $('.form-select .desktop-menu-icon').each(function() {
+        $(this).parent().addClass('form-select-with-hint');
+        $(this).parent().find('select').chosen('destroy');
+        $(this).parent().find('select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+        $(this).parent().find('select').each(function() {
+            var curSelect = $(this);
+            if (curSelect.data('placeholder') != '') {
+                curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
+            }
+        });
+    });
+
+    $('body').on('mouseover', '.desktop-menu-icon', function() {
+        var curHint = $(this);
+        curHint.removeClass('to-left to-right');
+        if (curHint.find('.desktop-menu-icon-text').offset().left + curHint.find('.desktop-menu-icon-text').outerWidth() > $(window).width()) {
+            curHint.addClass('to-left');
+        }
+        if (curHint.find('.desktop-menu-icon-text').offset().left < 0) {
+            curHint.addClass('to-right');
+        }
+    });
+
 });
 
 $(window).on('load resize scroll', function() {

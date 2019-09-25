@@ -34,6 +34,7 @@ $(document).ready(function() {
                         var minDateStr = $(element).attr('min');
                         var minDate = new Date(minDateStr.substr(6, 4), Number(minDateStr.substr(3, 2)) - 1, Number(minDateStr.substr(0, 2)));
                         if (userDate < minDate) {
+                            $.validator.messages['inputDate'] = 'Минимальная дата - ' + minDateStr;
                             return false;
                         }
                     }
@@ -41,16 +42,18 @@ $(document).ready(function() {
                         var maxDateStr = $(element).attr('max');
                         var maxDate = new Date(maxDateStr.substr(6, 4), Number(maxDateStr.substr(3, 2)) - 1, Number(maxDateStr.substr(0, 2)));
                         if (userDate > maxDate) {
+                            $.validator.messages['inputDate'] = 'Максимальная дата - ' + maxDateStr;
                             return false;
                         }
                     }
                     return true;
                 } else {
+                    $.validator.messages['inputDate'] = 'Дата введена некорректно';
                     return false;
                 }
             }
         },
-        'Дата введена некорректно'
+        ''
     );
 
     $('body').on('change', '.form-file input', function() {
@@ -130,6 +133,7 @@ function initForm(curForm) {
     curForm.find('input.phoneRU').mask('+7 (000) 000-00-00');
     curForm.find('.form-input-date input').mask('00.00.0000');
     curForm.find('.form-input-date input').attr('autocomplete', 'off');
+    curForm.find('.form-input-date input').addClass('inputDate');
     curForm.find('.form-input-date-range input').attr('autocomplete', 'off');
     curForm.find('input.digit3').mask('000');
     curForm.find('input.digit4').mask('0000');
@@ -168,7 +172,11 @@ function initForm(curForm) {
         curBlock.addClass('form-input-number');
         var curHTML = curBlock.html();
         curBlock.html(curHTML.replace(/type=\"number\"/g, 'type="text"'));
-        curBlock.find('input').spinner();
+        curBlock.find('input').spinner({
+            stop: function(event, ui) {
+                $(this).valid();
+            }
+        });
         curBlock.find('input').keypress(function(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (charCode > 31 && (charCode < 43 || charCode > 57)) {

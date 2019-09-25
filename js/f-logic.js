@@ -40,7 +40,7 @@ $(document).ready(function() {
     $.validator.addMethod('birthdayDate',
         function(birthdayDate, element) {
             var curForm = $(element).parents().filter('form');
-            curForm.find('.passportDate').valid();
+            curForm.find('.passportDate').trigger('change');
             return true;
         },
         ''
@@ -582,6 +582,9 @@ $(document).ready(function() {
                 $('#vzr-date-docs').addClass('required');
             } else {
                 $('.order-vzr-docs').removeClass('visible');
+                $('#vzr-date-docs').val('').trigger('change');
+                $('#vzr-date-docs').parent().removeClass('focus')
+                $('#vzr-date-docs').data('datepicker').clear();
                 $('#vzr-date-docs').removeClass('required');
             }
 

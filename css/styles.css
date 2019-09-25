@@ -214,12 +214,16 @@ fieldset {margin:20px 0; padding:0; border:0}
 .desktop-menu-icon:hover .desktop-menu-icon-text {display:block}
 .desktop-menu-icon-text::after {content:""; display:block; width:0; height:0; position:absolute; left:50%; bottom:-6px; margin-left:-6px; border-top:6px solid #fff; border-left:6px solid transparent; border-right:6px solid transparent}
 
-.vzr-programms-header-inner .desktop-menu-icon-text {width:550px}
-.desktop-menu-icon-text::after {left:118px}
+.order-vzr .desktop-menu-icon-text {width:550px}
+.order-vzr .desktop-menu-icon-text::after {left:118px}
 
 @media screen and (max-width:1199px) {
-    .vzr-programms-header-inner .desktop-menu-icon-text {width:237px}
-    .desktop-menu-icon-text::after {left:50%}
+    .order-vzr .desktop-menu-icon-text {width:237px}
+    .order-vzr .desktop-menu-icon-text::after {left:50%}
+    .desktop-menu-icon.to-left .desktop-menu-icon-text {left:auto; right:-10px; margin-left:0}
+    .desktop-menu-icon.to-left .desktop-menu-icon-text::after {left:auto; margin-left:0; right:12px}
+    .desktop-menu-icon.to-right .desktop-menu-icon-text {left:-10px; margin-left:0}
+    .desktop-menu-icon.to-right .desktop-menu-icon-text::after {left:12px; margin-left:0}
 }
 
 .form-input {position:relative; border-radius:3px}
@@ -240,6 +244,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 @media screen and (max-width:1199px) {
     .form-input-number {max-width:none}
     .form-input.focus .form-input-label {top:3px; font-size:13px}
+    .form-input-with-hint {margin-right:23px}
 }
 
 .form-input input,
@@ -310,6 +315,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 
 @media screen and (max-width:1199px) {
     .form-select select {font-size:22px}
+    .form-select-with-hint {margin-right:23px}
 }
 
 .form-checkbox {margin:14px 0; line-height:22px; user-select:none}
@@ -2125,7 +2131,7 @@ footer a {color:#cae3f9}
 }
 
 .order-vzr {position:relative}
-.order-vzr .loading {position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(255, 255, 255, 0.5) url(../images/loading.gif) no-repeat center}
+.order-vzr .loading {position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(255, 255, 255, 0.8) url(../images/loading-big.gif) no-repeat center}
 
 .vzr-programms-header-template {display:none}
 .vzr-programms-mobile-template {display:none}
