@@ -686,6 +686,15 @@ $(document).ready(function() {
                 if ($('#vzr-multiple').prop('checked')) {
                     $('#vzr-date-end').data('datepicker').selectDate(newDate);
                 }
+
+                $('#vzr-date-docs').data('datepicker').update({
+                    maxDate: curDate
+                });
+                $('#vzr-date-docs').attr('max', getDateString(newDate));
+                var endDateCurr = $('#vzr-date-docs').data('datepicker').selectedDates[0];
+                if (endDateCurr && endDateCurr > curDate) {
+                    $('#vzr-date-docs').data('datepicker').selectDate(curDate);
+                }
             }
         });
 
@@ -700,6 +709,12 @@ $(document).ready(function() {
 
         $('#vzr-date-start').each(function() {
             var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if ($('#vzr-multiple').prop('checked')) {
+                var newDate = new Date(startDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            }
             var endDate = $('#vzr-date-end').data('datepicker').selectedDates[0];
             if (startDate && endDate) {
                 var countDays = Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
