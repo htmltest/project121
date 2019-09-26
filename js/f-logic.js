@@ -660,12 +660,28 @@ $(document).ready(function() {
         $('#vzr-date-docs').attr('min', getDateString(tommorow));
         $('#vzr-date-docs').attr('max', getDateString(selfyear));
 
-        $('#vzr-date-end').data('datepicker').update({
-            minDate: tommorow,
-            maxDate: year
-        });
-        $('#vzr-date-end').attr('min', getDateString(tommorow));
-        $('#vzr-date-end').attr('max', getDateString(year));
+        if ($('#vzr-multiple').prop('checked')) {
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var newDate = new Date(curDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: newDate,
+                    maxDate: newDate
+                });
+                $('#vzr-date-end').attr('min', getDateString(newDate));
+                $('#vzr-date-end').attr('max', getDateString(newDate));
+                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            }
+        } else {
+            $('#vzr-date-end').data('datepicker').update({
+                minDate: tommorow,
+                maxDate: year
+            });
+            $('#vzr-date-end').attr('min', getDateString(tommorow));
+            $('#vzr-date-end').attr('max', getDateString(year));
+        }
 
         $('#vzr-date-start').change(function() {
             var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
@@ -709,11 +725,13 @@ $(document).ready(function() {
 
         $('#vzr-date-start').each(function() {
             var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            if ($('#vzr-multiple').prop('checked')) {
-                var newDate = new Date(startDate.getTime());
-                newDate.setDate(newDate.getDate() - 1);
-                newDate.setFullYear(newDate.getFullYear() + 1);
-                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            if (startDate) {
+                if ($('#vzr-multiple').prop('checked')) {
+                    var newDate = new Date(startDate.getTime());
+                    newDate.setDate(newDate.getDate() - 1);
+                    newDate.setFullYear(newDate.getFullYear() + 1);
+                    $('#vzr-date-end').data('datepicker').selectDate(newDate);
+                }
             }
             var endDate = $('#vzr-date-end').data('datepicker').selectedDates[0];
             if (startDate && endDate) {
@@ -728,9 +746,37 @@ $(document).ready(function() {
             $('.order-form-row-vzr-dates').addClass('multiple');
             $('#vzr-date-end').prop('disabled', true).parent().addClass('form-input-disabled');
             $('#vzr-date-start').trigger('change');
+
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var newDate = new Date(curDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: newDate,
+                    maxDate: newDate
+                });
+                $('#vzr-date-end').attr('min', getDateString(newDate));
+                $('#vzr-date-end').attr('max', getDateString(newDate));
+                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            }
         } else {
             $('.order-form-row-vzr-dates').removeClass('multiple');
             $('#vzr-date-end').prop('disabled', false).parent().removeClass('form-input-disabled');
+
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var year = new Date(curDate.getTime());
+                year.setDate(year.getDate() - 1);
+                year.setFullYear(year.getFullYear() + 1);
+
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: curDate,
+                    maxDate: year
+                });
+                $('#vzr-date-end').attr('min', getDateString(curDate));
+                $('#vzr-date-end').attr('max', getDateString(year));
+            }
         }
     });
 
@@ -738,9 +784,37 @@ $(document).ready(function() {
         if ($(this).prop('checked')) {
             $('.order-form-row-vzr-dates').addClass('multiple');
             $('#vzr-date-end').prop('disabled', true).parent().addClass('form-input-disabled');
+
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var newDate = new Date(curDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: newDate,
+                    maxDate: newDate
+                });
+                $('#vzr-date-end').attr('min', getDateString(newDate));
+                $('#vzr-date-end').attr('max', getDateString(newDate));
+                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            }
         } else {
             $('.order-form-row-vzr-dates').removeClass('multiple');
             $('#vzr-date-end').prop('disabled', false).parent().removeClass('form-input-disabled');
+
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var year = new Date(curDate.getTime());
+                year.setDate(year.getDate() - 1);
+                year.setFullYear(year.getFullYear() + 1);
+
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: curDate,
+                    maxDate: year
+                });
+                $('#vzr-date-end').attr('min', getDateString(curDate));
+                $('#vzr-date-end').attr('max', getDateString(year));
+            }
         }
     });
 
