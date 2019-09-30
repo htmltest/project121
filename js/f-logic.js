@@ -1,5 +1,22 @@
 $(document).ready(function() {
 
+    $.validator.addMethod('passportHow',
+        function(value, element) {
+            var pattern = /^[а-яё][а-яё\ \-'\.0-9]+$/i;
+            return this.optional(element) || pattern.test(value);
+        },
+        'Ошибка заполнения'
+    );
+
+    $('body').on('keypress', '.passportHow', function(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        console.log(charCode);
+        if ((charCode > 1039 && charCode < 1104) || (charCode > 47 && charCode < 58) || charCode == 1105 || charCode == 1025 || charCode == 45 || charCode == 32 || charCode == 39 || charCode == 46) {
+            return true;
+        }
+        return false;
+    });
+
     $.validator.addMethod('VZRSummPeople',
         function(value, element) {
             var summ = 0;
@@ -156,9 +173,11 @@ $(document).ready(function() {
 
     $('.order-middlename-checkbox input').change(function() {
         if ($(this).prop('checked')) {
+            $('.form-field-middlename').hide();
             $('.form-field-middlename input').removeClass('required').val('');
             $('.form-field-middlename em').hide();
         } else {
+            $('.form-field-middlename').show();
             $('.form-field-middlename input').addClass('required');
             $('.form-field-middlename em').show();
         }
@@ -166,9 +185,11 @@ $(document).ready(function() {
 
     $('.order-middlename-checkbox input').each(function() {
         if ($(this).prop('checked')) {
+            $('.form-field-middlename').hide();
             $('.form-field-middlename input').removeClass('required').val('');
             $('.form-field-middlename em').hide();
         } else {
+            $('.form-field-middlename').show();
             $('.form-field-middlename input').addClass('required');
             $('.form-field-middlename em').show();
         }

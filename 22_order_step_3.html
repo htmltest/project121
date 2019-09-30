@@ -432,7 +432,7 @@
                                         <input type="hidden" name="OK_URL" value="<?='http://' . $_SERVER['HTTP_HOST']?><?=rtrim($APPLICATION->GetCurPage(false), '/')?>/success/" />
                                         <input type="hidden" name="FAIL_URL" value="<?='http://' . $_SERVER['HTTP_HOST']?><?=rtrim($APPLICATION->GetCurPage(false), '/')?>/fail/" />
                                         <span class="form-input-label">СМС-код <em>*</em></span>
-                                        <input type="text" name="code" id="userCode" value="" class="required" />
+                                        <input type="text" name="code" id="userCode" value="" class="required digit10" />
                                     </div>
                                     <div class="form-submit"><input type="submit" value="Подтвердить" class="btn-orange" /></div>
                                     <div class="order-confirm-sms-new">СМС-код приходит в течении 2-х минут. <a href="#">Отправить повторно</a></div>
