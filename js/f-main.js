@@ -231,6 +231,7 @@ function initForm(curForm) {
         if ($(this).hasClass('maxDate1Year')) {
             var curDate = new Date();
             curDate.setFullYear(curDate.getFullYear() + 1);
+            curDate.setDate(curDate.getDate() - 1);
             maxDate = curDate;
             var maxDay = curDate.getDate();
             if (maxDay < 10) {
