@@ -531,8 +531,10 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    $('body').on('change', '#order-promo', function(e) {
+    $('body').on('change blur', '#order-promo', function(e) {
         if ($(this).val() == '') {
+            $('.order-form-results-code').removeClass('success');
+            $('#order-promo').parent().removeClass('focus');
             $('#order-promo').removeClass('error').prop('disabled', false);
             $('#order-promo').parent().find('label.error').remove();
         }
@@ -617,194 +619,53 @@ $(document).ready(function() {
         }
     });
 
-    $('#vzr-country-select').each(function() {
-        var curOption = $(this).find('option:selected');
-        if (curOption.length == 1) {
-            if (typeof (curOption.attr('data-schengen')) != 'undefined') {
-                $('.order-vzr-schengen').addClass('visible');
-            } else {
-                $('.order-vzr-schengen').removeClass('visible');
-            }
-
-            if (typeof (curOption.attr('data-docs')) != 'undefined') {
-                $('.order-vzr-docs').addClass('visible');
-                $('#vzr-date-docs').addClass('required');
-            } else {
-                $('.order-vzr-docs').removeClass('visible');
-                $('#vzr-date-docs').removeClass('required');
-            }
-        }
-        $('#vzr-country-select').chosen('destroy');
-        $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-        $('#vzr-country-select').each(function() {
-            var curSelect = $(this);
-            if (curSelect.data('placeholder') != '') {
-                curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
-            }
-        });
-        $(window).on('resize', function() {
-            $('#vzr-country-select').chosen('destroy');
-            $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-            $('#vzr-country-select').each(function() {
-                var curSelect = $(this);
-                if (curSelect.data('placeholder') != '') {
-                    curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
-                }
+    $('body').on('change', '#vzr-date-start', function() {
+        var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+        if (curDate) {
+            var newDate = new Date(curDate.getTime());
+            newDate.setDate(newDate.getDate() - 1);
+            newDate.setFullYear(newDate.getFullYear() + 1);
+            $('#vzr-date-end').data('datepicker').update({
+                minDate: curDate,
+                maxDate: newDate
             });
-        });
-    });
-
-    if ($('#vzr-date-start').length == 1) {
-        var today = new Date();
-
-        var tommorow = new Date(today.getTime());
-        tommorow.setDate(tommorow.getDate() + 1);
-
-        var selfyear = new Date(today.getTime());
-        selfyear.setMonth(selfyear.getMonth() + 6);
-
-        var year = new Date(tommorow.getTime());
-        year.setDate(year.getDate() - 1);
-        year.setFullYear(year.getFullYear() + 1);
-
-        $('#vzr-date-start').data('datepicker').update({
-            minDate: tommorow,
-            maxDate: selfyear
-        });
-        $('#vzr-date-start').attr('min', getDateString(tommorow));
-        $('#vzr-date-start').attr('max', getDateString(selfyear));
-
-        $('#vzr-date-docs').data('datepicker').update({
-            minDate: tommorow,
-            maxDate: selfyear
-        });
-        $('#vzr-date-docs').attr('min', getDateString(tommorow));
-        $('#vzr-date-docs').attr('max', getDateString(selfyear));
-
-        if ($('#vzr-multiple').prop('checked')) {
-            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            if (curDate) {
-                var newDate = new Date(curDate.getTime());
-                newDate.setDate(newDate.getDate() - 1);
-                newDate.setFullYear(newDate.getFullYear() + 1);
-                $('#vzr-date-end').data('datepicker').update({
-                    minDate: newDate,
-                    maxDate: newDate
-                });
-                $('#vzr-date-end').attr('min', getDateString(newDate));
-                $('#vzr-date-end').attr('max', getDateString(newDate));
+            $('#vzr-date-end').attr('min', getDateString(curDate));
+            $('#vzr-date-end').attr('max', getDateString(newDate));
+            var endDateCurr = $('#vzr-date-end').data('datepicker').selectedDates[0];
+            if (endDateCurr && endDateCurr < curDate) {
+                $('#vzr-date-end').data('datepicker').selectDate(curDate);
+            }
+            if ($('#vzr-multiple').prop('checked')) {
                 $('#vzr-date-end').data('datepicker').selectDate(newDate);
             }
-        } else {
-            $('#vzr-date-end').data('datepicker').update({
-                minDate: tommorow,
-                maxDate: year
+
+            $('#vzr-date-docs').data('datepicker').update({
+                maxDate: curDate
             });
-            $('#vzr-date-end').attr('min', getDateString(tommorow));
-            $('#vzr-date-end').attr('max', getDateString(year));
+            $('#vzr-date-docs').attr('max', getDateString(newDate));
+            var endDateCurr = $('#vzr-date-docs').data('datepicker').selectedDates[0];
+            if (endDateCurr && endDateCurr > curDate) {
+                $('#vzr-date-docs').data('datepicker').selectDate(curDate);
+            }
         }
+    });
 
-        $('#vzr-date-start').change(function() {
-            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            if (curDate) {
-                var newDate = new Date(curDate.getTime());
-                newDate.setDate(newDate.getDate() - 1);
-                newDate.setFullYear(newDate.getFullYear() + 1);
-                $('#vzr-date-end').data('datepicker').update({
-                    minDate: curDate,
-                    maxDate: newDate
-                });
-                $('#vzr-date-end').attr('min', getDateString(curDate));
-                $('#vzr-date-end').attr('max', getDateString(newDate));
-                var endDateCurr = $('#vzr-date-end').data('datepicker').selectedDates[0];
-                if (endDateCurr && endDateCurr < curDate) {
-                    $('#vzr-date-end').data('datepicker').selectDate(curDate);
-                }
-                if ($('#vzr-multiple').prop('checked')) {
-                    $('#vzr-date-end').data('datepicker').selectDate(newDate);
-                }
+    $('body').on('change', '#vzr-date-start, #vzr-date-end', function() {
+        var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+        var endDate = $('#vzr-date-end').data('datepicker').selectedDates[0];
+        if (startDate && endDate) {
+            var countDays = Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
+            $('.order-vzr-days-count-value').html(countDays);
+        }
+    });
 
-                $('#vzr-date-docs').data('datepicker').update({
-                    maxDate: curDate
-                });
-                $('#vzr-date-docs').attr('max', getDateString(newDate));
-                var endDateCurr = $('#vzr-date-docs').data('datepicker').selectedDates[0];
-                if (endDateCurr && endDateCurr > curDate) {
-                    $('#vzr-date-docs').data('datepicker').selectDate(curDate);
-                }
-            }
-        });
-
-        $('#vzr-date-start, #vzr-date-end').change(function() {
-            var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            var endDate = $('#vzr-date-end').data('datepicker').selectedDates[0];
-            if (startDate && endDate) {
-                var countDays = Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
-                $('.order-vzr-days-count-value').html(countDays);
-            }
-        });
-
-        $('#vzr-date-start').each(function() {
-            var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            if (startDate) {
-                if ($('#vzr-multiple').prop('checked')) {
-                    var newDate = new Date(startDate.getTime());
-                    newDate.setDate(newDate.getDate() - 1);
-                    newDate.setFullYear(newDate.getFullYear() + 1);
-                    $('#vzr-date-end').data('datepicker').selectDate(newDate);
-                }
-            }
-            var endDate = $('#vzr-date-end').data('datepicker').selectedDates[0];
-            if (startDate && endDate) {
-                var countDays = Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
-                $('.order-vzr-days-count-value').html(countDays);
-            }
-        });
-    }
+    initVZR();
 
     $('body').on('change', '#vzr-multiple', function() {
         if ($(this).prop('checked')) {
             $('.order-form-row-vzr-dates').addClass('multiple');
             $('#vzr-date-end').prop('disabled', true).parent().addClass('form-input-disabled');
             $('#vzr-date-start').trigger('change');
-
-            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            if (curDate) {
-                var newDate = new Date(curDate.getTime());
-                newDate.setDate(newDate.getDate() - 1);
-                newDate.setFullYear(newDate.getFullYear() + 1);
-                $('#vzr-date-end').data('datepicker').update({
-                    minDate: newDate,
-                    maxDate: newDate
-                });
-                $('#vzr-date-end').attr('min', getDateString(newDate));
-                $('#vzr-date-end').attr('max', getDateString(newDate));
-                $('#vzr-date-end').data('datepicker').selectDate(newDate);
-            }
-        } else {
-            $('.order-form-row-vzr-dates').removeClass('multiple');
-            $('#vzr-date-end').prop('disabled', false).parent().removeClass('form-input-disabled');
-
-            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
-            if (curDate) {
-                var year = new Date(curDate.getTime());
-                year.setDate(year.getDate() - 1);
-                year.setFullYear(year.getFullYear() + 1);
-
-                $('#vzr-date-end').data('datepicker').update({
-                    minDate: curDate,
-                    maxDate: year
-                });
-                $('#vzr-date-end').attr('min', getDateString(curDate));
-                $('#vzr-date-end').attr('max', getDateString(year));
-            }
-        }
-    });
-
-    $('#vzr-multiple').each(function() {
-        if ($(this).prop('checked')) {
-            $('.order-form-row-vzr-dates').addClass('multiple');
-            $('#vzr-date-end').prop('disabled', true).parent().addClass('form-input-disabled');
 
             var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
             if (curDate) {
@@ -1581,61 +1442,63 @@ function yearsDiff(dt) {
 }
 
 function updatePrecalc(curForm) {
-    $('#programCost').addClass('loading').html('');
-    var curData = {};
-    curForm.find('[data-calcField]').each(function() {
-        var curField = $(this);
-        if (curField.attr('id') == 'order-programm-select') {
-            var selected = curField.find('option:selected');
-            curData[curField.attr('data-calcField')] = selected.attr('data-value');
-        } else {
-            curData[curField.attr('data-calcField')] = curField.val();
-        }
-    });
     var curURL = curForm.attr('data-calcForm');
-    var promo = $('#order-promo').val();
-    if (typeof promo === 'string' && promo.length > 0) {
-        curURL = curForm.attr('data-calcFormPromo');
-    }
+    if (typeof (curURL) != 'undefined') {
+        $('#programCost').addClass('loading').html('');
+        var curData = {};
+        curForm.find('[data-calcField]').each(function() {
+            var curField = $(this);
+            if (curField.attr('id') == 'order-programm-select') {
+                var selected = curField.find('option:selected');
+                curData[curField.attr('data-calcField')] = selected.attr('data-value');
+            } else {
+                curData[curField.attr('data-calcField')] = curField.val();
+            }
+        });
+        var promo = $('#order-promo').val();
+        if (typeof promo === 'string' && promo.length > 0) {
+            curURL = curForm.attr('data-calcFormPromo');
+        }
 
-    $.post({
-        url: curURL,
-        data: curData,
-        dataType: 'json'
-    }).done(function(data) {
+        $.post({
+            url: curURL,
+            data: curData,
+            dataType: 'json'
+        }).done(function(data) {
 
-        if (data.status) {
-            if (typeof data.response === 'object') {
-                if (data.response.MESSAGE.length > 0) {
-                    $('#order-promo').addClass('error').parent().find('label.error').remove();
-                    $('#order-promo').prop('disabled', false).after('<label class="error">' + data.response.MESSAGE + '</label>');
-                    $('.order-form-results-code').removeClass('success');
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'exception', {
-                            'description': data.response.MESSAGE,
-                            'fatal': false
-                        });
+            if (data.status) {
+                if (typeof data.response === 'object') {
+                    if (data.response.MESSAGE.length > 0) {
+                        $('#order-promo').addClass('error').parent().find('label.error').remove();
+                        $('#order-promo').prop('disabled', false).after('<label class="error">' + data.response.MESSAGE + '</label>');
+                        $('.order-form-results-code').removeClass('success');
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'exception', {
+                                'description': data.response.MESSAGE,
+                                'fatal': false
+                            });
+                        }
+                    } else {
+                        $('#order-promo').removeClass('error').prop('disabled', true);
+                        $('#order-promo').parent().find('label.error').remove();
+                        $('.order-form-results-code').addClass('success');
+                    }
+
+                    $('#programCost').removeClass('loading').html(data.response.SUM + ' ₽');
+
+                    if (Number(data.response.OLD) > 0) {
+                        $('#programCost').append(' <em>' + data.response.OLD + ' ₽</em>');
                     }
                 } else {
-                    $('#order-promo').removeClass('error').prop('disabled', true);
-                    $('#order-promo').parent().find('label.error').remove();
-                    $('.order-form-results-code').addClass('success');
+                    $('#programCost').removeClass('loading').html(data.response + ' ₽');
                 }
-
-                $('#programCost').removeClass('loading').html(data.response.SUM + ' ₽');
-
-                if (Number(data.response.OLD) > 0) {
-                    $('#programCost').append(' <em>' + data.response.OLD + ' ₽</em>');
-                }
-            } else {
-                $('#programCost').removeClass('loading').html(data.response + ' ₽');
             }
-        }
 
-    }).fail(function() {
-        curForm.find('.form-error').remove()
-        curForm.prepend('<div class="form-error">Сервис временно недоступен, попробуйте позже.</div>');
-    });
+        }).fail(function() {
+            curForm.find('.form-error').remove()
+            curForm.prepend('<div class="form-error">Сервис временно недоступен, попробуйте позже.</div>');
+        });
+    }
 }
 
 $(window).on('load', function() {
@@ -1747,4 +1610,150 @@ function getDateString(curDate) {
     }
     var curYear = curDate.getFullYear();
     return curDay + '.' + curMonth + '.' + curYear;
+}
+
+function initVZR() {
+
+    $('#vzr-country-select').each(function() {
+        var curOption = $(this).find('option:selected');
+        if (curOption.length == 1) {
+            if (typeof (curOption.attr('data-schengen')) != 'undefined') {
+                $('.order-vzr-schengen').addClass('visible');
+            } else {
+                $('.order-vzr-schengen').removeClass('visible');
+            }
+
+            if (typeof (curOption.attr('data-docs')) != 'undefined') {
+                $('.order-vzr-docs').addClass('visible');
+                $('#vzr-date-docs').addClass('required');
+            } else {
+                $('.order-vzr-docs').removeClass('visible');
+                $('#vzr-date-docs').removeClass('required');
+            }
+        }
+        $('#vzr-country-select').chosen('destroy');
+        $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+        $('#vzr-country-select').each(function() {
+            var curSelect = $(this);
+            if (curSelect.data('placeholder') != '') {
+                curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
+            }
+        });
+        $(window).on('resize', function() {
+            $('#vzr-country-select').chosen('destroy');
+            $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+            $('#vzr-country-select').each(function() {
+                var curSelect = $(this);
+                if (curSelect.data('placeholder') != '') {
+                    curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
+                }
+            });
+        });
+    });
+
+    if ($('#vzr-date-start').length == 1) {
+        var today = new Date();
+
+        var tommorow = new Date(today.getTime());
+        tommorow.setDate(tommorow.getDate() + 1);
+
+        var selfyear = new Date(today.getTime());
+        selfyear.setMonth(selfyear.getMonth() + 6);
+
+        var year = new Date(tommorow.getTime());
+        year.setDate(year.getDate() - 1);
+        year.setFullYear(year.getFullYear() + 1);
+
+        $('#vzr-date-start').data('datepicker').update({
+            minDate: tommorow,
+            maxDate: selfyear
+        });
+        $('#vzr-date-start').attr('min', getDateString(tommorow));
+        $('#vzr-date-start').attr('max', getDateString(selfyear));
+
+        $('#vzr-date-docs').data('datepicker').update({
+            minDate: tommorow,
+            maxDate: selfyear
+        });
+        $('#vzr-date-docs').attr('min', getDateString(tommorow));
+        $('#vzr-date-docs').attr('max', getDateString(selfyear));
+
+        if ($('#vzr-multiple').prop('checked')) {
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var newDate = new Date(curDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: newDate,
+                    maxDate: newDate
+                });
+                $('#vzr-date-end').attr('min', getDateString(newDate));
+                $('#vzr-date-end').attr('max', getDateString(newDate));
+                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            }
+        } else {
+            $('#vzr-date-end').data('datepicker').update({
+                minDate: tommorow,
+                maxDate: year
+            });
+            $('#vzr-date-end').attr('min', getDateString(tommorow));
+            $('#vzr-date-end').attr('max', getDateString(year));
+        }
+
+        $('#vzr-date-start').each(function() {
+            var startDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (startDate) {
+                if ($('#vzr-multiple').prop('checked')) {
+                    var newDate = new Date(startDate.getTime());
+                    newDate.setDate(newDate.getDate() - 1);
+                    newDate.setFullYear(newDate.getFullYear() + 1);
+                    $('#vzr-date-end').data('datepicker').selectDate(newDate);
+                }
+            }
+            var endDate = $('#vzr-date-end').data('datepicker').selectedDates[0];
+            if (startDate && endDate) {
+                var countDays = Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
+                $('.order-vzr-days-count-value').html(countDays);
+            }
+        });
+    }
+
+    $('#vzr-multiple').each(function() {
+        if ($(this).prop('checked')) {
+            $('.order-form-row-vzr-dates').addClass('multiple');
+            $('#vzr-date-end').prop('disabled', true).parent().addClass('form-input-disabled');
+
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var newDate = new Date(curDate.getTime());
+                newDate.setDate(newDate.getDate() - 1);
+                newDate.setFullYear(newDate.getFullYear() + 1);
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: newDate,
+                    maxDate: newDate
+                });
+                $('#vzr-date-end').attr('min', getDateString(newDate));
+                $('#vzr-date-end').attr('max', getDateString(newDate));
+                $('#vzr-date-end').data('datepicker').selectDate(newDate);
+            }
+        } else {
+            $('.order-form-row-vzr-dates').removeClass('multiple');
+            $('#vzr-date-end').prop('disabled', false).parent().removeClass('form-input-disabled');
+
+            var curDate = $('#vzr-date-start').data('datepicker').selectedDates[0];
+            if (curDate) {
+                var year = new Date(curDate.getTime());
+                year.setDate(year.getDate() - 1);
+                year.setFullYear(year.getFullYear() + 1);
+
+                $('#vzr-date-end').data('datepicker').update({
+                    minDate: curDate,
+                    maxDate: year
+                });
+                $('#vzr-date-end').attr('min', getDateString(curDate));
+                $('#vzr-date-end').attr('max', getDateString(year));
+            }
+        }
+    });
 }

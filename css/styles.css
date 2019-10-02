@@ -1559,6 +1559,7 @@ h3.carier-text {font-weight:300; line-height:42px}
 .order-form-results-code .form-input.focus .form-input-clear {display:none}
 .order-form-results-code.success .form-input.focus .form-input-clear,
 .order-form-results-code.success .form-input .form-input-clear {display:block}
+.order-form-results-code label+label {display:none !important}
 
 @media screen and (max-width:1199px) {
     .order-form-results {float:none; width:auto}
@@ -2139,3 +2140,8 @@ footer a {color:#cae3f9}
 .vzr-params-hint-template {display:none}
 .vzr-type-add-item {display:none}
 .vzr-type-add-item.active {display:block}
+
+.main-events-form .order-vzr-days-count {background:#eaf4f9}
+.main-events-form .order-vzr-schengen {background:#f5fcff}
+
+label.error+label.error {display:none !important}

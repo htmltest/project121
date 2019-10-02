@@ -121,6 +121,7 @@ $(document).ready(function() {
                             var curProgramm = $('.order-programm-detail[data-id="' + curValue + '"]');
                             curProgramm.show();
                         });
+                        initVZR();
                     });
                 }
                 e.preventDefault();
