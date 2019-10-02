@@ -1751,8 +1751,9 @@ footer a {color:#cae3f9}
 @media screen and (max-width:1199px) {
     .footer-menu {float:none; width:auto; margin:0 -15px; padding:17px 15px 22px 15px; background:#005fb6}
     .footer-menu::after {content:""; display:block; clear:both}
-    .footer-menu ul {column-count:2; -moz-column-count:2; -webkit-column-count:2}
-    .footer-hotline-wrap {display:none}
+    .footer-menu ul {column-count:2; -moz-column-count:2; -webkit-column-count:2; position:relative; padding-bottom:62px}
+    .footer-hotline-wrap {position:absolute; left:0; bottom:0; right:0; text-align:center}
+    .footer-hotline {margin:0}
 }
 
 .footer-right {float:left; width:270px; padding:36px 0 0 0}
