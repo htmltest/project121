@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $.validator.addMethod('onlyRUS',
         function(value, element) {
-            var pattern = /^[а-яё][а-яё\ \-']+$/i;
+            var pattern = /^[А-ЯЁ][а-яёА-ЯЁ\ \-']+$/;
             return this.optional(element) || pattern.test(value);
         },
         'Ошибка заполнения'
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     $.validator.addMethod('onlyEN',
         function(value, element) {
-            var pattern = /^[a-z][a-z\ \-']+$/i;
+            var pattern = /^[A-Z][a-zA-Z\ \-']+$/;
             return this.optional(element) || pattern.test(value);
         },
         'Ошибка заполнения'
@@ -336,6 +336,11 @@ function initForm(curForm) {
             }
             return false;
         });
+        $(this).on('keyup change', function() {
+            var curValue = $(this).val();
+            curValue = curValue.charAt(0).toUpperCase() + curValue.substr(1);
+            $(this).val(curValue);
+        });
     });
 
     curForm.find('.onlyEN').each(function() {
@@ -345,6 +350,11 @@ function initForm(curForm) {
                 return true;
             }
             return false;
+        });
+        $(this).on('keyup change', function() {
+            var curValue = $(this).val();
+            curValue = curValue.charAt(0).toUpperCase() + curValue.substr(1);
+            $(this).val(curValue);
         });
     });
 
