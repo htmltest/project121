@@ -391,13 +391,13 @@
                         </tbody>
                     </table>
 
-                    <form action="<?=$APPLICATION->GetCurPage(false)?>#top" method="post" class="order-confirm-form-back-edit">
+                    <form action="<?=$APPLICATION->GetCurPage(false)?>#top" method="post" class="order-confirm-form-back-edit" data-product="ЗК" data-name="Защита квартиры">
                         <div class="order-confirm-form-header">
-                            <div class="order-confirm-form-back"><a href="#" class="btn-blue btn-mini btn-form-send" data-name="toFirst">Изменить данные</a></div>
+                            <div class="order-confirm-form-back"><a href="#" class="btn-blue btn-mini btn-form-send" data-name="toFirst" data-eventLabel="Этап 3: Кнопка «Изменить данные»">Изменить данные</a></div>
                         </div>
                     </form>
 
-                    <form action="/jsonResponse/createPayFormMyDefense/" method="post" class="order-confirm-form">
+                    <form action="/jsonResponse/createPayFormMyDefense/" method="post" class="order-confirm-form" data-product="ЗК" data-name="Защита квартиры">
                         <input type="hidden" name="confirmPhone" value="+79111234567" id="confirmPhone" />
                         <input type="hidden" name="confirmURL" value="https://smpins.ru/" id="confirmURL" />
 

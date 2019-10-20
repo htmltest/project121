@@ -10,7 +10,6 @@ $(document).ready(function() {
 
     $('body').on('keypress', '.passportHow', function(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
-        console.log(charCode);
         if ((charCode > 1039 && charCode < 1104) || (charCode > 47 && charCode < 58) || charCode == 1105 || charCode == 1025 || charCode == 45 || charCode == 32 || charCode == 39 || charCode == 46) {
             return true;
         }
@@ -196,28 +195,66 @@ $(document).ready(function() {
     });
 
     $('#order-confirm-data').change(function() {
+        var curForm = $(this).parents().filter('form');
+
         if ($(this).prop('checked')) {
             $(this).prop('disabled', true);
-            var curCheckbox = $(this).parents().filter('.form-checkbox');
-            var curForm = $(this).parents().filter('form');
             $('.order-confirm-form').addClass('open');
+            var content_value = 'yes';
         } else {
             $('.order-confirm-form').removeClass('open');
+            var content_value = 'no';
+        }
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'content_type' : 'personal_agreement',
+                    'content_value' : content_value,
+                    'type_select' : 'manual'
+                };
+                gtag('event', 'generate_lead', data);
+            }
         }
     });
 
     $('#order-confirm-data').each(function() {
+        var curForm = $(this).parents().filter('form');
+
         if ($(this).prop('checked')) {
             $(this).prop('disabled', true);
-            var curCheckbox = $(this).parents().filter('.form-checkbox');
-            var curForm = $(this).parents().filter('form');
             $('.order-confirm-form').addClass('open');
+            var content_value = 'yes';
         } else {
             $('.order-confirm-form').removeClass('open');
+            var content_value = 'no';
+        }
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'content_type' : 'personal_agreement',
+                    'content_value' : content_value,
+                    'type_select' : 'auto'
+                };
+                gtag('event', 'generate_lead', data);
+            }
         }
     });
 
     $('#order-confirm-info').change(function() {
+        var curForm = $(this).parents().filter('form');
+
         var accept = ($(this).prop('checked') ? 'Y' : 'N');
         $.post(
             window.location.href,
@@ -229,17 +266,90 @@ $(document).ready(function() {
             },
             'json'
         );
+
+        if ($(this).prop('checked')) {
+            var content_value = 'yes';
+        } else {
+            var content_value = 'no';
+        }
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'content_type' : 'ad_agreement',
+                    'content_value' : content_value,
+                    'type_select' : 'manual'
+                };
+                gtag('event', 'generate_lead', data);
+            }
+        }
+    });
+
+    $('#order-confirm-info').each(function() {
+        var curForm = $(this).parents().filter('form');
+
+        if ($(this).prop('checked')) {
+            var content_value = 'yes';
+        } else {
+            var content_value = 'no';
+        }
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'content_type' : 'ad_agreement',
+                    'content_value' : content_value,
+                    'type_select' : 'auto'
+                };
+                gtag('event', 'generate_lead', data);
+            }
+        }
     });
 
     $('#order-confirm').each(function() {
+        var curForm = $(this).parents().filter('form');
+
         $(this).prop('checked', false);
+
+        if ($(this).prop('checked')) {
+            var content_value = 'yes';
+        } else {
+            var content_value = 'no';
+        }
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'content_type' : 'data_agreement',
+                    'content_value' : content_value,
+                    'type_select' : 'auto'
+                };
+                gtag('event', 'generate_lead', data);
+            }
+        }
     });
 
     $('#order-confirm').change(function() {
+        var curForm = $(this).parents().filter('form');
+
         if ($(this).prop('checked')) {
             $(this).prop('disabled', true);
             var curCheckbox = $(this).parents().filter('.form-checkbox');
-            var curForm = $(this).parents().filter('form');
             curCheckbox.addClass('loading');
             $.ajax({
                 type: 'POST',
@@ -262,13 +372,30 @@ $(document).ready(function() {
                     curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.error + '</div></div>');
                 }
             });
+            var content_value = 'yes';
         } else {
             $('.order-confirm-sms').css('display', 'none');
+            var content_value = 'no';
+        }
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'content_type' : 'data_agreement',
+                    'content_value' : content_value,
+                    'type_select' : 'manual'
+                };
+                gtag('event', 'generate_lead', data);
+            }
         }
     });
 
     $('.order-confirm-sms-new a').click(function(e) {
-        var curCheckbox = $(this).parents().filter('.form-checkbox');
         var curForm = $(this).parents().filter('form');
         $('.order-confirm-sms-new a').addClass('loading');
         $.ajax({
@@ -291,7 +418,42 @@ $(document).ready(function() {
                 curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">' + data.error + '</div></div>');
             }
         });
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'event_category': 'button',
+                    'event_label': 'Этап 3: Кнопка «Отправить СМС»'
+                };
+                gtag('event', 'click', data);
+            }
+        }
+
         e.preventDefault();
+    });
+
+    $('.order-success-sms-link a').click(function(e) {
+        var curForm = $(this).parents().filter('form');
+
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'event_category': 'button',
+                    'event_label': 'Этап 3: Кнопка «Оплатить и получить»'
+                };
+                gtag('event', 'click', data);
+            }
+        }
     });
 
     var confirmForm = $('.order-confirm-form');
@@ -527,6 +689,22 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.order-form-results-code-btn a', function(e) {
+        var curForm = $(this).parents().filter('form');
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            var eventLabel = $(this).attr('data-eventLabel');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (eventLabel) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'event_category' : 'button',
+                    'event_label' : eventLabel
+                };
+                gtag('event', 'click', data);
+            }
+        }
         $('#order-promo').trigger('change');
         e.preventDefault();
     });
@@ -1353,6 +1531,31 @@ $(document).ready(function() {
         });
     });
 
+    $('.order-results').each(function() {
+        if (typeof gtag === 'function') {
+            var productID = $(this).attr('data-product');
+            var formName = $(this).attr('data-name');
+            var paymentsStatus = $(this).attr('data-paymentsStatus');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (paymentsStatus) != 'undefined') {
+                if (paymentsStatus == 'true') {
+                    var data = {
+                        'url': document.location.href,
+                        'id': productID,
+                        'name': formName,
+                        'payment': 'yes'
+                    };
+                } else {
+                    var data = {
+                        'url': document.location.href,
+                        'id': productID,
+                        'name': formName
+                    };
+                }
+                gtag('event', 'page_load', data);
+            }
+        }
+    });
+
 });
 
 function getDaysText(number) {
@@ -1441,7 +1644,11 @@ function yearsDiff(dt) {
     }
 }
 
-function updatePrecalc(curForm) {
+function updatePrecalc(curForm, statusChange) {
+    if (typeof (statusChange) == 'undefined') {
+        statusChange = 'manual';
+    }
+
     var curURL = curForm.attr('data-calcForm');
     if (typeof (curURL) != 'undefined') {
         $('#programCost').addClass('loading').html('');
@@ -1489,8 +1696,62 @@ function updatePrecalc(curForm) {
                     if (Number(data.response.OLD) > 0) {
                         $('#programCost').append(' <em>' + data.response.OLD + ' ₽</em>');
                     }
+                    if (typeof gtag === 'function') {
+                        var productID = curForm.attr('data-product');
+                        var formName = curForm.attr('data-name');
+                        var variant = curForm.find('#order-programm-select option:selected').html();
+                        if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (variant) != 'undefined') {
+                            var data = {
+                                'url': document.location.href,
+                                'id': productID,
+                                'quantity': 1,
+                                'price': data.response.SUM,
+                                'currency': 'RUB',
+                                'type_select': statusChange,
+                                'items': [
+                                    {
+                                        'id': productID,
+                                        'name': formName,
+                                        'variant': variant,
+                                        'list_position': 1,
+                                        'quantity': 1,
+                                        'price': data.response.SUM,
+                                        'currency': 'RUB'
+                                    }
+                                ]
+                            };
+                            gtag('event', 'product_select_program', data);
+                        }
+                    }
                 } else {
                     $('#programCost').removeClass('loading').html(data.response + ' ₽');
+                    if (typeof gtag === 'function') {
+                        var productID = curForm.attr('data-product');
+                        var formName = curForm.attr('data-name');
+                        var variant = curForm.find('#order-programm-select option:selected').html();
+                        if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (variant) != 'undefined') {
+                            var data = {
+                                'url': document.location.href,
+                                'id': productID,
+                                'quantity': 1,
+                                'price': data.response,
+                                'currency': 'RUB',
+                                'type_select': statusChange,
+                                'items': [
+                                    {
+                                        'id': productID,
+                                        'name': formName,
+                                        'variant': variant,
+                                        'list_position': 1,
+                                        'quantity': 1,
+                                        'price': data.response,
+                                        'currency': 'RUB'
+                                    }
+                                ]
+                            };
+                            gtag('event', 'product_select_program', data);
+                        }
+                    }
                 }
             }
 
@@ -1504,7 +1765,7 @@ function updatePrecalc(curForm) {
 $(window).on('load', function() {
 
     $('form[data-calcForm]').each(function() {
-        updatePrecalc($(this));
+        updatePrecalc($(this), 'auto');
     });
 
 });
@@ -1521,6 +1782,13 @@ function sendUserCode(_code_)
         {
             $('#phone-hint').hide();
             $('#codeFormError').removeAttr('style').find('.form-error-text').html(data.error);
+            if (typeof gtag === 'function') {
+                var data = {
+                    'description': data.error,
+                    'fatal': true
+                };
+                gtag('event', 'exception', data);
+            }
             return false;
         }
         windowClose();

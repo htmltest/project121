@@ -86,9 +86,26 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.btn-form-send', function(e) {
-        $(this).parents().filter('form').validate().destroy();
-        $(this).parents().filter('form').append('<input type="hidden" name="' + $(this).data('name') + '" value="1" />');
-        $(this).parents().filter('form').trigger('submit');
+        var curForm = $(this).parents().filter('form');
+        if (typeof gtag === 'function') {
+            var productID = curForm.attr('data-product');
+            var formName = curForm.attr('data-name');
+            var eventLabel = $(this).attr('data-eventLabel');
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (eventLabel) != 'undefined') {
+                var data = {
+                    'url': document.location.href,
+                    'id': productID,
+                    'name': formName,
+                    'event_category': 'button',
+                    'event_label': eventLabel
+                };
+                gtag('event', 'click', data);
+            }
+        }
+
+        curForm.validate().destroy();
+        curForm.append('<input type="hidden" name="' + $(this).data('name') + '" value="1" />');
+        curForm.trigger('submit');
         e.preventDefault();
     });
 
@@ -421,6 +438,23 @@ function initForm(curForm) {
             }
         },
         submitHandler: function(form) {
+            if (typeof gtag === 'function') {
+                var curForm = $(form);
+                var productID = curForm.attr('data-product');
+                var formName = curForm.attr('data-name');
+                var eventLabel = curForm.find('.order-form-ctrl input').attr('data-eventLabel');
+                if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (eventLabel) != 'undefined') {
+                    var data = {
+                        'url': document.location.href,
+                        'id': productID,
+                        'name': formName,
+                        'event_category': 'button',
+                        'event_label': eventLabel
+                    };
+                    gtag('event', 'click', data);
+                }
+            }
+
             if ($(form).hasClass('ajax-form')) {
                 windowOpen($(form).attr('action'), false, new FormData(form));
             } else {
