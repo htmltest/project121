@@ -895,7 +895,7 @@ $(document).ready(function() {
                 countDays: this.context.countDays,
                 people: this.context.people,
                 currency: this.context.currency,
-                multiple: this.context.multiple,
+                multiple: (this.context.multiple === true ? 'Y' : 'N'),
                 packOptions: [],
                 promo: ''
             };
