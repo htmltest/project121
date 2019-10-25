@@ -1548,13 +1548,12 @@ $(document).ready(function() {
                     gtag('event', 'page_load', data);
 
                     var transactionID = $(this).attr('data-transaction');
-                    var productCost = $(this).attr('data-cost');
                     var productPrice = $(this).attr('data-price');
                     var category = $(this).attr('data-category');
                     var data = {
                         'transaction_id': transactionID,
                         'affiliation': 'Сайт СМП',
-                        'value': productCost,
+                        'value': productPrice,
                         'currency': 'RUB',
                         'shipping': 0,
                         'items': [
@@ -1587,7 +1586,6 @@ $(document).ready(function() {
         if (typeof gtag === 'function') {
             var productID = $(this).attr('data-product');
             var formName = $(this).attr('data-name');
-            var productCost = $(this).attr('data-cost');
             var productPrice = $(this).attr('data-price');
             var step = $(this).attr('data-step');
             var category = $(this).attr('data-category');
@@ -1595,10 +1593,10 @@ $(document).ready(function() {
             if (typeof (coupon) == 'undefined') {
                 coupon = '';
             }
-            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (step) != 'undefined' && typeof (category) != 'undefined' && typeof (productCost) != 'undefined' && typeof (productPrice) != 'undefined') {
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (step) != 'undefined' && typeof (category) != 'undefined' && typeof (productPrice) != 'undefined') {
                 var data = {
                     'checkout_step': step,
-                    'value': productCost,
+                    'value': productPrice,
                     'currency': 'RUB',
                     "items": [
                                 {
@@ -1768,7 +1766,7 @@ function updatePrecalc(curForm, statusChange) {
                         var formName = curForm.attr('data-name');
                         var variant = curForm.find('#order-programm-select option:selected').html();
                         if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (variant) != 'undefined') {
-                            var data = {
+                            var dataTag = {
                                 'url': document.location.href,
                                 'id': productID,
                                 'quantity': 1,
@@ -1787,7 +1785,41 @@ function updatePrecalc(curForm, statusChange) {
                                     }
                                 ]
                             };
-                            gtag('event', 'product_select_program', data);
+                            gtag('event', 'product_select_program', dataTag);
+                        }
+
+                        if (typeof (curForm.data('firstPrecalc')) == 'undefined') {
+                            var productPrice = data.response.SUM;
+                            var step = curForm.attr('data-step');
+                            var category = curForm.attr('data-category');
+                            var coupon = $('#order-promo').val();
+                            if (typeof (coupon) == 'undefined') {
+                                coupon = '';
+                            }
+                            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (step) != 'undefined' && typeof (category) != 'undefined' && typeof (productPrice) != 'undefined') {
+                                var dataTag = {
+                                    'checkout_step': step,
+                                    'value': productPrice,
+                                    'currency': 'RUB',
+                                    "items": [
+                                                {
+                                                    'id': productID,
+                                                    'name': formName,
+                                                    'list_name': 'Страница_заявки',
+                                                    'brand': 'СМП-Страхование',
+                                                    'category': category,
+                                                    'list_position': 1,
+                                                    'quantity': 1,
+                                                    'price': productPrice
+                                                }
+                                    ],
+                                    'coupon': coupon
+                                };
+                                if (step == 1) {
+                                    gtag('event', 'begin_checkout', dataTag);
+                                    curForm.data('firstPrecalc', true);
+                                }
+                            }
                         }
                     }
                 } else {
