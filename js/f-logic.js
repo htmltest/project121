@@ -1850,6 +1850,39 @@ function updatePrecalc(curForm, statusChange) {
                             };
                             gtag('event', 'product_select_program', data);
                         }
+                        if (typeof (curForm.data('firstPrecalc')) == 'undefined') {
+                            var productPrice = data.response;
+                            var step = curForm.attr('data-step');
+                            var category = curForm.attr('data-category');
+                            var coupon = $('#order-promo').val();
+                            if (typeof (coupon) == 'undefined') {
+                                coupon = '';
+                            }
+                            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (step) != 'undefined' && typeof (category) != 'undefined' && typeof (productPrice) != 'undefined') {
+                                var dataTag = {
+                                    'checkout_step': step,
+                                    'value': productPrice,
+                                    'currency': 'RUB',
+                                    "items": [
+                                                {
+                                                    'id': productID,
+                                                    'name': formName,
+                                                    'list_name': 'Страница_заявки',
+                                                    'brand': 'СМП-Страхование',
+                                                    'category': category,
+                                                    'list_position': 1,
+                                                    'quantity': 1,
+                                                    'price': productPrice
+                                                }
+                                    ],
+                                    'coupon': coupon
+                                };
+                                if (step == 1) {
+                                    gtag('event', 'begin_checkout', dataTag);
+                                    curForm.data('firstPrecalc', true);
+                                }
+                            }
+                        }
                     }
                 }
             }
