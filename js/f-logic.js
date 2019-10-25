@@ -1545,14 +1545,80 @@ $(document).ready(function() {
                         'name': formName,
                         'payment': 'yes'
                     };
+                    gtag('event', 'page_load', data);
+
+                    var transactionID = $(this).attr('data-transaction');
+                    var productCost = $(this).attr('data-cost');
+                    var productPrice = $(this).attr('data-price');
+                    var category = $(this).attr('data-category');
+                    var data = {
+                        'transaction_id': transactionID,
+                        'affiliation': 'Сайт СМП',
+                        'value': productCost,
+                        'currency': 'RUB',
+                        'shipping': 0,
+                        'items': [
+                                    {
+                                        'id': productID,
+                                        'name': formName,
+                                        'list_name': 'Успешная оплата',
+                                        'brand': 'СМП-Страхование',
+                                        'category': category,
+                                        'list_position': 1,
+                                        'quantity': 1,
+                                        'price': productPrice
+                                    }
+                                ]
+                    };
+                    gtag('event', 'purchase', data);
                 } else {
                     var data = {
                         'url': document.location.href,
                         'id': productID,
                         'name': formName
                     };
+                    gtag('event', 'page_load', data);
                 }
-                gtag('event', 'page_load', data);
+            }
+        }
+    });
+
+    $('.order-form form, .order-confirm-form').each(function() {
+        if (typeof gtag === 'function') {
+            var productID = $(this).attr('data-product');
+            var formName = $(this).attr('data-name');
+            var productCost = $(this).attr('data-cost');
+            var productPrice = $(this).attr('data-price');
+            var step = $(this).attr('data-step');
+            var category = $(this).attr('data-category');
+            var coupon = $('#order-promo').val();
+            if (typeof (coupon) == 'undefined') {
+                coupon = '';
+            }
+            if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (step) != 'undefined' && typeof (category) != 'undefined' && typeof (productCost) != 'undefined' && typeof (productPrice) != 'undefined') {
+                var data = {
+                    'checkout_step': step,
+                    'value': productCost,
+                    'currency': 'RUB',
+                    "items": [
+                                {
+                                    'id': productID,
+                                    'name': formName,
+                                    'list_name': 'Страница_заявки',
+                                    'brand': 'СМП-Страхование',
+                                    'category': category,
+                                    'list_position': 1,
+                                    'quantity': 1,
+                                    'price': productPrice
+                                }
+                    ],
+                    'coupon': coupon
+                };
+                if (step == 1) {
+                    gtag('event', 'begin_checkout', data);
+                } else {
+                    gtag('event', 'checkout_progress', data);
+                }
             }
         }
     });
