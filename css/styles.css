@@ -964,7 +964,7 @@ h1+.page-menu {margin-top:-17px}
     .main-events-list .slick-dots li.slick-active button {background:#004e96; width:8px; height:8px}
 }
 
-.main-events-form {display:none; background:#deeff7; min-height:36px; position:relative; margin:12px 0 20px 0; text-align:left}
+.main-events-form {display:none; background:#deeff7; min-height:100px; position:relative; margin:12px 0 20px 0; text-align:left}
 .main-events-form .loading {position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(222, 239, 247, 0.1) url(../images/loading.gif) no-repeat center}
 .main-events-form form {margin:0; padding:40px 30px 20px 30px}
 .main-events-form form::after {content:""; display:block; clear:both}

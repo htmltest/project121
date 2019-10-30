@@ -2001,7 +2001,11 @@ function initVZR() {
             }
         }
         $('#vzr-country-select').chosen('destroy');
-        $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+        if ($(window).width() < 1200) {
+            $('#vzr-country-select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+        } else {
+            $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+        }
         $('#vzr-country-select').each(function() {
             var curSelect = $(this);
             if (curSelect.data('placeholder') != '') {
@@ -2010,7 +2014,11 @@ function initVZR() {
         });
         $(window).on('resize', function() {
             $('#vzr-country-select').chosen('destroy');
-            $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+            if ($(window).width() < 1200) {
+                $('#vzr-country-select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+            } else {
+                $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
+            }
             $('#vzr-country-select').each(function() {
                 var curSelect = $(this);
                 if (curSelect.data('placeholder') != '') {
