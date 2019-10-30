@@ -992,7 +992,7 @@ h1+.page-menu {margin-top:-17px}
 .main-events-form-results-value::before {content:""; display:block; position:absolute; right:27px; top:14px; width:90px; height:49px; background:url(../images/main-events-form-results.png)}
 .main-events-form-results-value::after {content:""; display:block; position:absolute; left:0; bottom:-8px; right:0; height:8px; background:url(../images/main-events-form-results-value.png)}
 .main-events-form-results-value-title {line-height:22px; padding:25px 0 0 0; font-weight:normal}
-.main-events-form-results-value-price {font-size:42px; line-height:42px; font-weight:normal; margin:22px 0 0 0; min-height:42px; margin-right:-120px; text-align:center; position:relative}
+.main-events-form-results-value-price {font-size:42px; line-height:42px; font-weight:normal; margin:22px 0 0 0; min-height:42px; margin-right:-88px; text-align:center; position:relative}
 .main-events-form-results-value-price span.loading {display:inline-block; vertical-align:top; position:static; background:none}
 .main-events-form-results-value-price span.loading::after {content:""; display:block; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center; position:absolute; left:50%; top:50%; margin:-12px 0 0 -12px}
 .main-events-form-results .form-submit {margin:20px 0}
