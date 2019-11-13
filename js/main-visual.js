@@ -286,14 +286,6 @@ $(document).ready(function() {
 
     $('.form-select .desktop-menu-icon').each(function() {
         $(this).parent().addClass('form-select-with-hint');
-        $(this).parent().find('select').chosen('destroy');
-        $(this).parent().find('select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-        $(this).parent().find('select').each(function() {
-            var curSelect = $(this);
-            if (curSelect.data('placeholder') != '') {
-                curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
-            }
-        });
     });
 
     $('body').on('mouseover', '.desktop-menu-icon', function() {

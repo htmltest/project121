@@ -1007,7 +1007,6 @@ h1+.page-menu {margin-top:-17px}
 @media screen and (max-width:1199px) {
     .main-events-form-results {float:none; width:auto; margin:0 0 25px 0}
     .main-events-form-results-value {margin:20px 0 40px 0}
-    .main-events-form-results-value-price {margin-right:0}
 }
 
 .main-title {font-weight:normal; font-size:38px; line-height:42px; text-align:center}

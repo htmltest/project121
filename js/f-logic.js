@@ -1471,7 +1471,7 @@ $(document).ready(function() {
         $(this).attr('autocomplete', 'off');
     });
 
-    $('body').on('change', '.user-email-one, .user-email-two, .user-email-confirm-one, .user-email-confirm-two', function(e) {
+    $('body').on('change', '.user-email-one, .user-email-two, .user-email-confirm-one', function(e) {
         combineEmail();
     });
 
@@ -1905,16 +1905,12 @@ function combineEmail()
     $('.user-email-confirm-two option').each(function () {
         if ($(this).attr('value') == $('.user-email-two').val()) {
             $(this).attr('selected', 'selected');
-            $('.user-email-confirm-two').chosen('destroy');
-            $('.user-email-confirm-two').chosen({disable_search: true})
-            $('.user-email-confirm-two').each(function() {
-                var curSelect = $(this);
-                if (curSelect.data('placeholder') != '') {
-                    curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
-                }
-            });
         }
     });
+
+    if ($('.user-email-confirm-two').hasClass('select2-hidden-accessible')) {
+        $('.user-email-confirm-two').trigger('change');
+    }
 
     $('.user-email').val(
         $('.user-email-one').val() + '@' + $('.user-email-two').val()
@@ -1925,7 +1921,7 @@ function combineEmail()
     );
 }
 
-$(document).ready(function () {
+$(window).on('load', function() {
     combineEmail();
 });
 
@@ -2000,32 +1996,6 @@ function initVZR() {
                 $('#vzr-date-docs').removeClass('required');
             }
         }
-        $('#vzr-country-select').chosen('destroy');
-        if ($(window).width() < 1200) {
-            $('#vzr-country-select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-        } else {
-            $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-        }
-        $('#vzr-country-select').each(function() {
-            var curSelect = $(this);
-            if (curSelect.data('placeholder') != '') {
-                curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
-            }
-        });
-        $(window).on('resize', function() {
-            $('#vzr-country-select').chosen('destroy');
-            if ($(window).width() < 1200) {
-                $('#vzr-country-select').chosen({disable_search: true, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-            } else {
-                $('#vzr-country-select').chosen({disable_search: false, placeholder_text_multiple: ' ', no_results_text: 'Нет результатов'});
-            }
-            $('#vzr-country-select').each(function() {
-                var curSelect = $(this);
-                if (curSelect.data('placeholder') != '') {
-                    curSelect.parent().find('.chosen-single').prepend('<strong>' + curSelect.data('placeholder') + '</strong>');
-                }
-            });
-        });
     });
 
     if ($('#vzr-date-start').length == 1) {
