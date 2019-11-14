@@ -53,15 +53,6 @@ $(document).ready(function() {
         'Срок действия документа истек'
     );
 
-    $.validator.addMethod('birthdayDate',
-        function(birthdayDate, element) {
-            var curForm = $(element).parents().filter('form');
-            curForm.find('.passportDate').trigger('change');
-            return true;
-        },
-        ''
-    );
-
     $.validator.addMethod('passportSeries',
         function(curSeries, element) {
             return this.optional(element) || curSeries.match(/^[0-9]{4}$/);
