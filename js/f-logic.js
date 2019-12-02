@@ -869,6 +869,37 @@ $(document).ready(function() {
         }
     });
 
+    $('body').on('click', '[data-analitycs]', function() {
+        if (typeof gtag === 'function') {
+            var curForm = $(this).parents().filter('form');
+            var productID = curForm.attr('data-product');
+            var productName = curForm.attr('data-name');
+            var stageID = curForm.attr('data-step');
+            var price = $('#programCost');
+            if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined') {
+                var data = {
+                    'event_category': productID,
+                    'event_action' : stageID,
+                    'event_label': 'Этап ' + stageID + ' - Поле: ' + $(this).attr('data-analitycs'),
+                    'currency': 'RUB',
+                    'checkout_step': stageID,
+                    'items': [
+                                {
+                                    'id': productID,
+                                    'name': productName,
+                                    'list_name': document.location.href,
+                                    'brand': 'СМП-Страхование',
+                                    'list_position': 1,
+                                    'quantity': 1,
+                                    'price': price,
+                                }
+                    ]
+                };
+                gtag('event', 'generate_lead', data);
+            }
+        }
+    });
+
     $('.order-vzr').each(function() {
 
         function CalculatorVZR(parameters) {
@@ -964,7 +995,7 @@ $(document).ready(function() {
                             }
                             htmlOptions += '</div>';
                         }
-                        $('.vzr-programms').append('<div class="vzr-programms-item" data-id="' + programmsItems[i].id + '" data-cost="' + programmsItems[i].cost + '" data-costOld="' + programmsItems[i].oldCost + '">' +
+                        $('.vzr-programms').append('<div class="vzr-programms-item" data-analitycs="programm" data-id="' + programmsItems[i].id + '" data-cost="' + programmsItems[i].cost + '" data-costOld="' + programmsItems[i].oldCost + '">' +
                                                         '<label>' +
                                                             '<input type="radio" name="' + obj.context.inputs.program + '" value="' + programmsItems[i].value + '" />' +
                                                             '<div class="vzr-programms-item-content">' +
@@ -984,7 +1015,7 @@ $(document).ready(function() {
                             var curPack = programmsItems[i].packs[j];
                             var newParam = $('<div class="vzr-type-item" data-id="' + curPack.id + '" data-cost="' + curPack.cost + '" data-costOld="' + curPack.oldCost + '">' +
                                                 '<label class="vzr-type-checkbox">' +
-                                                    '<input type="checkbox" name="' + obj.context.inputs.packs + '[]" value="' + curPack.value + '" />' +
+                                                    '<input type="checkbox" name="' + obj.context.inputs.packs + '[]" value="' + curPack.value + '" data-analitycs="vacantion_type" />' +
                                                     '<div class="vzr-type-checkbox-inner">' +
                                                         '<div class="vzr-type-title">' + curPack.name + '</div>' +
                                                     '</div>' +
@@ -1015,7 +1046,7 @@ $(document).ready(function() {
                                         if (curOption.selected) {
                                             selected = ' checked="checked"';
                                         }
-                                        htmlOptions += '<div class="form-checkbox"><label><input type="checkbox" data-id="' + curOption.value + '"  name="' + obj.context.inputs.packOptions +'[]" value="' + curOption.value + '"' + selected + ' /><span>' + curOption.name + '</span></label></div>';
+                                        htmlOptions += '<div class="form-checkbox"><label><input type="checkbox" data-analitycs="extreme_type" data-id="' + curOption.value + '"  name="' + obj.context.inputs.packOptions +'[]" value="' + curOption.value + '"' + selected + ' /><span>' + curOption.name + '</span></label></div>';
                                     }
                                     htmlOptions += '</div>';
                                 }
@@ -1037,7 +1068,7 @@ $(document).ready(function() {
                             }
                             var newOption = $('<div class="vzr-more-item" data-id="' + curOption.id + '" data-cost="' + curOption.cost + '" data-costOld="' + curOption.oldCost + '">' +
                                                     '<label class="vzr-more-checkbox">' +
-                                                        '<input type="checkbox" name="" value="' + curOption.id + '" />' +
+                                                        '<input type="checkbox" name="" value="' + curOption.id + '" data-analitycs="vacantion_option" />' +
                                                         '<div class="vzr-more-checkbox-inner">' +
                                                             '<div class="vzr-more-checkbox-title">' + curOption.name + '</div>' +
                                                             '<div class="vzr-more-checkbox-price">' + costOptionOldMobile + '+ ' + costOption + ' ₽' + costOptionOld + '</div>' +

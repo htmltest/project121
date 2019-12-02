@@ -377,32 +377,47 @@ function initForm(curForm) {
         });
     });
 
-    curForm.find('[data-analitycs]').each(function() {
+    curForm.find('[data-analitycs]').change(function() {
         if (typeof gtag === 'function') {
             var productID = curForm.attr('data-product');
-            var stageID = curForm.attr('data-stage');
-            if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined') {
+            var productName = curForm.attr('data-name');
+            var stageID = curForm.attr('data-step');
+            var price = $('#programCost');
+            if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined' && typeof (productName) != 'undefined' && typeof (price) != 'undefined') {
                 var data = {
-                    'url': document.location.href,
-                    'id': productID,
-                    'name': $(this).val(),
-                    'content_type' : $(this).attr('data-analitycs'),
-                    'type_select' : 'auto'
+                    'event_category': productID,
+                    'event_action' : stageID,
+                    'event_label': 'Этап ' + stageID + ' - Поле: ' + $(this).attr('data-analitycs'),
+                    'currency': 'RUB',
+                    'checkout_step': stageID,
+                    'items': [
+                                {
+                                    'id': productID,
+                                    'name': productName,
+                                    'list_name': document.location.href,
+                                    'brand': 'СМП-Страхование',
+                                    'list_position': 1,
+                                    'quantity': 1,
+                                    'price': price,
+                                }
+                    ]
                 };
                 gtag('event', 'generate_lead', data);
             }
         }
     });
 
-    curForm.find('[data-analitycs]').change(function() {
+    curForm.find('[data-analitycs]').blur(function() {
         if (typeof gtag === 'function') {
             var productID = curForm.attr('data-product');
-            var stageID = curForm.attr('data-stage');
-            if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined') {
+            var productName = curForm.attr('data-name');
+            var stageID = curForm.attr('data-step');
+            var price = $('#programCost');
+            if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined' && typeof (productName) != 'undefined' && typeof (price) != 'undefined') {
                 var data = {
                     'url': document.location.href,
                     'id': productID,
-                    'name': $(this).val(),
+                    'name': productName,
                     'content_type' : $(this).attr('data-analitycs'),
                     'type_select' : 'manual'
                 };
@@ -418,7 +433,7 @@ function initForm(curForm) {
             if (typeof gtag === 'function') {
                 var curForm = $(validator.currentForm);
                 var productID = curForm.attr('data-product');
-                var stageID = curForm.attr('data-stage');
+                var stageID = curForm.attr('data-step');
                 if (typeof (productID) != 'undefined' && typeof (stageID) != 'undefined') {
                     var invalidElements = validator.invalidElements();
                     for (var i = 0; i < invalidElements.length; i++) {
@@ -444,14 +459,28 @@ function initForm(curForm) {
                 var curForm = $(form);
                 var productID = curForm.attr('data-product');
                 var formName = curForm.attr('data-name');
+                var productName = curForm.attr('data-name');
+                var stageID = curForm.attr('data-step');
+                var price = $('#programCost');
                 var eventLabel = curForm.find('.order-form-ctrl input').attr('data-eventLabel');
-                if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (eventLabel) != 'undefined') {
+                if (typeof (productID) != 'undefined' && typeof (formName) != 'undefined' && typeof (eventLabel) != 'undefined' && typeof (productName) != 'undefined' && typeof (price) != 'undefined') {
                     var data = {
-                        'url': document.location.href,
-                        'id': productID,
-                        'name': formName,
-                        'event_category': 'button',
-                        'event_label': eventLabel
+                        'event_category': productID,
+                        'event_action' : stageID,
+                        'event_label': 'Этап ' + stageID + ' - Кнопка: ' + $(this).attr('data-analitycs'),
+                        'currency': 'RUB',
+                        'checkout_step': stageID,
+                        'items': [
+                                    {
+                                        'id': productID,
+                                        'name': productName,
+                                        'list_name': document.location.href,
+                                        'brand': 'СМП-Страхование',
+                                        'list_position': 1,
+                                        'quantity': 1,
+                                        'price': price,
+                                    }
+                        ]
                     };
                     gtag('event', 'click', data);
                 }
