@@ -163,25 +163,25 @@ $(document).ready(function() {
 
     $('.order-middlename-checkbox input').change(function() {
         if ($(this).prop('checked')) {
-            $('.form-field-middlename').hide();
-            $('.form-field-middlename input').removeClass('required').val('');
-            $('.form-field-middlename em').hide();
+            $(this).parent().parent().prev().hide();
+            $(this).parent().parent().prev().find('input').removeClass('required').val('');
+            $(this).parent().parent().prev().find('em').hide();
         } else {
-            $('.form-field-middlename').show();
-            $('.form-field-middlename input').addClass('required');
-            $('.form-field-middlename em').show();
+            $(this).parent().parent().prev().show();
+            $(this).parent().parent().prev().find('input').addClass('required');
+            $(this).parent().parent().prev().find('em').show();
         }
     });
 
     $('.order-middlename-checkbox input').each(function() {
         if ($(this).prop('checked')) {
-            $('.form-field-middlename').hide();
-            $('.form-field-middlename input').removeClass('required').val('');
-            $('.form-field-middlename em').hide();
+            $(this).parent().parent().prev().hide();
+            $(this).parent().parent().prev().find('input').removeClass('required').val('');
+            $(this).parent().parent().prev().find('em').hide();
         } else {
-            $('.form-field-middlename').show();
-            $('.form-field-middlename input').addClass('required');
-            $('.form-field-middlename em').show();
+            $(this).parent().parent().prev().show();
+            $(this).parent().parent().prev().find('input').addClass('required');
+            $(this).parent().parent().prev().find('em').show();
         }
     });
 

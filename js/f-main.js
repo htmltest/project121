@@ -208,10 +208,28 @@ function initForm(curForm) {
     curForm.find('.form-input-date input').on('change', function() {
         var curValue = $(this).val();
         if (curValue.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
-            var myDatepicker = $(this).data('datepicker');
-            if (myDatepicker) {
-                var curValueArray = curValue.split('.');
-                myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
+            var userDate = new Date(curValue.substr(6, 4), Number(curValue.substr(3, 2)) - 1, Number(curValue.substr(0, 2)));
+            var isCorrectDate = true;
+            if ($(this).attr('min')) {
+                var minDateStr = $(this).attr('min');
+                var minDate = new Date(minDateStr.substr(6, 4), Number(minDateStr.substr(3, 2)) - 1, Number(minDateStr.substr(0, 2)));
+                if (userDate < minDate) {
+                    isCorrectDate = false;
+                }
+            }
+            if ($(this).attr('max')) {
+                var maxDateStr = $(this).attr('max');
+                var maxDate = new Date(maxDateStr.substr(6, 4), Number(maxDateStr.substr(3, 2)) - 1, Number(maxDateStr.substr(0, 2)));
+                if (userDate > maxDate) {
+                    isCorrectDate = false;
+                }
+            }
+            if (isCorrectDate) {
+                var myDatepicker = $(this).data('datepicker');
+                if (myDatepicker) {
+                    var curValueArray = curValue.split('.');
+                    myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
+                }
             }
         } else {
             var myDatepicker = $(this).data('datepicker');
@@ -224,12 +242,30 @@ function initForm(curForm) {
     curForm.find('.form-input-date input').on('keyup', function() {
         var curValue = $(this).val();
         if (curValue.match(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/)) {
-            var myDatepicker = $(this).data('datepicker');
-            if (myDatepicker) {
-                var curValueArray = curValue.split('.');
-                myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
-                myDatepicker.show();
-                $(this).focus();
+            var isCorrectDate = true;
+            var userDate = new Date(curValue.substr(6, 4), Number(curValue.substr(3, 2)) - 1, Number(curValue.substr(0, 2)));
+            if ($(this).attr('min')) {
+                var minDateStr = $(this).attr('min');
+                var minDate = new Date(minDateStr.substr(6, 4), Number(minDateStr.substr(3, 2)) - 1, Number(minDateStr.substr(0, 2)));
+                if (userDate < minDate) {
+                    isCorrectDate = false;
+                }
+            }
+            if ($(this).attr('max')) {
+                var maxDateStr = $(this).attr('max');
+                var maxDate = new Date(maxDateStr.substr(6, 4), Number(maxDateStr.substr(3, 2)) - 1, Number(maxDateStr.substr(0, 2)));
+                if (userDate > maxDate) {
+                    isCorrectDate = false;
+                }
+            }
+            if (isCorrectDate) {
+                var myDatepicker = $(this).data('datepicker');
+                if (myDatepicker) {
+                    var curValueArray = curValue.split('.');
+                    myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
+                    myDatepicker.show();
+                    $(this).focus();
+                }
             }
         }
     });
