@@ -230,11 +230,11 @@ function initForm(curForm) {
                     var curValueArray = curValue.split('.');
                     myDatepicker.selectDate(new Date(Number(curValueArray[2]), Number(curValueArray[1]) - 1, Number(curValueArray[0])));
                 }
-            }
-        } else {
-            var myDatepicker = $(this).data('datepicker');
-            if (myDatepicker) {
-                myDatepicker.clear();
+            } else {
+                var myDatepicker = $(this).data('datepicker');
+                if (myDatepicker) {
+                    myDatepicker.clear();
+                }
             }
         }
     });
@@ -266,6 +266,9 @@ function initForm(curForm) {
                     myDatepicker.show();
                     $(this).focus();
                 }
+            } else {
+                $(this).addClass('error');
+                return false;
             }
         }
     });
