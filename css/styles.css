@@ -324,7 +324,7 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-checkbox.loading label::after {content:""; display:block; float:left; margin:-1px 0 -1px 10px; width:24px; height:24px; background:url(../images/loading.gif) no-repeat center}
 .form-checkbox input {display:none}
 .form-checkbox span {display:block; float:left; padding:0 0 0 33px; position:relative}
-.form-checkbox span::before {content:""; display:block; position:absolute; left:0; top:0; width:22px; height:22px; border:1px solid #e6e6e6; background:#fff url(../images/checkbox.svg) no-repeat -999px -999px; border-radius:3px; transition:background-color 0.2s, border-color 0.2s}
+.form-checkbox span::before {content:""; display:block; position:absolute; left:0; top:0; width:22px; height:22px; border:1px solid #b1b1b1; background:#fff url(../images/checkbox.svg) no-repeat -999px -999px; border-radius:3px; transition:background-color 0.2s, border-color 0.2s}
 @media screen and (min-width:1200px) {
     .form-checkbox label:hover span::before {border-color:#03a9f4}
 }
@@ -337,17 +337,35 @@ fieldset {margin:20px 0; padding:0; border:0}
 .form-checkbox label.error {display:none !important}
 .form-checkbox span em {font-style:normal; color:#ff6200}
 
+.form-block .form-checkbox span::before {border-color:#e6e6e6}
+@media screen and (min-width:1200px) {
+    .form-block .form-checkbox label:hover span::before {border-color:#03a9f4}
+}
+.form-block .form-checkbox label input:checked+span::before,
+.form-block .form-checkbox label input:checked+label+span::before {border-color:#03a9f4}
+.form-block .form-checkbox label input.error+span::before,
+.form-block .form-checkbox label input.error+label+span::before {border-color:#ff1800}
+
 .form-radio {margin:14px 0; line-height:22px; user-select:none}
 .form-radio::after {content:""; display:block; clear:both}
 .form-radio label {float:left; margin:0; cursor:pointer}
 .form-radio input {display:none}
 .form-radio span {display:block; padding:0 0 0 33px; position:relative}
-.form-radio span::before {content:""; display:block; position:absolute; left:0; top:0; width:22px; height:22px; border:1px solid #e6e6e6; background:#fff; border-radius:50%; transition:all 0.2s}
+.form-radio span::before {content:""; display:block; position:absolute; left:0; top:0; width:22px; height:22px; border:1px solid #b1b1b1; background:#fff; border-radius:50%; transition:all 0.2s}
 @media screen and (min-width:1200px) {
     .form-radio label:hover span::before {border-color:#03a9f4}
 }
 .form-radio input:checked+span::before,
 .form-radio input:checked+label+span::before {border-width:6px; border-color:#03a9f4}
+
+.form-block .form-radio span::before {border-color:#e6e6e6}
+@media screen and (min-width:1200px) {
+    .form-block .form-radio label:hover span::before {border-color:#03a9f4}
+}
+.form-block .form-radio label input:checked+span::before,
+.form-block .form-radio label input:checked+label+span::before {border-color:#03a9f4}
+.form-block .form-radio label input.error+span::before,
+.form-block .form-radio label input.error+label+span::before {border-color:#ff1800}
 
 .form-slider-content {padding:6px 0 0 0}
 .form-slider-content::after {content:""; display:block; clear:both}
