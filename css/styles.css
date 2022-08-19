@@ -1786,10 +1786,10 @@ footer a {color:#cae3f9}
 .footer-social {font-size:0; line-height:0; letter-spacing:-1px; padding:17px 0 0 0}
 .footer-social a {display:inline-block; vertical-align:middle; margin:0 0 0 18px}
 .footer-social a:first-child {margin:0}
-.footer-social svg path {fill:#fff; transition:all 0.2s}
+.footer-social svg {fill:#fff; transition:all 0.2s}
 @media screen and (min-width:1200px) {
-    .footer-social a:hover svg path {fill:#03a9f4}
-    .footer-social a:active svg path {fill:#ff8a00}
+    .footer-social a:hover svg {fill:#03a9f4}
+    .footer-social a:active svg {fill:#ff8a00}
 }
 
 @media screen and (max-width:1199px) {
