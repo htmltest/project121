@@ -2126,3 +2126,76 @@ function initVZR() {
         }
     });
 }
+
+$(document).ready(function() {
+
+    $('.agents-search-form form').each(function() {
+        var curForm = $(this);
+        var validator = curForm.validate();
+        validator.destroy();
+        curForm.validate({
+            ignore: '',
+            submitHandler: function(form) {
+                var isEmptyForm = true;
+                curForm.find('.form-input input').each(function() {
+                    if ($(this).val() != '') {
+                        isEmptyForm = false;
+                    }
+                });
+                if (isEmptyForm) {
+                    curForm.find('.form-error').remove();
+                    curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Необходимо заполнить хотя бы одно поле.</div></div>');
+                } else {
+                    curForm.addClass('loading');
+                    $.ajax({
+                        type: 'POST',
+                        url: curForm.attr('action'),
+                        dataType: 'html',
+                        data: curForm.serialize(),
+                        cache: false,
+                        timeout: 30000
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        curForm.removeClass('loading');
+                        curForm.find('.form-error').remove();
+                        curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Сервис временно недоступен, попробуйте позже.</div></div>');
+                    }).done(function(html) {
+                        curForm.removeClass('loading');
+                        curForm.find('.form-error').remove();
+                        $('.agents-search-results').html(html);
+                        $('html, body').animate({'scrollTop': $('.agents-search-results').offset().top});
+                    });
+                }
+            }
+        });
+    });
+
+    $('body').on('click', '.agents-results-item-types-title a', function(e) {
+        $(this).parent().parent().toggleClass('open');
+        e.preventDefault();
+    });
+
+    $('body').on('click', '.agents-results-item-types-hide a', function(e) {
+        $(this).parent().parent().removeClass('open');
+        e.preventDefault();
+    });
+
+    $.validator.addMethod('INN',
+        function(curSeries, element) {
+            return this.optional(element) || curSeries.match(/^[0-9]{10}$/) || curSeries.match(/^[0-9]{12}$/);
+        },
+        'ИНН должен содержать 10 или 12 цифр'
+    );
+
+    var optionsINN =  {
+        translation: {
+            'X': {
+                pattern: /[0-9]/
+            },
+            'W': {
+                pattern: /[0-9]/, optional: true
+            }
+        }
+    }
+    $('input.INN').mask('XXXXXXXXXXWW', optionsINN);
+
+});
