@@ -2137,7 +2137,7 @@ $(document).ready(function() {
             ignore: '',
             submitHandler: function(form) {
                 var isEmptyForm = true;
-                curForm.find('.form-input input').each(function() {
+                curForm.find('.agents-search-form-tab.active .form-input input').each(function() {
                     if ($(this).val() != '') {
                         isEmptyForm = false;
                     }
@@ -2179,23 +2179,25 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    $.validator.addMethod('INN',
-        function(curSeries, element) {
-            return this.optional(element) || curSeries.match(/^[0-9]{10}$/) || curSeries.match(/^[0-9]{12}$/);
-        },
-        'ИНН должен содержать 10 или 12 цифр'
-    );
-
     var optionsINN =  {
         translation: {
-            'X': {
-                pattern: /[0-9]/
-            },
             'W': {
                 pattern: /[0-9]/, optional: true
             }
         }
     }
-    $('input.INN').mask('XXXXXXXXXXWW', optionsINN);
+    $('input.INN').mask('WWWWWWWWWWWW', optionsINN);
+
+    $('.agents-search-form-type input').change(function() {
+        var curType = $('.agents-search-form-type input').index($(this));
+        $('.agents-search-form-tab.active').removeClass('active');
+        $('.agents-search-form-tab').eq(curType).addClass('active');
+    });
+
+    $('.agents-search-form-type').each(function() {
+        var curType = $('.agents-search-form-type input').index($('.agents-search-form-type input:checked'));
+        $('.agents-search-form-tab.active').removeClass('active');
+        $('.agents-search-form-tab').eq(curType).addClass('active');
+    });
 
 });
