@@ -2144,7 +2144,7 @@ $(document).ready(function() {
                 });
                 if (isEmptyForm) {
                     curForm.find('.form-error').remove();
-                    curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Необходимо заполнить хотя бы одно поле.</div></div>');
+                    curForm.append('<div class="form-error"><div class="form-error-title">Сообщение</div><div class="form-error-text">Необходимо заполнить хотя бы одно поле.</div></div>');
                 } else {
                     curForm.addClass('loading');
                     $.ajax({
@@ -2157,7 +2157,7 @@ $(document).ready(function() {
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         curForm.removeClass('loading');
                         curForm.find('.form-error').remove();
-                        curForm.append('<div class="form-error"><div class="form-error-title">Произошла ошибка</div><div class="form-error-text">Сервис временно недоступен, попробуйте позже.</div></div>');
+                        curForm.append('<div class="form-error"><div class="form-error-title">Сообщение</div><div class="form-error-text">Сервис временно недоступен, попробуйте позже.</div></div>');
                     }).done(function(html) {
                         curForm.removeClass('loading');
                         curForm.find('.form-error').remove();
