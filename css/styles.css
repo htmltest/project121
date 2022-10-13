@@ -561,11 +561,7 @@ footer {transition:opacity 0.7s, visibility 0.7s}
 .nav-add-item-list ul li ul {display:block; font-size:14px; line-height:20px; font-weight:300; margin:-2px 0 15px 0}
 .nav-add-item-list ul li ul li {margin:8px 0; padding:0 0 0 20px; position:relative}
 .nav-add-item-list ul li ul li::before {content:""; display:block; width:4px; height:4px; border-radius:2px; background:#004e96; border:none; position:absolute; left:7px; top:8px; transform:none}
-.nav-add-item-list ul li a svg.icon-online {display:inline-block; vertical-align:middle; margin:-2px 0 0 5px; width:14px; height:14px; fill:#004E96; transition:fill 0.2s}
-@media screen and (min-width:1200px) {
-    .nav-add-item-list ul li a:hover svg.icon-online {fill:#ff6200}
-    .nav-add-item-list ul li a:active svg.icon-online {fill:#ff8a00}
-}
+.nav-add-item-list ul li a svg.icon-online {display:inline-block; vertical-align:middle; margin:-2px 0 0 5px; width:14px; height:14px; fill:#ff6200; transition:fill 0.2s}
 
 @media screen and (max-width:1199px) {
     .nav-add-open .nav-add {position:absolute; left:0; top:-9999px; opacity:0; visibility:hidden}
@@ -1493,11 +1489,7 @@ h3.carier-text {font-weight:300; line-height:42px}
     .services-item-inner:hover .services-item-content {min-height:284px; box-shadow:0px 4px 15px rgba(0, 95, 182, 0.15); border-color:#E6E6E6}
     .services-item-inner:hover .services-item-list {left:auto; top:auto; position:relative; opacity:1; max-height:400px}
 }
-.services-item-list ul li a svg.icon-online {display:inline-block; vertical-align:middle; margin:-2px 0 0 5px; width:14px; height:14px; fill:#004E96; transition:fill 0.2s}
-@media screen and (min-width:1200px) {
-    .services-item-list ul li a:hover svg.icon-online {fill:#ff6200}
-    .services-item-list ul li a:active svg.icon-online {fill:#ff8a00}
-}
+.services-item-list ul li a svg.icon-online {display:inline-block; vertical-align:middle; margin:-2px 0 0 5px; width:14px; height:14px; fill:#ff6200; transition:fill 0.2s}
 
 @media screen and (max-width:1199px) {
     .services {margin:34px 0 0 0}
