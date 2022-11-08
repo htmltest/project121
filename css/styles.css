@@ -505,16 +505,16 @@ header {background:#004e96; padding:0 0 26px 0}
     .nav-main {display:none}
 }
 
-.nav-btn {float:left; margin:0 0 0 6px}
+.nav-btn {float:right; margin:0 0 0 6px}
 .nav-btn .btn-border {padding-left:15px; padding-right:15px; height:38px; line-height:36px}
 
 @media screen and (max-width:1199px) {
-    .nav-btn {width:calc(44.44% - 10px); margin:0}
-    .nav-btn+.nav-btn {float:right; width:calc(55.56%)}
+    .nav-btn {width:calc(55.56%); margin:0}
+    .nav-btn+.nav-btn {float:left; width:calc(44.44% - 10px)}
     .nav-btn .btn-border {padding-left:0; padding-right:0; width:100%}
 }
 
-.nav-add-link {float:right; margin:9px 0 0 0; position:relative; width:20px; height:20px; z-index:20; transition:all 0.2s}
+.nav-add-link {float:right; margin:9px 0 0 16px; position:relative; width:20px; height:20px; z-index:20; transition:all 0.2s}
 .nav-add-link::before,
 .nav-add-link::after {content:""; display:block; width:31px; height:2px; position:absolute; left:50%; top:50%; background:#959595; transform:translate(-50%, -50%); opacity:0; transition:all 0.2s}
 @media screen and (min-width:1200px) {
