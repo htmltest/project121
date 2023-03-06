@@ -393,18 +393,18 @@ fieldset {margin:20px 0; padding:0; border:0}
     .wrapper-inner {padding:0}
 }
 
-header {background:#004e96; padding:0 0 26px 0}
+header {background:#004e96; padding:0 0 30px 0}
 
 @media screen and (max-width:1199px) {
     header {height:68px; padding:0; position:relative}
 }
 
-.logo {float:left; position:relative; width:115px; height:63px; margin:12px 0}
+.logo {float:left; position:relative; width:119px; height:42px; margin:30px 0 0 0}
 .logo a {display:block; position:absolute; left:0; top:0; right:0; bottom:0}
 .logo img {display:block; width:100%}
 
 @media screen and (max-width:1199px) {
-    .logo {float:none; position:absolute; left:77px; top:8px; width:83px; height:45px; margin:0}
+    .logo {float:none; position:absolute; left:77px; top:16px; margin:0; width:102px; height:36px}
 }
 
 .header-menu {float:left; font-weight:500; font-size:14px; margin:38px 0 0 63px}
@@ -1776,8 +1776,8 @@ footer a {color:#cae3f9}
     .footer-hotline {margin:0}
 }
 
-.footer-right {float:left; width:270px; padding:36px 0 0 0}
-.footer-logo {width:85px; height:46px; line-height:0}
+.footer-right {float:left; width:270px; padding:49px 0 0 0}
+.footer-logo {width:122px; height:42px; line-height:0}
 .footer-logo img {display:block; width:100%}
 .footer-phone {font-weight:500; font-size:18px; color:#fff; padding:20px 0 0 0}
 .footer-phone a {color:#fff}
@@ -1797,7 +1797,7 @@ footer a {color:#cae3f9}
 
 @media screen and (max-width:1199px) {
     .footer-right {float:none; width:auto; padding:0; position:relative}
-    .footer-logo {float:left; margin:26px 0 0 0}
+    .footer-logo {float:left; margin:36px 0 0 0}
     .footer-phone {float:right; padding:0; font-size:18px; font-weight:normal; margin:36px 0 0 0}
     .footer-phone-hint {float:right; clear:right; padding:0; margin:-5px 0 0 0; font-size:11px}
     .footer-social {position:absolute; left:50%; top:49px; padding:0; transform:translateX(-50%)}
